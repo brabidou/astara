@@ -15,3 +15,8 @@ define( 'ASTARA_THEME_URI', get_template_directory_uri() );
 
 require ASTARA_THEME_DIR . '/inc/setup.php';
 require ASTARA_THEME_DIR . '/inc/enqueue.php';
+require ASTARA_THEME_DIR . '/inc/team.php';
+require ASTARA_THEME_DIR . '/inc/portfolio.php';
+require ASTARA_THEME_DIR . '/inc/blocks.php';
+require ASTARA_THEME_DIR . '/inc/portfolio-blocks.php';
+require ASTARA_THEME_DIR . '/inc/news-blocks.php';

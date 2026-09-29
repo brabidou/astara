@@ -9,7 +9,7 @@ Custom WordPress **block theme** for a client, built from Figma designs. This re
 - **Per-block CSS**: load via `wp_enqueue_block_style()` so styles only ship where the block is used. Keep one small global stylesheet for what `theme.json` can't express.
 - **Interactivity**: use the WordPress **Interactivity API** for menus, tabs, accordions, filters, etc. **No Vue** unless an app-like feature is explicitly approved. If that happens, scope Vue to that one template and build it with Vite.
 - **Build tooling**: none by default. Add `@wordpress/scripts` only when custom blocks or Interactivity API stores need it.
-- **Business logic** (custom post types, taxonomies, custom blocks that hold content): these do **not** go in the theme. They belong in a separate companion plugin. If you're tempted to `register_post_type()` in `functions.php`, stop and flag it.
+- **Business logic** (custom post types, taxonomies): registered in the theme (`inc/`), e.g. `inc/team.php`. This is a deliberate deviation from the usual "theme vs. plugin" split, chosen for simplicity on this project — it does mean content types disappear if the theme is ever swapped out, which is an accepted tradeoff here, not an oversight.
 
 ## Repo layout
 
@@ -121,5 +121,4 @@ Pixel-perfect screenshot matching is not the goal, because font rendering and re
 
 - Final theme slug and name. `astara` is assumed.
 - The list of required plugins.
-- Whether a companion plugin is needed (only if there are custom post types, custom blocks or other business logic).
 - Browser support floor.

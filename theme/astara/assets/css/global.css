@@ -1,5 +1,60 @@
 /* Global styles that theme.json presets can't express. Keep this small. */
 
+/* Shared design-system classes, used across Home/Team/Contact and any future page. */
+.astara-eyebrow {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--eyebrow);
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--astara-bright-orange);
+	margin: 0 0 16px;
+}
+
+.astara-section-heading {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-2);
+	font-weight: 300;
+	line-height: 1.15;
+	color: var(--wp--preset--color--astara-navy);
+	margin: 0 0 24px;
+}
+
+.astara-body {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--body-copy);
+	line-height: 1.4;
+	color: var(--wp--preset--color--gray-1);
+	margin: 0 0 24px;
+}
+
+.astara-btn-solid .wp-block-button__link,
+.astara-btn-outline .wp-block-button__link {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 1.2;
+	border-radius: 4px;
+	padding: 12px 24px;
+	height: 50px;
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+}
+
+.astara-btn-solid .wp-block-button__link {
+	background: var(--wp--preset--color--astara-bright-orange);
+	color: var(--wp--preset--color--astara-off-white);
+	border: 1px solid var(--wp--preset--color--astara-bright-orange);
+}
+
+.astara-btn-outline .wp-block-button__link {
+	background: transparent;
+	color: var(--wp--preset--color--astara-navy);
+	border: 1px solid var(--wp--preset--color--astara-bright-orange);
+}
+
 /* Header — Figma frame 400:10 "Main Nav" (Web design_Rd. 3) */
 .astara-header {
 	padding-block: 24px;
@@ -30,6 +85,26 @@
 	font-weight: 400;
 	color: var(--wp--preset--color--astara-navy);
 	padding: 0;
+	position: relative;
+}
+
+.astara-header .astara-nav .wp-block-navigation-item__content::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: -6px;
+	height: 2px;
+	background: var(--wp--preset--color--astara-bright-orange);
+	transform: scaleX(0);
+	transform-origin: center;
+	transition: transform 0.3s ease;
+}
+
+.astara-header .astara-nav .wp-block-navigation-item__content:hover::after,
+.astara-header .astara-nav .wp-block-navigation-item__content:focus-visible::after,
+.astara-header .astara-nav .current-menu-item > .wp-block-navigation-item__content::after {
+	transform: scaleX(1);
 }
 
 /* Footer — Figma frame 400:476 "Footer" (Web design_Rd. 3) */
@@ -122,4 +197,55 @@
 
 .astara-footer__copyright {
 	margin: 0;
+}
+
+/* Accordion — patterns/accordion-item.php, powered by the Interactivity API */
+.astara-accordion {
+	border-top: 1px solid var(--wp--preset--color--astara-gray);
+}
+
+.astara-accordion__heading {
+	margin: 0;
+}
+
+.astara-accordion__trigger {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding-block: 20px;
+	background: none;
+	border: none;
+	cursor: pointer;
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: 20px;
+	font-weight: 700;
+	color: var(--wp--preset--color--astara-navy);
+	text-align: left;
+}
+
+.astara-accordion__icon {
+	flex-shrink: 0;
+	margin-left: 16px;
+	font-size: 24px;
+	line-height: 1;
+	color: var(--wp--preset--color--astara-bright-orange);
+	transition: transform 0.2s ease;
+}
+
+.astara-accordion__icon::before {
+	content: "+";
+}
+
+.astara-accordion__icon.is-open {
+	transform: rotate(45deg);
+}
+
+.astara-accordion__panel {
+	padding-bottom: 20px;
+	color: var(--wp--preset--color--gray-1);
+}
+
+.astara-accordion__panel[hidden] {
+	display: none;
 }

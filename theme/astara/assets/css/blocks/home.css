@@ -1,62 +1,7 @@
 /* Home page — Figma frame 400:8 "Home, Investment, Strategy" (Web design_Rd. 3) */
-
-body.home {
-	background: var(--wp--preset--color--astara-gray);
-}
-
-.astara-eyebrow {
-	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--eyebrow);
-	font-weight: 800;
-	line-height: 1;
-	letter-spacing: 5px;
-	text-transform: uppercase;
-	color: var(--wp--preset--color--astara-bright-orange);
-	margin: 0 0 16px;
-}
-
-.astara-section-heading {
-	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--heading-2);
-	font-weight: 400;
-	line-height: 1.15;
-	color: var(--wp--preset--color--astara-navy);
-	margin: 0 0 24px;
-}
-
-.astara-body {
-	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--body-copy);
-	line-height: 1.4;
-	color: var(--wp--preset--color--gray-1);
-	margin: 0 0 24px;
-}
-
-.astara-btn-solid .wp-block-button__link,
-.astara-btn-outline .wp-block-button__link {
-	font-family: var(--wp--preset--font-family--manrope);
-	font-weight: 700;
-	font-size: 18px;
-	line-height: 1.2;
-	border-radius: 4px;
-	padding: 12px 24px;
-	height: 50px;
-	box-sizing: border-box;
-	display: inline-flex;
-	align-items: center;
-}
-
-.astara-btn-solid .wp-block-button__link {
-	background: var(--wp--preset--color--astara-bright-orange);
-	color: var(--wp--preset--color--astara-off-white);
-	border: 1px solid var(--wp--preset--color--astara-bright-orange);
-}
-
-.astara-btn-outline .wp-block-button__link {
-	background: transparent;
-	color: var(--wp--preset--color--astara-navy);
-	border: 1px solid var(--wp--preset--color--astara-bright-orange);
-}
+/* Shared design-system classes (.astara-eyebrow, .astara-section-heading, .astara-body,
+   .astara-btn-solid/outline) live in global.css, not here — they're reused by the
+   Team and Contact pages too, which don't load this stylesheet. */
 
 /* Hero */
 .astara-hero {
@@ -67,7 +12,7 @@ body.home {
 .astara-hero__title {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--heading-1);
-	font-weight: 400;
+	font-weight: 300;
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-navy);
 	max-width: 1100px;
@@ -101,7 +46,7 @@ body.home {
 .astara-hero__heading {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--heading-2);
-	font-weight: 400;
+	font-weight: 300;
 	line-height: 1.15;
 	color: var(--wp--preset--color--astara-navy);
 	margin: 0 0 24px;

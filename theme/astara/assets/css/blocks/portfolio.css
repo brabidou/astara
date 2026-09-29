@@ -1,0 +1,227 @@
+/* Portfolio page — Figma frame 400:243 "Our Portfolio and Case Studies" (Web design_Rd. 3) */
+
+.astara-portfolio-hero {
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../../img/portfolio/hero-banner.jpg");
+    background-size: cover;
+    background-position: center;
+    border-radius: 8px;
+    margin: 40px clamp(20px, 5vw, 88px) 0;
+    padding: 64px clamp(20px, 5vw, 120px);
+    text-align: center;
+}
+
+.astara-portfolio-hero__eyebrow {
+    text-align: center;
+    color: var(--wp--preset--color--astara-off-white);
+}
+
+.astara-portfolio-hero__heading {
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: var(--wp--preset--font-size--heading-2);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--wp--preset--color--astara-off-white);
+    max-width: 860px;
+    margin: 0 auto 24px;
+}
+
+.astara-portfolio-hero__body {
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: var(--wp--preset--font-size--body-copy);
+    line-height: 1.4;
+    color: var(--wp--preset--color--astara-off-white);
+    max-width: 700px;
+    margin: 0 auto 32px;
+}
+
+.astara-portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 40px;
+    padding: 64px clamp(20px, 5vw, 88px) 96px;
+}
+
+.astara-portfolio-tile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--wp--preset--color--astara-off-white);
+    border-radius: 8px;
+    aspect-ratio: 437 / 300;
+    padding: 32px;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease;
+}
+
+a.astara-portfolio-tile:hover,
+a.astara-portfolio-tile:focus-visible {
+    box-shadow: 0 4px 16px rgba(30, 45, 62, 0.15);
+}
+
+.astara-portfolio-tile__logo {
+    max-width: 70%;
+    max-height: 60%;
+    object-fit: contain;
+}
+
+.astara-portfolio-tile__badge {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    background: var(--wp--preset--color--astara-gray);
+    color: var(--wp--preset--color--astara-navy);
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: 14px;
+    border-radius: 30px;
+    padding: 10px 20px;
+    transition: background-color 0.2s ease;
+}
+
+a.astara-portfolio-tile:hover .astara-portfolio-tile__badge,
+a.astara-portfolio-tile:focus-visible .astara-portfolio-tile__badge {
+    background: var(--wp--preset--color--astara-peach);
+}
+
+/* Shared case study content (popup + single page) */
+.astara-portfolio-case__logo img,
+.astara-portfolio-modal__logo img {
+    display: block;
+    max-width: 240px;
+    max-height: 120px;
+    object-fit: contain;
+    margin: 0 0 24px;
+}
+
+.astara-portfolio-case__name,
+.astara-portfolio-modal__name {
+    font-family: var(--wp--preset--font-family--manrope);
+    font-weight: 400;
+    font-size: var(--wp--preset--font-size--heading-2);
+    color: var(--wp--preset--color--astara-navy);
+    margin: 0 0 24px;
+}
+
+.astara-portfolio-case__meta,
+.astara-portfolio-modal__meta {
+    display: flex;
+    gap: 48px;
+    margin-bottom: 24px;
+}
+
+.astara-portfolio-case__meta-label,
+.astara-portfolio-modal__meta-label {
+    font-family: var(--wp--preset--font-family--manrope);
+    font-weight: 700;
+    font-size: var(--wp--preset--font-size--heading-4);
+    color: var(--wp--preset--color--gray-1);
+    margin: 0 0 4px;
+}
+
+.astara-portfolio-case__meta-value,
+.astara-portfolio-modal__meta-value {
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: var(--wp--preset--font-size--body-copy);
+    color: var(--wp--preset--color--gray-1);
+    margin: 0;
+}
+
+.astara-portfolio-case__story,
+.astara-portfolio-modal__story {
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--wp--preset--color--gray-1);
+    border-left: 2px solid var(--wp--preset--color--astara-bright-orange);
+    padding-left: 20px;
+    margin-bottom: 24px;
+}
+
+.astara-portfolio-case__visit,
+.astara-portfolio-modal__visit {
+    display: inline-block;
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--wp--preset--color--astara-navy);
+}
+
+/* Popup modal */
+.astara-portfolio-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.astara-portfolio-modal[hidden] {
+    display: none;
+}
+
+.astara-portfolio-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 45, 62, 0.7);
+}
+
+.astara-portfolio-modal__panel {
+    position: relative;
+    background: var(--wp--preset--color--astara-off-white);
+    border-radius: 8px;
+    max-width: 640px;
+    width: calc(100% - 40px);
+    max-height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding: 40px;
+    text-align: left;
+}
+
+.astara-portfolio-modal__close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 28px;
+    line-height: 1;
+    color: var(--wp--preset--color--astara-navy);
+    padding: 4px 8px;
+}
+
+/* Single company page */
+.astara-portfolio-detail {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 64px clamp(20px, 5vw, 88px) 96px;
+    text-align: left;
+}
+
+.astara-portfolio-detail__back {
+    display: inline-block;
+    font-family: var(--wp--preset--font-family--manrope);
+    font-weight: 700;
+    color: var(--wp--preset--color--astara-navy);
+    margin-bottom: 40px;
+}
+
+@media (max-width: 782px) {
+    .astara-portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .astara-portfolio-hero__heading {
+        font-size: var(--wp--preset--font-size--heading-3);
+    }
+}
+
+@media (max-width: 480px) {
+    .astara-portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
