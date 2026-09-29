@@ -1,1 +1,125 @@
 /* Global styles that theme.json presets can't express. Keep this small. */
+
+/* Header — Figma frame 400:10 "Main Nav" (Web design_Rd. 3) */
+.astara-header {
+	padding-block: 24px;
+	padding-inline: clamp(20px, 5vw, 88px);
+}
+
+.astara-header__inner {
+	align-items: center;
+}
+
+.astara-logo {
+	display: block;
+	width: 187.54px;
+	height: 25px;
+	background: url("../img/astara-logo.svg") no-repeat center / contain;
+}
+
+.astara-nav .wp-block-navigation__container {
+	gap: 53px;
+}
+
+.astara-header .astara-nav .wp-block-navigation-item__content {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: 16px;
+	line-height: 26px;
+	letter-spacing: 2.4px;
+	text-transform: uppercase;
+	font-weight: 400;
+	color: var(--wp--preset--color--astara-navy);
+	padding: 0;
+}
+
+/* Footer — Figma frame 400:476 "Footer" (Web design_Rd. 3) */
+.astara-footer {
+	background: var(--wp--preset--color--astara-navy);
+	padding-block: 64px 40px;
+	padding-inline: clamp(20px, 5vw, 88px);
+	margin-top: 0;
+}
+
+.astara-footer__row {
+	align-items: flex-start;
+	column-gap: 40px;
+	row-gap: 32px;
+	margin-bottom: 48px;
+}
+
+.astara-footer__wordmark {
+	font-family: var(--wp--preset--font-family--besley);
+	font-weight: 600;
+	font-size: var(--wp--preset--font-size--footer-logo);
+	line-height: 1.0757;
+	letter-spacing: 9.5644px;
+	color: var(--wp--preset--color--astara-off-white);
+	margin: 0;
+}
+
+.astara-footer__nav .wp-block-navigation__container {
+	gap: 19px;
+}
+
+.astara-footer .astara-footer__nav .wp-block-navigation-item__content,
+.astara-footer .astara-footer__contact p,
+.astara-footer .astara-footer__copyright {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: 16px;
+	line-height: 26px;
+	letter-spacing: 2.4px;
+	text-transform: uppercase;
+	font-weight: 400;
+	color: var(--wp--preset--color--astara-off-white);
+	padding: 0;
+	margin: 0;
+}
+
+.astara-footer__contact {
+	gap: 12px;
+}
+
+.astara-footer__cta {
+	align-items: center;
+	gap: 40px;
+}
+
+.astara-footer__cta .wp-block-button__link {
+	border: 1px solid var(--wp--preset--color--astara-peach);
+	border-radius: 4px;
+	height: 50px;
+	box-sizing: border-box;
+	padding: 12px 24px;
+	font-family: var(--wp--preset--font-family--manrope);
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 1.2;
+	color: var(--wp--preset--color--astara-gray);
+	background: transparent;
+}
+
+.astara-footer__social {
+	display: flex;
+	align-items: center;
+	gap: 32px;
+}
+
+.astara-footer__social-icon {
+	display: block;
+	width: 24px;
+	height: 24px;
+	background: no-repeat center / contain;
+}
+
+.astara-footer__social-icon--linkedin {
+	background-image: url("../img/icon-linkedin.svg");
+}
+
+.astara-footer__social-icon--x {
+	width: 21px;
+	background-image: url("../img/icon-x.svg");
+}
+
+.astara-footer__copyright {
+	margin: 0;
+}

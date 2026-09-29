@@ -1,0 +1,37 @@
+name: Deploy to Pressable
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "theme/astara/**"
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-pressable
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Deploy theme via SFTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          protocol: sftp
+          server: ${{ secrets.PRESSABLE_SFTP_HOST }}
+          port: ${{ secrets.PRESSABLE_SFTP_PORT }}
+          username: ${{ secrets.PRESSABLE_SFTP_USER }}
+          password: ${{ secrets.PRESSABLE_SFTP_PASSWORD }}
+          local-dir: "theme/astara/"
+          server-dir: ${{ secrets.PRESSABLE_DEPLOY_PATH }}
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.wp-env.json
+            **/.env*

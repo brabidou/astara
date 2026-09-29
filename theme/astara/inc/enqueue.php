@@ -20,5 +20,14 @@ function astara_enqueue_assets() {
 		array(),
 		ASTARA_VERSION
 	);
+
+	if ( is_front_page() ) {
+		wp_enqueue_style(
+			'astara-home',
+			ASTARA_THEME_URI . '/assets/css/blocks/home.css',
+			array( 'astara-global' ),
+			ASTARA_VERSION
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'astara_enqueue_assets' );

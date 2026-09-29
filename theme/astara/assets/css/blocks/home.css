@@ -1,0 +1,453 @@
+/* Home page — Figma frame 400:8 "Home, Investment, Strategy" (Web design_Rd. 3) */
+
+body.home {
+	background: var(--wp--preset--color--astara-gray);
+}
+
+.astara-eyebrow {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--eyebrow);
+	font-weight: 800;
+	line-height: 1;
+	letter-spacing: 5px;
+	text-transform: uppercase;
+	color: var(--wp--preset--color--astara-bright-orange);
+	margin: 0 0 16px;
+}
+
+.astara-section-heading {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-2);
+	font-weight: 400;
+	line-height: 1.15;
+	color: var(--wp--preset--color--astara-navy);
+	margin: 0 0 24px;
+}
+
+.astara-body {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--body-copy);
+	line-height: 1.4;
+	color: var(--wp--preset--color--gray-1);
+	margin: 0 0 24px;
+}
+
+.astara-btn-solid .wp-block-button__link,
+.astara-btn-outline .wp-block-button__link {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 1.2;
+	border-radius: 4px;
+	padding: 12px 24px;
+	height: 50px;
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+}
+
+.astara-btn-solid .wp-block-button__link {
+	background: var(--wp--preset--color--astara-bright-orange);
+	color: var(--wp--preset--color--astara-off-white);
+	border: 1px solid var(--wp--preset--color--astara-bright-orange);
+}
+
+.astara-btn-outline .wp-block-button__link {
+	background: transparent;
+	color: var(--wp--preset--color--astara-navy);
+	border: 1px solid var(--wp--preset--color--astara-bright-orange);
+}
+
+/* Hero */
+.astara-hero {
+	padding-block: 160px 80px;
+	padding-inline: clamp(20px, 5vw, 88px);
+}
+
+.astara-hero__title {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-1);
+	font-weight: 400;
+	line-height: 1.2;
+	color: var(--wp--preset--color--astara-navy);
+	max-width: 1100px;
+	margin: 0 0 64px;
+}
+
+.astara-hero__row {
+	align-items: center;
+	column-gap: 64px;
+	row-gap: 32px;
+}
+
+.astara-hero__image img {
+	border-radius: 10px;
+	display: block;
+	width: 100%;
+	height: auto;
+}
+
+.astara-hero__image {
+	flex: 1 1 480px;
+	max-width: 888px;
+	margin: 0;
+}
+
+.astara-hero__copy {
+	flex: 1 1 420px;
+	max-width: 546px;
+}
+
+.astara-hero__heading {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-2);
+	font-weight: 400;
+	line-height: 1.15;
+	color: var(--wp--preset--color--astara-navy);
+	margin: 0 0 24px;
+}
+
+/* How We Work / How We Help shared row pattern */
+.astara-how-we-work,
+.astara-how-we-help {
+	padding-block: 80px;
+	padding-inline: clamp(20px, 5vw, 88px);
+}
+
+.astara-how-we-work {
+	background: var(--wp--preset--color--astara-off-white);
+}
+
+.astara-how-we-work__row,
+.astara-how-we-help__row {
+	align-items: flex-start;
+	column-gap: 64px;
+	row-gap: 32px;
+}
+
+.astara-how-we-work__image,
+.astara-how-we-help__image {
+	flex: 1 1 400px;
+	max-width: 700px;
+	margin: 0;
+}
+
+.astara-how-we-work__image img,
+.astara-how-we-help__image img {
+	border-radius: 10px;
+	display: block;
+	width: 100%;
+	height: auto;
+	object-fit: cover;
+	aspect-ratio: 1 / 1;
+}
+
+.astara-how-we-work__copy,
+.astara-how-we-help__copy {
+	flex: 1 1 420px;
+	max-width: 620px;
+}
+
+.astara-principles {
+	margin-top: 32px;
+}
+
+.astara-principle {
+	align-items: flex-start;
+	gap: 24px;
+	padding-block: 20px;
+	border-top: 1px solid var(--wp--preset--color--astara-gray);
+}
+
+.astara-principle:first-child {
+	border-top: none;
+}
+
+.astara-principle__number {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-2);
+	color: var(--wp--preset--color--astara-bright-orange);
+	line-height: 1.15;
+	margin: 0;
+	flex: 0 0 auto;
+	min-width: 56px;
+}
+
+.astara-principle__title {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-4);
+	font-weight: 700;
+	color: var(--wp--preset--color--gray-1);
+	margin: 0 0 8px;
+}
+
+.astara-principle .astara-body {
+	margin: 0;
+}
+
+.astara-help-card {
+	background: var(--wp--preset--color--astara-off-white);
+	border-radius: 10px;
+	padding: 32px;
+	margin-top: 24px;
+}
+
+.astara-help-card__title {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-4);
+	font-weight: 700;
+	color: var(--wp--preset--color--gray-1);
+	margin: 0 0 14px;
+}
+
+/* Stats band */
+.astara-stats {
+	background: var(--wp--preset--color--astara-navy);
+	padding-block: 64px;
+	padding-inline: clamp(20px, 5vw, 88px);
+}
+
+.astara-stats__heading {
+	color: var(--wp--preset--color--astara-off-white);
+}
+
+.astara-stats__row {
+	column-gap: 32px;
+	row-gap: 32px;
+}
+
+.astara-stat {
+	flex: 1 1 200px;
+}
+
+.astara-stat__number {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-1);
+	line-height: 1.2;
+	color: var(--wp--preset--color--astara-bright-orange);
+	margin: 0;
+}
+
+.astara-stat__label {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--body-copy);
+	color: var(--wp--preset--color--astara-off-white);
+	margin: 0;
+}
+
+/* Investment criteria */
+.astara-criteria {
+	background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../../img/home/investment-criteria-bg.jpg");
+	background-size: cover;
+	background-position: center;
+	padding-block: 96px;
+	padding-inline: clamp(20px, 5vw, 88px);
+	text-align: center;
+}
+
+.astara-criteria__eyebrow {
+	text-align: center;
+}
+
+.astara-criteria__heading {
+	color: var(--wp--preset--color--astara-off-white);
+	max-width: 860px;
+	margin-inline: auto;
+	margin-bottom: 24px;
+}
+
+.astara-criteria__body {
+	color: var(--wp--preset--color--astara-off-white);
+	max-width: 800px;
+	margin-inline: auto;
+	margin-bottom: 48px;
+}
+
+.astara-criteria__table {
+	background: var(--wp--preset--color--astara-off-white);
+	border-radius: 8px;
+	padding: 32px;
+	column-gap: 0;
+	row-gap: 24px;
+	margin-bottom: 48px;
+}
+
+.astara-criteria__item {
+	flex: 1 1 180px;
+	text-align: center;
+	padding-inline: 16px;
+	border-left: 1px solid var(--wp--preset--color--astara-gray);
+}
+
+.astara-criteria__item:first-child {
+	border-left: none;
+}
+
+.astara-criteria__label {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-weight: 700;
+	font-size: 24px;
+	color: #918e7f;
+	margin: 0 0 8px;
+}
+
+.astara-criteria__value {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-2);
+	color: var(--wp--preset--color--astara-navy);
+	margin: 0;
+}
+
+/* Sectors / Transaction types */
+.astara-sectors {
+	padding-block: 80px;
+	padding-inline: clamp(20px, 5vw, 88px);
+}
+
+.astara-sectors__photos {
+	column-gap: 24px;
+	row-gap: 24px;
+	margin-bottom: 64px;
+}
+
+.astara-sectors__photo {
+	flex: 1 1 300px;
+	margin: 0;
+}
+
+.astara-sectors__photo img {
+	border-radius: 8px;
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1 / 1;
+	object-fit: cover;
+}
+
+.astara-sectors__row {
+	align-items: flex-start;
+	column-gap: 64px;
+	row-gap: 24px;
+	padding-block: 48px;
+	border-top: 1px solid var(--wp--preset--color--astara-gray);
+}
+
+.astara-sectors__intro {
+	flex: 1 1 350px;
+	max-width: 450px;
+}
+
+.astara-arrow-list {
+	flex: 1 1 400px;
+	max-width: 600px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.astara-arrow-list li {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: var(--wp--preset--font-size--heading-3);
+	line-height: 1.3;
+	color: var(--wp--preset--color--astara-navy);
+	padding-block: 10px;
+	position: relative;
+	padding-left: 48px;
+}
+
+.astara-arrow-list li::before {
+	content: "→";
+	position: absolute;
+	left: 0;
+	color: var(--wp--preset--color--astara-bright-orange);
+}
+
+@media (max-width: 782px) {
+	.astara-hero,
+	.astara-how-we-work,
+	.astara-how-we-help,
+	.astara-stats,
+	.astara-criteria,
+	.astara-sectors {
+		padding-inline: 24px;
+	}
+
+	.astara-hero {
+		padding-block: 120px 48px;
+	}
+
+	.astara-how-we-work,
+	.astara-how-we-help,
+	.astara-sectors {
+		padding-block: 48px;
+	}
+
+	.astara-stats {
+		padding-block: 40px;
+	}
+
+	.astara-criteria {
+		padding-block: 56px 40px;
+	}
+
+	.astara-hero__title {
+		font-size: var(--wp--preset--font-size--heading-2);
+		margin-bottom: 32px;
+	}
+
+	.astara-hero__heading,
+	.astara-section-heading {
+		font-size: var(--wp--preset--font-size--heading-3);
+	}
+
+	.astara-body {
+		font-size: 16px;
+		margin-bottom: 20px;
+	}
+
+	.astara-stat__number {
+		font-size: var(--wp--preset--font-size--heading-2);
+	}
+
+	.astara-criteria__heading {
+		font-size: var(--wp--preset--font-size--heading-3);
+	}
+
+	.astara-criteria__table {
+		padding: 20px;
+	}
+
+	.astara-criteria__item {
+		flex-basis: 45%;
+		border-left: none;
+		border-top: 1px solid var(--wp--preset--color--astara-gray);
+		padding-top: 16px;
+	}
+
+	.astara-criteria__value {
+		font-size: var(--wp--preset--font-size--heading-3);
+	}
+
+	.astara-arrow-list li {
+		font-size: 18px;
+		padding-left: 32px;
+		padding-block: 8px;
+	}
+
+	.astara-sectors__row {
+		padding-block: 32px;
+	}
+
+	.astara-help-card {
+		padding: 24px;
+	}
+
+	.astara-principle {
+		gap: 16px;
+	}
+
+	.astara-principle__number {
+		font-size: var(--wp--preset--font-size--heading-3);
+		min-width: 40px;
+	}
+}

@@ -93,6 +93,28 @@ npx wp-env logs                              # container logs
 
 All credentials live in `.env`, which is gitignored. `.env.example` documents every variable without real values. That includes database passwords for deploy and sync scripts, WP admin credentials for tests, Figma tokens and deploy targets. Local development uses wp-env's own database, so the theme itself never needs DB credentials.
 
+## Deployment
+
+Pushes to `main` that touch `theme/astara/**` automatically deploy to Pressable via `.github/workflows/deploy.yml`, using SFTP with username/password ([SamKirkland/FTP-Deploy-Action](https://github.com/SamKirkland/FTP-Deploy-Action)). You can also trigger it manually from the Actions tab (`Deploy to Pressable` → "Run workflow").
+
+This uses password auth for simplicity — **upgrade to SSH key auth later** (swap the workflow step to a key-based action like `easingthemes/ssh-deploy` once you're ready; it's a small change and doesn't affect anything else in the repo).
+
+### Add the deploy credentials
+
+In the GitHub repo: **Settings → Secrets and variables → Actions → New repository secret** (or, since the workflow targets the `production` [Environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment), you can instead create a `production` environment under **Settings → Environments** and add these as **environment secrets** there — that lets you require manual approval before every deploy, which is worth turning on for a production site).
+
+Add these five secrets, using Pressable's SFTP credentials for this site (found in the Pressable dashboard under the site → **SFTP/SSH** tab):
+
+| Secret name | Value |
+|---|---|
+| `PRESSABLE_SFTP_HOST` | The SFTP hostname Pressable gives you for the site (e.g. `sftp.pressable.com` or a site-specific host) |
+| `PRESSABLE_SFTP_USER` | The SFTP username for the site |
+| `PRESSABLE_SFTP_PORT` | The SFTP port Pressable assigns (often `22`, but check the dashboard) |
+| `PRESSABLE_SFTP_PASSWORD` | The SFTP password for that user. Treat this as sensitive — it's stored encrypted by GitHub, but rotate it if it's ever exposed. |
+| `PRESSABLE_DEPLOY_PATH` | Absolute path to the theme directory on the server, **must end with a trailing `/`**, e.g. `/htdocs/wp-content/themes/astara/` (Pressable's web root is typically `/htdocs`) |
+
+Never commit a private key or paste it into chat — only into the GitHub secret field.
+
 ## Required plugins
 
 _TBD._ Plugins are installed at the site level, not bundled in the theme. For local dev, list them in `.wp-env.json`. The theme feature-detects them and shows an admin notice if a critical one is missing.
@@ -128,7 +150,7 @@ _TBD._ Plugins are installed at the site level, not bundled in the theme. For lo
 - [ ] GitHub Actions: PHPCS and Playwright on every PR
 
 ### Phase 6 — Handoff
-- [ ] Document the deploy process
+- [x] Document the deploy process
 - [ ] Client editor walkthrough (Site Editor, patterns, what's safe to change)
 
 ## Definition of done (per template or pattern)

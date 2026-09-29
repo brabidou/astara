@@ -49,6 +49,13 @@ Only files under `theme/astara/` ship to WordPress as the theme. Everything else
 - WP-CLI: `npx wp-env run cli wp <command>`.
 - wp-env manages its own database and credentials. The theme itself never needs DB credentials.
 
+## Deployment
+
+- Target: **Pressable**, deployed via `.github/workflows/deploy.yml` (SFTP, `SamKirkland/FTP-Deploy-Action`) on push to `main` when `theme/astara/**` changes, or manually via workflow_dispatch.
+- Auth is username/password for now (deliberate, temporary choice — upgrade to SSH key auth later; see README's Deployment section for how).
+- No build step — the theme ships as-is (per "Build tooling: none by default" above). If `@wordpress/scripts` is ever added for a custom block, add a build step to the workflow before the deploy step.
+- Credentials are GitHub Actions secrets (`PRESSABLE_SFTP_HOST`, `PRESSABLE_SFTP_USER`, `PRESSABLE_SFTP_PORT`, `PRESSABLE_SFTP_PASSWORD`, `PRESSABLE_DEPLOY_PATH`), not `.env` — `.env`'s `DEPLOY_*` vars are for local sync/deploy scripts only, if any get added. See README's Deployment section for exact setup steps.
+
 ## Secrets
 
 **Set this up first**, before anything that needs a credential.
@@ -67,11 +74,14 @@ Only files under `theme/astara/` ship to WordPress as the theme. Everything else
 ## Design source
 
 - Figma file: see `FIGMA_FILE_URL` in `.env`.
+- **Canonical page/canvas: "Web design_Rd. 3".** The file has multiple design rounds (Rd. 1, Rd. 2, Rd. 3, …) as separate pages/canvases — always confirm you're pulling frames from **Rd. 3**, not an earlier round.
 - Use the Figma MCP server:
   - `get_variable_defs` to pull variables into `theme.json` presets. **Do this first, before building any template.**
   - `get_design_context` to get exact values (spacing, sizes, weights) per frame.
   - `get_screenshot` to get the reference image for visual comparison.
+  - `download_assets` to pull real logo/icon SVGs and other image assets — don't substitute a generic placeholder (e.g. a default block's built-in icon set) when the real asset is available.
 - Map Figma variables to `theme.json` presets 1:1 and keep the naming aligned. Never hardcode a hex value or pixel size that exists as a token.
+- If Figma MCP calls return a tool-call-limit error (this happens on accounts with only View access to a file — the limit is tied to your role on that specific file, not the plan or the connection method), stop and tell the user rather than guessing at values or falling back to a different page. Getting Editor/Dev access to the file, or your own copy of it, removes the cap.
 
 ## Workflow
 
@@ -103,11 +113,12 @@ Pixel-perfect screenshot matching is not the goal, because font rendering and re
 - Required plugins: feature-detect with `function_exists` / `class_exists` and degrade gracefully, and show an admin notice when something critical is missing. **No TGM Plugin Activation.**
 - Keep the list of required plugins in README.md.
 - Don't commit `node_modules/`, `vendor/`, `build/` or `.env`.
+- Template parts (`.html` files) are **not** PHP — `<?php ... ?>` inside them is printed as literal text, not executed. For anything that needs `esc_url()`/`home_url()`/dynamic PHP, either use a native block that already handles it (e.g. logos via CSS `background-image` on a static anchor, not inline PHP) or move the logic into a real PHP-rendered block.
+- `core/navigation` block CSS ships a `color: inherit` rule at `.wp-block-navigation .wp-block-navigation-item__content.wp-block-navigation-item__content` (specificity 0,3,0, via a duplicated class). A typical 2-class override (e.g. `.astara-nav .wp-block-navigation-item__content`) silently loses to it. Match or beat that specificity (e.g. `.astara-header .astara-nav .wp-block-navigation-item__content`) whenever styling nav link color, and verify with `getComputedStyle` — don't trust a screenshot alone, since two dark colors can look identical at a glance.
 
 ## Open questions (ask, don't assume)
 
 - Final theme slug and name. `astara` is assumed.
 - The list of required plugins.
 - Whether a companion plugin is needed (only if there are custom post types, custom blocks or other business logic).
-- Deploy target and method (host, and whether deploys run a build or upload artifacts).
 - Browser support floor.
