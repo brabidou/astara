@@ -7,7 +7,10 @@
 		"env:start": "wp-env start",
 		"env:stop": "wp-env stop",
 		"env:destroy": "wp-env destroy",
-		"test:e2e": "playwright test"
+		"test:e2e": "playwright test",
+		"content:pull": "scripts/pull-content.sh",
+		"content:push-db": "scripts/push-db.sh",
+		"content:push-media": "scripts/push-media.sh"
 	},
 	"devDependencies": {
 		"@playwright/mcp": "^0.0.29",

@@ -54,8 +54,8 @@ Only files under `theme/astara/` ship to WordPress as the theme. Everything else
 - Target: **Pressable**, deployed via `.github/workflows/deploy.yml` (SFTP, `SamKirkland/FTP-Deploy-Action`) on push to `main` when `theme/astara/**` changes, or manually via workflow_dispatch.
 - Auth is username/password for now (deliberate, temporary choice — upgrade to SSH key auth later; see README's Deployment section for how).
 - No build step — the theme ships as-is (per "Build tooling: none by default" above). If `@wordpress/scripts` is ever added for a custom block, add a build step to the workflow before the deploy step.
-- Credentials are GitHub Actions secrets (`PRESSABLE_SFTP_HOST`, `PRESSABLE_SFTP_USER`, `PRESSABLE_SFTP_PORT`, `PRESSABLE_SFTP_PASSWORD`, `PRESSABLE_DEPLOY_PATH`), not `.env` — `.env`'s `DEPLOY_*` vars are for local sync/deploy scripts only, if any get added. See README's Deployment section for exact setup steps.
-- This deploy only ships theme code, never content. Database/media sync between local and Pressable uses **WP Migrate** (paid, dev-only plugin — see README's "Content sync" section). Don't build a custom content-sync script; that's a solved problem here.
+- Credentials are GitHub Actions secrets (`PRESSABLE_SFTP_HOST`, `PRESSABLE_SFTP_USER`, `PRESSABLE_SFTP_PORT`, `PRESSABLE_SFTP_PASSWORD`, `PRESSABLE_DEPLOY_PATH`), not `.env`. See README's Deployment section for exact setup steps.
+- This deploy only ships theme code, never content. Database/media sync between local and Pressable is `scripts/pull-content.sh` / `push-db.sh` / `push-media.sh` (WP-CLI over SSH, no plugin) — see README's "Content sync" section. `.env`'s `PRESSABLE_*` vars (host/user/port/WP root/site URL) drive these; the SSH password is never stored, only prompted for. Push scripts require typing `PUSH` to confirm — never make a push non-interactive or silent.
 
 ## Secrets
 
