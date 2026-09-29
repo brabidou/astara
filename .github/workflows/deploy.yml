@@ -19,19 +19,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Deploy theme via SFTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          protocol: sftp
-          server: ${{ secrets.PRESSABLE_SFTP_HOST }}
-          port: ${{ secrets.PRESSABLE_SFTP_PORT }}
-          username: ${{ secrets.PRESSABLE_SFTP_USER }}
-          password: ${{ secrets.PRESSABLE_SFTP_PASSWORD }}
-          local-dir: "theme/astara/"
-          server-dir: ${{ secrets.PRESSABLE_DEPLOY_PATH }}
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.wp-env.json
-            **/.env*
+      - name: Install sshpass
+        run: sudo apt-get update && sudo apt-get install -y sshpass
+
+      - name: Deploy theme via rsync over SSH
+        env:
+          SSHPASS: ${{ secrets.PRESSABLE_SFTP_PASSWORD }}
+          REMOTE_HOST: ${{ secrets.PRESSABLE_SFTP_HOST }}
+          REMOTE_USER: ${{ secrets.PRESSABLE_SFTP_USER }}
+          REMOTE_PORT: ${{ secrets.PRESSABLE_SFTP_PORT }}
+          REMOTE_PATH: ${{ secrets.PRESSABLE_DEPLOY_PATH }}
+        run: |
+          sshpass -e rsync -rlgoDzvc --delete \
+            -e "ssh -p ${REMOTE_PORT} -o StrictHostKeyChecking=accept-new" \
+            --exclude=".git*" \
+            --exclude="node_modules" \
+            --exclude=".wp-env.json" \
+            --exclude=".env*" \
+            theme/astara/ \
+            "${REMOTE_USER}@${REMOTE_HOST}:${REMOTE_PATH}"

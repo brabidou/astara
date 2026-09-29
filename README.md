@@ -95,7 +95,7 @@ All credentials live in `.env`, which is gitignored. `.env.example` documents ev
 
 ## Deployment
 
-Pushes to `main` that touch `theme/astara/**` automatically deploy to Pressable via `.github/workflows/deploy.yml`, using SFTP with username/password ([SamKirkland/FTP-Deploy-Action](https://github.com/SamKirkland/FTP-Deploy-Action)). You can also trigger it manually from the Actions tab (`Deploy to Pressable` → "Run workflow").
+Pushes to `main` that touch `theme/astara/**` automatically deploy to Pressable via `.github/workflows/deploy.yml`, using `rsync` over SSH with username/password (via `sshpass`) — the same mechanism the `scripts/*.sh` content-sync scripts use, just non-interactive for CI. You can also trigger it manually from the Actions tab (`Deploy to Pressable` → "Run workflow").
 
 This uses password auth for simplicity — **upgrade to SSH key auth later** (swap the workflow step to a key-based action like `easingthemes/ssh-deploy` once you're ready; it's a small change and doesn't affect anything else in the repo).
 
@@ -113,7 +113,7 @@ Add these five secrets, using Pressable's SFTP credentials for this site (found 
 | `PRESSABLE_SFTP_PASSWORD` | The SFTP password for that user. Treat this as sensitive — it's stored encrypted by GitHub, but rotate it if it's ever exposed. |
 | `PRESSABLE_DEPLOY_PATH` | Absolute path to the theme directory on the server, **must end with a trailing `/`**, e.g. `/htdocs/wp-content/themes/astara/` (Pressable's web root is typically `/htdocs`) |
 
-Never commit a private key or paste it into chat — only into the GitHub secret field.
+Never commit a password or private key, or paste one into chat — only into the GitHub secret field.
 
 ## Content sync (local ↔ Pressable)
 

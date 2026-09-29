@@ -51,7 +51,7 @@ Only files under `theme/astara/` ship to WordPress as the theme. Everything else
 
 ## Deployment
 
-- Target: **Pressable**, deployed via `.github/workflows/deploy.yml` (SFTP, `SamKirkland/FTP-Deploy-Action`) on push to `main` when `theme/astara/**` changes, or manually via workflow_dispatch.
+- Target: **Pressable**, deployed via `.github/workflows/deploy.yml` (`rsync` over SSH via `sshpass`, same mechanism as `scripts/*.sh`) on push to `main` when `theme/astara/**` changes, or manually via workflow_dispatch.
 - Auth is username/password for now (deliberate, temporary choice — upgrade to SSH key auth later; see README's Deployment section for how).
 - No build step — the theme ships as-is (per "Build tooling: none by default" above). If `@wordpress/scripts` is ever added for a custom block, add a build step to the workflow before the deploy step.
 - Credentials are GitHub Actions secrets (`PRESSABLE_SFTP_HOST`, `PRESSABLE_SFTP_USER`, `PRESSABLE_SFTP_PORT`, `PRESSABLE_SFTP_PASSWORD`, `PRESSABLE_DEPLOY_PATH`), not `.env`. See README's Deployment section for exact setup steps.
