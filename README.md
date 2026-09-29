@@ -115,6 +115,29 @@ Add these five secrets, using Pressable's SFTP credentials for this site (found 
 
 Never commit a private key or paste it into chat — only into the GitHub secret field.
 
+## Content sync (local ↔ Pressable)
+
+The GitHub Actions deploy above only ships **theme code**. Database content (posts, pages, options) and media are synced separately using [WP Migrate](https://wpmigrate.com/) (formerly WP Migrate DB Pro), pushed/pulled between your local wp-env site and Pressable.
+
+WP Migrate is a paid plugin — it's dev tooling, not a site content plugin, so it isn't listed under "Required plugins" below and has no theme-code dependency (no `function_exists` feature-detection needed).
+
+**Local setup** (per-developer, do not commit the plugin zip or license):
+
+1. Download the plugin zip from your WP Migrate account.
+2. Create `.wp-env.override.json` in the repo root (already gitignored) with:
+   ```json
+   {
+   	"plugins": ["/absolute/path/to/wp-migrate-pro.zip"]
+   }
+   ```
+   Note: `.wp-env.override.json` *replaces* the base config's `plugins` array rather than merging with it — if `.wp-env.json` later lists other plugins, include those paths here too.
+3. `npx wp-env start` (or restart if already running) to install it locally.
+4. Activate WP Migrate in wp-admin and enter your license key.
+
+**Pressable setup:** install and activate WP Migrate the same way directly in that site's wp-admin, with the same license.
+
+**Workflow:** use WP Migrate's Push/Pull screen (in either site's wp-admin, under Tools → Migrate DB) to compare and sync the database and media between local and Pressable. Always pull production content down before pushing local changes up, and double-check the diff before confirming a push — this can overwrite live content.
+
 ## Required plugins
 
 _TBD._ Plugins are installed at the site level, not bundled in the theme. For local dev, list them in `.wp-env.json`. The theme feature-detects them and shows an admin notice if a critical one is missing.

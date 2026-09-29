@@ -16,3 +16,5 @@ build/
 # Editors
 .vscode/
 .idea/
+
+figma/**

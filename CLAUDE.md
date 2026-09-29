@@ -55,6 +55,7 @@ Only files under `theme/astara/` ship to WordPress as the theme. Everything else
 - Auth is username/password for now (deliberate, temporary choice — upgrade to SSH key auth later; see README's Deployment section for how).
 - No build step — the theme ships as-is (per "Build tooling: none by default" above). If `@wordpress/scripts` is ever added for a custom block, add a build step to the workflow before the deploy step.
 - Credentials are GitHub Actions secrets (`PRESSABLE_SFTP_HOST`, `PRESSABLE_SFTP_USER`, `PRESSABLE_SFTP_PORT`, `PRESSABLE_SFTP_PASSWORD`, `PRESSABLE_DEPLOY_PATH`), not `.env` — `.env`'s `DEPLOY_*` vars are for local sync/deploy scripts only, if any get added. See README's Deployment section for exact setup steps.
+- This deploy only ships theme code, never content. Database/media sync between local and Pressable uses **WP Migrate** (paid, dev-only plugin — see README's "Content sync" section). Don't build a custom content-sync script; that's a solved problem here.
 
 ## Secrets
 
