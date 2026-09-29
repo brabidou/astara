@@ -38,8 +38,9 @@ function astara_register_news_blocks() {
 add_action( 'init', 'astara_register_news_blocks' );
 
 /**
- * Render a single news teaser card — image, tag, title (linked to the single
- * post), excerpt, date. The whole card links to the post's own page.
+ * Render a single news teaser card — date/category meta row, image (with an
+ * arrow-icon affordance), title, excerpt. The whole card links to the post's
+ * own page. Matches the Figma news card layout: meta above the image, not below.
  *
  * @param WP_Post $post_obj Post.
  * @return string
@@ -51,16 +52,25 @@ function astara_render_news_card( $post_obj ) {
 	ob_start();
 	?>
 	<a class="astara-news-card" href="<?php echo esc_url( get_permalink( $post_obj ) ); ?>">
-		<?php if ( has_post_thumbnail( $post_obj ) ) : ?>
-			<div class="astara-news-card__image"><?php echo get_the_post_thumbnail( $post_obj, 'medium_large' ); ?></div>
-		<?php endif; ?>
-		<div class="astara-news-card__body">
+		<div class="astara-news-card__meta">
+			<span class="astara-news-card__date"><?php echo esc_html( get_the_date( 'F j, Y', $post_obj ) ); ?></span>
 			<?php if ( $tag ) : ?>
 				<span class="astara-news-card__tag"><?php echo esc_html( $tag->name ); ?></span>
 			<?php endif; ?>
+		</div>
+		<?php if ( has_post_thumbnail( $post_obj ) ) : ?>
+			<div class="astara-news-card__image">
+				<?php echo get_the_post_thumbnail( $post_obj, 'medium_large' ); ?>
+				<span class="astara-news-card__arrow" aria-hidden="true">
+					<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</span>
+			</div>
+		<?php endif; ?>
+		<div class="astara-news-card__body">
 			<h3 class="astara-news-card__title"><?php echo esc_html( get_the_title( $post_obj ) ); ?></h3>
 			<p class="astara-news-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt( $post_obj ), 20 ) ); ?></p>
-			<p class="astara-news-card__date"><?php echo esc_html( get_the_date( '', $post_obj ) ); ?></p>
 		</div>
 	</a>
 	<?php
