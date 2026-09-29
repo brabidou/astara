@@ -1,6 +1,6 @@
 # Astara WordPress Theme
 
-Custom WordPress block theme built from the client's Figma designs. This repository contains **only the theme**. WordPress core, plugins, media and the database are managed separately.
+Custom WordPress block theme built from the client's Figma designs. This repository contains **only the theme**, at `theme/astara/`. WordPress core, plugins, media and the database are managed separately.
 
 ## Summary
 
@@ -28,17 +28,66 @@ Custom WordPress block theme built from the client's Figma designs. This reposit
 
 ## Getting started
 
+These steps work in a plain terminal — no Claude Code or any AI tooling required.
+
+### 1. Install prerequisites
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) — must be **running** before you start the site (`docker info` should succeed, not error).
+- [Node.js LTS](https://nodejs.org/) (v20+) and npm.
+- [Composer](https://getcomposer.org/) — only needed if you're running PHPCS.
+
+### 2. Clone and configure
+
 ```bash
 git clone <repo-url> astara
 cd astara
 cp .env.example .env      # fill in real values; never commit .env
-npm install               # dev tooling (wp-env, Playwright)
+npm install                # installs wp-env, Playwright, and other dev tooling
+```
+
+### 3. Start the site
+
+```bash
 npx wp-env start
 ```
 
-- Site: http://localhost:8888
-- Admin: http://localhost:8888/wp-admin (wp-env default: `admin` / `password`)
-- WP-CLI: `npx wp-env run cli wp <command>`
+First run pulls WordPress + MySQL Docker images and can take a few minutes; later runs are fast. When it finishes you'll see:
+
+```
+WordPress development site started at http://localhost:8888
+```
+
+- **Site**: http://localhost:8888
+- **Admin**: http://localhost:8888/wp-admin — wp-env default login is `admin` / `password` (override via `WP_ADMIN_USER` / `WP_ADMIN_PASSWORD` in `.env`, which Playwright tests read)
+- **Site Editor**: http://localhost:8888/wp-admin/site-editor.php
+
+The `astara` theme (from `theme/astara/`) is mounted into the container automatically per `.wp-env.json`. If it isn't active yet on a fresh environment:
+
+```bash
+npx wp-env run cli wp theme activate astara
+```
+
+### 4. Stop / reset the environment
+
+```bash
+npx wp-env stop        # stop containers, keep all data
+npx wp-env start        # resume where you left off
+npx wp-env destroy      # wipe the environment completely (fresh DB next start)
+```
+
+### 5. Useful commands
+
+```bash
+npx wp-env run cli wp <command>              # run any WP-CLI command inside the container
+npx wp-env run cli wp theme list             # confirm the theme is active
+npx wp-env logs                              # container logs
+```
+
+### Troubleshooting
+
+- **"Cannot connect to the Docker daemon"** — Docker Desktop isn't running. Launch it and wait until it's ready, then retry `npx wp-env start`.
+- **"Please run the command 'npx @wordpress/env <command>' instead"** — you ran `npx wp-env` before `@wordpress/env` was installed as a local dependency; run `npm install` first, or use `npx @wordpress/env start` directly.
+- **PHP errors** — check the debug log: `npx wp-env run cli bash -c "cat wp-content/debug.log"` (empty/missing means no errors).
 
 ## Secrets
 
@@ -94,9 +143,11 @@ _TBD._ Plugins are installed at the site level, not bundled in the theme. For lo
 ## Repo layout
 
 ```
-style.css  theme.json  functions.php
-templates/  parts/  patterns/  styles/
-assets/{css,css/blocks,js,fonts}/
-inc/  tests/e2e/
+theme/astara/
+├── style.css  theme.json  functions.php
+├── templates/  parts/  patterns/  styles/
+├── assets/{css,css/blocks,js,fonts}/
+└── inc/
+tests/e2e/
 .wp-env.json  .env.example  CLAUDE.md  README.md
 ```

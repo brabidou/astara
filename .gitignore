@@ -1,0 +1,18 @@
+node_modules/
+vendor/
+build/
+
+# wp-env
+.wp-env.override.json
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/

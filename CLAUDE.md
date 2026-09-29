@@ -1,6 +1,6 @@
 # CLAUDE.md — Astara WordPress Theme
 
-Custom WordPress **block theme** for a client, built from Figma designs. This repo contains **only the theme**. WordPress core, plugins, uploads and the database never live here.
+Custom WordPress **block theme** for a client, built from Figma designs. This repo contains **only the theme**, living at `theme/astara/`. WordPress core, plugins, uploads and the database never live here.
 
 ## Stack decisions (settled, don't relitigate)
 
@@ -14,32 +14,36 @@ Custom WordPress **block theme** for a client, built from Figma designs. This re
 ## Repo layout
 
 ```
-/                      ← repo root IS the theme folder (astara/)
-├── style.css          ← theme header only
-├── theme.json
-├── functions.php
-├── templates/
-├── parts/
-├── patterns/
-├── styles/            ← style variations (if any)
-├── assets/
-│   ├── css/
-│   │   └── blocks/    ← per-block stylesheets
-│   ├── js/
-│   └── fonts/
-├── inc/               ← PHP includes, one concern per file
+/                          ← repo root: tooling + config, not theme code
+├── theme/
+│   └── astara/            ← the theme itself, mounted into wp-env
+│       ├── style.css      ← theme header only
+│       ├── theme.json
+│       ├── functions.php
+│       ├── templates/
+│       ├── parts/
+│       ├── patterns/
+│       ├── styles/        ← style variations (if any)
+│       ├── assets/
+│       │   ├── css/
+│       │   │   └── blocks/    ← per-block stylesheets
+│       │   ├── js/
+│       │   └── fonts/
+│       └── inc/           ← PHP includes, one concern per file
 ├── tests/
-│   └── e2e/           ← Playwright specs
+│   └── e2e/               ← Playwright specs
 ├── .wp-env.json
-├── .env.example       ← committed, no real values
-├── .env               ← NOT committed (see Secrets)
+├── .env.example           ← committed, no real values
+├── .env                   ← NOT committed (see Secrets)
 ├── CLAUDE.md
 └── README.md
 ```
 
+Only files under `theme/astara/` ship to WordPress as the theme. Everything else at the repo root (config, tests, tooling manifests) is project scaffolding.
+
 ## Local environment
 
-- `@wordpress/env` (Docker). `.wp-env.json` mounts this repo as the theme: `"themes": ["."]`.
+- `@wordpress/env` (Docker). `.wp-env.json` mounts the theme subfolder: `"themes": ["./theme/astara"]`.
 - Dev plugins are listed under `"plugins"` in `.wp-env.json`. Never commit plugin code or paid plugin zips.
 - Start: `npx wp-env start`. Site: http://localhost:8888, admin: http://localhost:8888/wp-admin.
 - WP-CLI: `npx wp-env run cli wp <command>`.

@@ -1,0 +1,18 @@
+{
+	"name": "astara/theme",
+	"description": "Astara WordPress block theme",
+	"type": "wordpress-theme",
+	"license": "proprietary",
+	"require-dev": {
+		"wp-coding-standards/wpcs": "^3.1",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.0"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	},
+	"scripts": {
+		"lint": "phpcs"
+	}
+}

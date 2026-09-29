@@ -1,0 +1,18 @@
+{
+	"name": "astara",
+	"version": "0.1.0",
+	"private": true,
+	"description": "Astara WordPress block theme",
+	"scripts": {
+		"env:start": "wp-env start",
+		"env:stop": "wp-env stop",
+		"env:destroy": "wp-env destroy",
+		"test:e2e": "playwright test"
+	},
+	"devDependencies": {
+		"@playwright/mcp": "^0.0.29",
+		"@playwright/test": "^1.48.0",
+		"@wordpress/env": "^11.16.0",
+		"dotenv": "^16.4.5"
+	}
+}
