@@ -170,7 +170,7 @@
 /* List variant — small thumbnail inline to the left of title + meta, used by the News archive */
 .astara-news-card--list {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
     padding: 16px 0;
 }
@@ -196,6 +196,15 @@
     font-size: var(--wp--preset--font-size--body-copy);
     font-weight: 700;
     margin: 0 0 4px;
+}
+
+.astara-news-card--list .astara-news-card__excerpt {
+    font-size: 14px;
+    margin: 0 0 8px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
 }
 
 .astara-news-card--list .astara-news-card__meta {
