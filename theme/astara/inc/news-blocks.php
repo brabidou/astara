@@ -80,7 +80,7 @@ function astara_render_news_card( $post_obj ) {
 /**
  * Render the News & Media page's grid — a tag filter bar above a set of
  * panels (one per tag, plus "All"), each pre-rendered server-side with that
- * tag's 16 latest posts (a 4x4 grid). The Interactivity API just toggles
+ * tag's 4 latest posts (a 2x2 grid). The Interactivity API just toggles
  * which panel is visible, so no client-side fetching is needed. Ends with a
  * "View More" link to the full archive listing page.
  *
@@ -124,7 +124,7 @@ function astara_render_news_grid() {
 		foreach ( $panels as $slug => $label ) :
 			$query_args = array(
 				'post_type'      => 'post',
-				'posts_per_page' => 16,
+				'posts_per_page' => 4,
 				'post_status'    => 'publish',
 			);
 			if ( 'all' !== $slug ) {
