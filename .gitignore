@@ -17,4 +17,7 @@ build/
 .vscode/
 .idea/
 
+# Playwright MCP scratch output (snapshots/console logs from browser_* calls)
+.playwright-mcp/
+
 figma/**
