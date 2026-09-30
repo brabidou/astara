@@ -167,6 +167,51 @@
     margin: 0;
 }
 
+/* List variant — small thumbnail inline to the left of title + meta, used by the News archive */
+.astara-news-card--list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 16px 0;
+}
+
+.astara-news-card--list .astara-news-card__image {
+    flex: 0 0 auto;
+    width: 88px;
+    height: 88px;
+    margin-bottom: 0;
+}
+
+.astara-news-card--list .astara-news-card__image img {
+    width: 88px;
+    height: 88px;
+    aspect-ratio: 1 / 1;
+}
+
+.astara-news-card--list .astara-news-card__body {
+    min-width: 0;
+}
+
+.astara-news-card--list .astara-news-card__title {
+    font-size: var(--wp--preset--font-size--body-copy);
+    font-weight: 700;
+    margin: 0 0 4px;
+}
+
+.astara-news-card--list .astara-news-card__meta {
+    margin-bottom: 0;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.astara-news-card--list .astara-news-card__date {
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 13px;
+    color: var(--wp--preset--color--gray-1);
+}
+
 .astara-news-view-more {
     text-align: center;
     padding: 40px clamp(20px, 5vw, 88px) 96px;
@@ -240,7 +285,12 @@
 
 .astara-news-archive__main .astara-news-grid {
     grid-template-columns: 1fr;
+    gap: 0;
     padding: 0;
+}
+
+.astara-news-archive__main .astara-news-card--list {
+    border-bottom: 1px solid rgba(30, 45, 62, 0.15);
 }
 
 .astara-news-archive__pagination {

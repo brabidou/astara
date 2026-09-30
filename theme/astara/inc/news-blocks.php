@@ -38,16 +38,49 @@ function astara_register_news_blocks() {
 add_action( 'init', 'astara_register_news_blocks' );
 
 /**
- * Render a single news teaser card — date/category meta row, image (with an
- * arrow-icon affordance), title, excerpt. The whole card links to the post's
- * own page. Matches the Figma news card layout: meta above the image, not below.
+ * Render a single news teaser card.
+ *
+ * Two variants:
+ * - 'grid' (default) — date/category meta row, large image with an
+ *   arrow-icon affordance, title, excerpt. Matches the Figma news card
+ *   layout: meta above the image, not below. Used by the News & Media
+ *   page's 2x2 grid.
+ * - 'list' — small thumbnail inline to the left of the title, with the
+ *   date/category meta as a subtitle line underneath. Used by the News
+ *   archive listing.
+ *
+ * The whole card links to the post's own page either way.
  *
  * @param WP_Post $post_obj Post.
+ * @param string  $variant  'grid' or 'list'.
  * @return string
  */
-function astara_render_news_card( $post_obj ) {
+function astara_render_news_card( $post_obj, $variant = 'grid' ) {
 	$tags = get_the_terms( $post_obj, 'post_tag' );
 	$tag  = ( ! is_wp_error( $tags ) && ! empty( $tags ) ) ? $tags[0] : null;
+
+	if ( 'list' === $variant ) {
+		ob_start();
+		?>
+		<a class="astara-news-card astara-news-card--list" href="<?php echo esc_url( get_permalink( $post_obj ) ); ?>">
+			<?php if ( has_post_thumbnail( $post_obj ) ) : ?>
+				<div class="astara-news-card__image">
+					<?php echo get_the_post_thumbnail( $post_obj, 'thumbnail' ); ?>
+				</div>
+			<?php endif; ?>
+			<div class="astara-news-card__body">
+				<h3 class="astara-news-card__title"><?php echo esc_html( get_the_title( $post_obj ) ); ?></h3>
+				<div class="astara-news-card__meta">
+					<span class="astara-news-card__date"><?php echo esc_html( get_the_date( 'F j, Y', $post_obj ) ); ?></span>
+					<?php if ( $tag ) : ?>
+						<span class="astara-news-card__tag"><?php echo esc_html( $tag->name ); ?></span>
+					<?php endif; ?>
+				</div>
+			</div>
+		</a>
+		<?php
+		return ob_get_clean();
+	}
 
 	ob_start();
 	?>
@@ -237,7 +270,7 @@ function astara_render_news_archive() {
 					<?php
 					while ( $query->have_posts() ) {
 						$query->the_post();
-						echo astara_render_news_card( get_post() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- astara_render_news_card() already escapes its own output.
+						echo astara_render_news_card( get_post(), 'list' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- astara_render_news_card() already escapes its own output.
 					}
 					wp_reset_postdata();
 					?>
