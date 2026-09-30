@@ -62,14 +62,23 @@
     color: var(--wp--preset--color--astara-bright-orange);
 }
 
+/* Two independent flex columns, not a CSS grid — a grid row stretches every
+   cell in it to the tallest item's height, so expanding one accordion was
+   visually "expanding" its row neighbor too. */
 .astara-strategy-accordion {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
     column-gap: 64px;
     margin-top: 32px;
 }
 
-.astara-strategy-accordion .astara-accordion:nth-child(-n+2) {
+.astara-strategy-accordion__col {
+    flex: 1 1 320px;
+    min-width: 0;
+}
+
+.astara-strategy-accordion__col .astara-accordion:first-child {
     border-top: none;
 }
 
@@ -87,14 +96,10 @@
     }
 
     .astara-strategy-accordion {
-        grid-template-columns: 1fr;
+        flex-direction: column;
     }
 
-    .astara-strategy-accordion .astara-accordion:nth-child(-n+2) {
+    .astara-strategy-accordion__col + .astara-strategy-accordion__col .astara-accordion:first-child {
         border-top: 1px solid var(--wp--preset--color--astara-gray);
-    }
-
-    .astara-strategy-accordion .astara-accordion:first-child {
-        border-top: none;
     }
 }
