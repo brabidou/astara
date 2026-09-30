@@ -77,6 +77,15 @@ function astara_enqueue_assets() {
 			astara_asset_version( '/assets/css/blocks/news.css' )
 		);
 	}
+
+	if ( is_page( 'strategy' ) ) {
+		wp_enqueue_style(
+			'astara-strategy',
+			ASTARA_THEME_URI . '/assets/css/blocks/strategy.css',
+			array( 'astara-global' ),
+			astara_asset_version( '/assets/css/blocks/strategy.css' )
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'astara_enqueue_assets' );
 
