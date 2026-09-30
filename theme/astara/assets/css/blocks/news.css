@@ -69,7 +69,7 @@
 /* Card grid — shared by the filtered grid and the archive listing */
 .astara-news-grid {
     display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 40px;
     padding: 0 clamp(20px, 5vw, 88px);
 }
