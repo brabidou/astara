@@ -99,13 +99,5 @@ function astara_register_script_modules() {
 		astara_asset_version( '/assets/js/team-modal.js' )
 	);
 	wp_enqueue_script_module( 'astara-team-modal' );
-
-	wp_register_script_module(
-		'astara-news-filter',
-		ASTARA_THEME_URI . '/assets/js/news-filter.js',
-		array( '@wordpress/interactivity' ),
-		astara_asset_version( '/assets/js/news-filter.js' )
-	);
-	wp_enqueue_script_module( 'astara-news-filter' );
 }
 add_action( 'wp_enqueue_scripts', 'astara_register_script_modules' );

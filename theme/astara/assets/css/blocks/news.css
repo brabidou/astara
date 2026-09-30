@@ -48,10 +48,12 @@
 }
 
 .astara-news-filter__tag {
+    display: inline-block;
     font-family: var(--wp--preset--font-family--manrope);
     font-size: 15px;
     background: none;
     color: var(--wp--preset--color--gray-1);
+    text-decoration: none;
     border: none;
     border-bottom: 2px solid transparent;
     margin-bottom: -1px;
@@ -67,12 +69,8 @@
     border-bottom-color: var(--wp--preset--color--astara-navy);
 }
 
-.astara-news-filter__panel {
+.astara-news-filter .astara-news-grid {
     padding-top: 40px;
-}
-
-.astara-news-filter__panel[hidden] {
-    display: none;
 }
 
 /* Card grid — shared by the filtered grid and the archive listing */

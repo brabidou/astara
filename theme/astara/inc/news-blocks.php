@@ -78,11 +78,13 @@ function astara_render_news_card( $post_obj ) {
 }
 
 /**
- * Render the News & Media page's grid — a tag filter bar above a set of
- * panels (one per tag, plus "All"), each pre-rendered server-side with that
- * tag's 4 latest posts (a 2x2 grid). The Interactivity API just toggles
- * which panel is visible, so no client-side fetching is needed. Ends with a
- * "View More" link to the full archive listing page.
+ * Render the News & Media page's grid — a tag filter bar (real links, works
+ * with JS off) above a single 2x2 grid of that tag's latest posts. The
+ * active tag comes from the `tag` query string, so it's a normal page
+ * request per filter, not a client-side toggle over a fixed pre-rendered
+ * set — a tag with more than 4 posts still only shows its own latest 4,
+ * not the site-wide latest 4. Ends with a "View More" link to the full
+ * archive listing page.
  *
  * @return string
  */
@@ -100,52 +102,47 @@ function astara_render_news_grid() {
 
 	$archive_page = get_page_by_path( 'news-archive' );
 	$archive_url  = $archive_page ? get_permalink( $archive_page ) : home_url( '/news-archive/' );
+	$page_url     = get_permalink();
+
+	$requested_tag = isset( $_GET['tag'] ) ? sanitize_title( wp_unslash( $_GET['tag'] ) ) : ''; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only filter, no state change.
+	$valid_slugs   = wp_list_pluck( $tags, 'slug' );
+	$active_slug   = in_array( $requested_tag, $valid_slugs, true ) ? $requested_tag : 'all';
+
+	$query_args = array(
+		'post_type'      => 'post',
+		'posts_per_page' => 4,
+		'post_status'    => 'publish',
+	);
+	if ( 'all' !== $active_slug ) {
+		$query_args['tag'] = $active_slug;
+	}
+	$posts = get_posts( $query_args );
 
 	ob_start();
 	?>
-	<div class="astara-news-filter" data-wp-interactive="astara/newsFilter" data-wp-context='{ "activeTag": "all" }'>
+	<div class="astara-news-filter">
 		<div class="astara-news-filter__bar">
-			<button type="button" class="astara-news-filter__tag" data-wp-context='{ "tagSlug": "all" }' data-wp-class--is-active="callbacks.isTagActive" data-wp-on--click="actions.setTag">
+			<a href="<?php echo esc_url( $page_url ); ?>" class="astara-news-filter__tag<?php echo ( 'all' === $active_slug ) ? ' is-active' : ''; ?>">
 				<?php esc_html_e( 'All', 'astara' ); ?>
-			</button>
+			</a>
 			<?php foreach ( $tags as $tag ) : ?>
-				<button type="button" class="astara-news-filter__tag" data-wp-context='<?php echo esc_attr( wp_json_encode( array( 'tagSlug' => $tag->slug ) ) ); ?>' data-wp-class--is-active="callbacks.isTagActive" data-wp-on--click="actions.setTag">
+				<a href="<?php echo esc_url( add_query_arg( 'tag', $tag->slug, $page_url ) ); ?>" class="astara-news-filter__tag<?php echo ( $tag->slug === $active_slug ) ? ' is-active' : ''; ?>">
 					<?php echo esc_html( $tag->name ); ?>
-				</button>
+				</a>
 			<?php endforeach; ?>
 		</div>
 
-		<?php
-		$panels = array( 'all' => __( 'All', 'astara' ) );
-		foreach ( $tags as $tag ) {
-			$panels[ $tag->slug ] = $tag->name;
-		}
-
-		foreach ( $panels as $slug => $label ) :
-			$query_args = array(
-				'post_type'      => 'post',
-				'posts_per_page' => 4,
-				'post_status'    => 'publish',
-			);
-			if ( 'all' !== $slug ) {
-				$query_args['tag'] = $slug;
-			}
-			$posts = get_posts( $query_args );
-
-			if ( empty( $posts ) ) {
-				continue;
-			}
-			?>
-			<div class="astara-news-filter__panel" data-wp-context='<?php echo esc_attr( wp_json_encode( array( 'tagSlug' => $slug ) ) ); ?>' data-wp-bind--hidden="callbacks.isPanelHidden">
-				<div class="astara-news-grid">
-					<?php
-					foreach ( $posts as $post_obj ) {
-						echo astara_render_news_card( $post_obj ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- astara_render_news_card() already escapes its own output.
-					}
-					?>
-				</div>
+		<?php if ( ! empty( $posts ) ) : ?>
+			<div class="astara-news-grid">
+				<?php
+				foreach ( $posts as $post_obj ) {
+					echo astara_render_news_card( $post_obj ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- astara_render_news_card() already escapes its own output.
+				}
+				?>
 			</div>
-		<?php endforeach; ?>
+		<?php else : ?>
+			<p><?php esc_html_e( 'No posts found for this tag.', 'astara' ); ?></p>
+		<?php endif; ?>
 	</div>
 
 	<div class="astara-news-view-more">
