@@ -332,7 +332,7 @@
     }
 
     .astara-news-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
     }
 
     .astara-news-archive {
@@ -341,11 +341,5 @@
 
     .astara-news-archive__nav {
         position: static;
-    }
-}
-
-@media (max-width: 480px) {
-    .astara-news-grid {
-        grid-template-columns: 1fr;
     }
 }
