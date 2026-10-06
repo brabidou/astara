@@ -10,7 +10,9 @@
 		"test:e2e": "playwright test",
 		"content:pull": "scripts/pull-content.sh",
 		"content:push-db": "scripts/push-db.sh",
-		"content:push-media": "scripts/push-media.sh"
+		"content:push-media": "scripts/push-media.sh",
+		"content:seed-export": "scripts/export-seed.sh",
+		"content:seed-import": "scripts/seed-content.sh"
 	},
 	"devDependencies": {
 		"@playwright/mcp": "^0.0.29",

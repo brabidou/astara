@@ -97,6 +97,8 @@ All credentials live in `.env`, which is gitignored. `.env.example` documents ev
 
 Pushes to `main` that touch `theme/astara/**` automatically deploy to Pressable via `.github/workflows/deploy.yml`, using `rsync` over SSH with username/password (via `sshpass`) — the same mechanism the `scripts/*.sh` content-sync scripts use, just non-interactive for CI. You can also trigger it manually from the Actions tab (`Deploy to Pressable` → "Run workflow").
 
+**Staging site**: https://astara.mystagingwebsite.com/ — this is the Pressable site that `main` deploys to. Use it for testing (visual checks, computed-style checks) once a change is pushed, rather than relying on local wp-env alone. Since every qualifying push to `main` deploys automatically, merging to `main` is effectively a production deploy — verify locally before pushing.
+
 This uses password auth for simplicity — **upgrade to SSH key auth later** (swap the workflow step to a key-based action like `easingthemes/ssh-deploy` once you're ready; it's a small change and doesn't affect anything else in the repo).
 
 ### Add the deploy credentials
@@ -130,6 +132,17 @@ These use `wp search-replace --export`, not a raw `wp db export`, so serialized 
 | `npm run content:push-media` | Pushes local media **up** to production. Additive only (no `--delete`) — existing remote files are never removed. Requires typing `PUSH` to confirm. |
 
 There's no `push-media`-style delete or a combined "push everything" script on purpose — pushing to production should be a deliberate, per-artifact decision, not a single button.
+
+### Seed content (fresh/cloud environments, no Pressable access)
+
+`content:pull`/`push-*` above require Pressable SSH credentials and a live connection. For environments that don't have either — a new teammate's first run, CI, or a cloud sandbox — there's a small, versioned content fixture checked into `seed/` instead:
+
+| Script | What it does |
+|---|---|
+| `npm run content:seed-export` | Exports the **current local wp-env** content (posts, pages, templates/parts, menus, taxonomies) to `seed/content.xml`, and copies `wp-content/uploads` into `seed/media/`. Run this after shaping local content into something worth keeping as the baseline. |
+| `npm run content:seed-import` | Imports `seed/content.xml` and `seed/media/` into local wp-env. Needs only a running `wp-env` — no Pressable credentials, no network call to production. |
+
+This is a fixture, not a backup: `seed/content.xml` and `seed/media/` are committed to git, so **never run `content:seed-export` straight from a `content:pull`**. Review `seed/content.xml` for anything sensitive (real names/emails, unpublished drafts) and keep `seed/media/` trimmed to a small, representative set of images before committing — not a copy of the full production media library.
 
 ## Required plugins
 
