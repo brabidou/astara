@@ -25,3 +25,17 @@ function astara_setup() {
 	load_theme_textdomain( 'astara', ASTARA_THEME_DIR . '/languages' );
 }
 add_action( 'after_setup_theme', 'astara_setup' );
+
+/**
+ * Hide the Template dropdown in Post Attributes for Team Members and
+ * Portfolio Companies. It only listed the theme's own single-* templates,
+ * which WordPress already applies automatically — Order is the only
+ * attribute editors need.
+ *
+ * @return array
+ */
+function astara_no_page_templates() {
+	return array();
+}
+add_filter( 'theme_astara_team_member_templates', 'astara_no_page_templates' );
+add_filter( 'theme_astara_portfolio_co_templates', 'astara_no_page_templates' );
