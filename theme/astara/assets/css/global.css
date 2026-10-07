@@ -54,19 +54,19 @@
 .astara-btn-outline .wp-block-button__link:hover,
 .astara-btn-outline .wp-block-button__link:focus-visible {
 	background: var(--wp--preset--color--astara-bright-orange);
-	color: var(--wp--preset--color--astara-off-white);
+	color: var(--wp--preset--color--astara-navy);
 }
 
 .astara-btn-solid .wp-block-button__link:hover,
 .astara-btn-solid .wp-block-button__link:focus-visible {
-	background: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 82%, #000);
-	border-color: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 82%, #000);
-	color: var(--wp--preset--color--astara-off-white);
+	background: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 92%, #000);
+	border-color: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 92%, #000);
+	color: var(--wp--preset--color--astara-navy);
 }
 
 .astara-btn-solid .wp-block-button__link {
 	background: var(--wp--preset--color--astara-bright-orange);
-	color: var(--wp--preset--color--astara-off-white);
+	color: var(--wp--preset--color--astara-navy);
 	border: 1px solid var(--wp--preset--color--astara-bright-orange);
 }
 
@@ -388,4 +388,29 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 
 .astara-accordion__panel[hidden] {
 	display: none;
+}
+
+/* Accessibility: the brand orange is only 2-2.6:1 on the light section
+   backgrounds, so orange *text* on light uses a darker shade (4:1+, fine for
+   large text). Orange on navy/photo sections and orange fills are unchanged. */
+.astara-eyebrow {
+	color: var(--astara-orange-on-light, #a8380b);
+}
+
+.astara-hero .astara-eyebrow,
+.astara-criteria .astara-eyebrow,
+.astara-stats .astara-eyebrow {
+	color: var(--wp--preset--color--astara-bright-orange);
+}
+
+/* Keyboard focus: a clear ring on every interactive element. Orange on light,
+   off-white on the dark navy bands and the footer. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+	outline: 3px solid #a8380b;
+	outline-offset: 3px;
+}
+
+:where(.astara-stats, .astara-hero, .astara-criteria, .astara-footer, .astara-header) :where(a, button, summary):focus-visible,
+.has-astara-navy-background-color :where(a, button, summary):focus-visible {
+	outline-color: var(--wp--preset--color--astara-bright-orange);
 }

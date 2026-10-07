@@ -148,7 +148,7 @@
 .astara-principle__number {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--heading-2);
-	color: var(--wp--preset--color--astara-bright-orange);
+	color: #a8380b; /* darker orange: 4:1 on the light-gray band (brand orange is 2:1) */
 	line-height: 1.15;
 	margin: 0;
 	flex: 0 0 154px;
@@ -206,7 +206,7 @@
 }
 
 .astara-stats__row {
-	column-gap: 32px;
+	column-gap: clamp(32px, 3.6vw, 64px);
 	row-gap: 32px;
 }
 
@@ -218,6 +218,7 @@
 	font-family: var(--wp--preset--font-family--manrope);
 	/* 90px (Figma H1) at the 1728px design width, scaling down on smaller screens */
 	font-size: clamp(56px, 5.2vw, 90px);
+	font-weight: 300;
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-bright-orange);
 	margin: 0;
@@ -579,6 +580,7 @@
 
 	.astara-criteria__label {
 		font-size: 18px;
+		color: #6f6c5e; /* 18px text needs 4.5:1; the desktop gray only reaches 3:1 */
 		margin-bottom: 8px;
 	}
 

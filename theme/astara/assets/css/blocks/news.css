@@ -387,7 +387,7 @@
 
 .astara-news-archive__nav-link:hover,
 .astara-news-archive__nav-link.is-active {
-    color: var(--wp--preset--color--astara-bright-orange);
+    color: #a8380b; /* darker orange for contrast on the light background */
     font-weight: 700;
 }
 

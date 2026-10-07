@@ -72,7 +72,7 @@ function astara_render_news_card( $post_obj, $variant = 'grid' ) {
 				<?php echo astara_news_card_placeholder( $post_obj ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside the helper. ?>
 			<?php endif; ?>
 			<div class="astara-news-card__body">
-				<h3 class="astara-news-card__title"><?php echo esc_html( get_the_title( $post_obj ) ); ?></h3>
+				<h2 class="astara-news-card__title"><?php echo esc_html( get_the_title( $post_obj ) ); ?></h2>
 				<p class="astara-news-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt( $post_obj ), 20 ) ); ?></p>
 				<div class="astara-news-card__meta">
 					<span class="astara-news-card__date"><?php echo esc_html( get_the_date( 'F j, Y', $post_obj ) ); ?></span>
@@ -121,7 +121,7 @@ function astara_render_news_card( $post_obj, $variant = 'grid' ) {
 			</div>
 		<?php endif; ?>
 		<div class="astara-news-card__body">
-			<h3 class="astara-news-card__title"><?php echo esc_html( get_the_title( $post_obj ) ); ?></h3>
+			<h2 class="astara-news-card__title"><?php echo esc_html( get_the_title( $post_obj ) ); ?></h2>
 			<p class="astara-news-card__excerpt"><?php echo esc_html( wp_trim_words( get_the_excerpt( $post_obj ), 20 ) ); ?></p>
 		</div>
 	</a>
