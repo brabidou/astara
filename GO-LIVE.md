@@ -108,8 +108,10 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [ ] Mobile menu: consider adding a "Get in Touch" button and contact details to the overlay (currently logo + links only).
 
 - [x] 2026-10-07 — Automated accessibility pass (axe-core, WCAG 2.2 AA) on all pages at 390/768/1440: no violations left except WordPress core's admin bar and skip link (not shown to visitors). Fixed landmarks, colour contrast (darker orange for orange text on light backgrounds; navy text on orange buttons), headings, hidden H1 on pages without one, focus rings.
-- [ ] Manual accessibility pass not yet done: keyboard-only tab order, mobile menu overlay, Team/Portfolio popups (focus trap and Esc to close), site editor, and a screen reader (VoiceOver). Confirm the navy-on-orange button text is OK with the client (differs from Figma).
+- [ ] Manual accessibility pass not yet done: keyboard-only tab order, mobile menu overlay, Team/Portfolio popups (focus trap and Esc to close), site editor, and a screen reader (VoiceOver). 
 - [ ] SEO: current favicon is the old red astaracapital.com icon (`assets/img/icons/`); replace with the new brand icon (or set Settings → General → Site Icon). Google sitelinks can't be forced; set the Site Title/tagline on production, submit the sitemap in Search Console, and note Yoast per-page fields override the theme's default descriptions.
+
+- [ ] Client decision: orange buttons (brand `#F9703E` with white text) are only 2.6:1 contrast, below WCAG AA (4.5:1). Buttons are currently as designed. Options tried and rejected: navy text on orange (looked weak), deeper orange `#c2410c` (didn't look right). Ask the client whether to keep as designed or adopt an accessible shade.
 
 ## 10. Launch day
 
