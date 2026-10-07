@@ -3,7 +3,7 @@
  * Title: How We Work
  * Slug: astara/how-we-work
  * Categories: astara
- * Description: Photo beside a heading, intro and a numbered list of principles.
+ * Description: Intro copy beside a photo panel holding a numbered stack of principle cards.
  *
  * @package Astara
  */
@@ -16,10 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="wp-block-group astara-how-we-work">
 	<!-- wp:group {"className":"astara-how-we-work__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group astara-how-we-work__row">
-		<!-- wp:image {"className":"astara-how-we-work__image","sizeSlug":"large"} -->
-		<figure class="wp-block-image size-large astara-how-we-work__image"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/how-we-work.jpg' ) ); ?>" alt="Astara team reviewing plans at a portfolio company facility"/></figure>
-		<!-- /wp:image -->
-
 		<!-- wp:group {"className":"astara-how-we-work__copy","layout":{"type":"constrained"}} -->
 		<div class="wp-block-group astara-how-we-work__copy">
 			<!-- wp:paragraph {"className":"astara-eyebrow"} -->
@@ -33,86 +29,88 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<!-- wp:paragraph {"className":"astara-body"} -->
 			<p class="astara-body">Our mission is to help businesses reach their full potential through thoughtful partnership, practical execution, and a focus on lasting impact.</p>
 			<!-- /wp:paragraph -->
-
-			<!-- wp:group {"className":"astara-principles","layout":{"type":"default"}} -->
-			<div class="wp-block-group astara-principles">
-				<!-- wp:group {"className":"astara-principle","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-				<div class="wp-block-group astara-principle">
-					<!-- wp:paragraph {"className":"astara-principle__number"} -->
-					<p class="astara-principle__number">01</p>
-					<!-- /wp:paragraph -->
-					<!-- wp:group {"layout":{"type":"constrained"}} -->
-					<div class="wp-block-group">
-						<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
-						<h3 class="wp-block-heading astara-principle__title">Balanced Partnership</h3>
-						<!-- /wp:heading -->
-						<!-- wp:paragraph {"className":"astara-body"} -->
-						<p class="astara-body">We are in service to management; here to provide what they need to succeed, not to dictate how they get there.</p>
-						<!-- /wp:paragraph -->
-					</div>
-					<!-- /wp:group -->
-				</div>
-				<!-- /wp:group -->
-
-				<!-- wp:group {"className":"astara-principle","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-				<div class="wp-block-group astara-principle">
-					<!-- wp:paragraph {"className":"astara-principle__number"} -->
-					<p class="astara-principle__number">02</p>
-					<!-- /wp:paragraph -->
-					<!-- wp:group {"layout":{"type":"constrained"}} -->
-					<div class="wp-block-group">
-						<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
-						<h3 class="wp-block-heading astara-principle__title">Empowered Teams</h3>
-						<!-- /wp:heading -->
-						<!-- wp:paragraph {"className":"astara-body"} -->
-						<p class="astara-body">We bring financial, operational, and strategic resources to great management teams, positioning them for long-term success.</p>
-						<!-- /wp:paragraph -->
-					</div>
-					<!-- /wp:group -->
-				</div>
-				<!-- /wp:group -->
-
-				<!-- wp:group {"className":"astara-principle","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-				<div class="wp-block-group astara-principle">
-					<!-- wp:paragraph {"className":"astara-principle__number"} -->
-					<p class="astara-principle__number">03</p>
-					<!-- /wp:paragraph -->
-					<!-- wp:group {"layout":{"type":"constrained"}} -->
-					<div class="wp-block-group">
-						<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
-						<h3 class="wp-block-heading astara-principle__title">Transparent Communication</h3>
-						<!-- /wp:heading -->
-						<!-- wp:paragraph {"className":"astara-body"} -->
-						<p class="astara-body">We say what we mean, listen as much as we talk, and build every relationship one honest conversation at a time.</p>
-						<!-- /wp:paragraph -->
-					</div>
-					<!-- /wp:group -->
-				</div>
-				<!-- /wp:group -->
-
-				<!-- wp:group {"className":"astara-principle","layout":{"type":"flex","flexWrap":"nowrap"}} -->
-				<div class="wp-block-group astara-principle">
-					<!-- wp:paragraph {"className":"astara-principle__number"} -->
-					<p class="astara-principle__number">04</p>
-					<!-- /wp:paragraph -->
-					<!-- wp:group {"layout":{"type":"constrained"}} -->
-					<div class="wp-block-group">
-						<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
-						<h3 class="wp-block-heading astara-principle__title">Prudent Capitalization</h3>
-						<!-- /wp:heading -->
-						<!-- wp:paragraph {"className":"astara-body"} -->
-						<p class="astara-body">We capitalize companies to fund what long-term success requires — people, process, equipment, IP, and infrastructure.</p>
-						<!-- /wp:paragraph -->
-					</div>
-					<!-- /wp:group -->
-				</div>
-				<!-- /wp:group -->
-			</div>
-			<!-- /wp:group -->
 		</div>
 		<!-- /wp:group -->
+
+		<!-- wp:cover {"url":"<?php echo esc_url( get_theme_file_uri( 'assets/img/home/how-we-work.jpg' ) ); ?>","dimRatio":0,"minHeight":940,"minHeightUnit":"px","contentPosition":"center right","isDark":false,"className":"astara-how-we-work__panel","layout":{"type":"constrained"}} -->
+		<div class="wp-block-cover is-light has-custom-content-position is-position-center-right astara-how-we-work__panel" style="min-height:940px"><img class="wp-block-cover__image-background" alt="" src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/how-we-work.jpg' ) ); ?>" data-object-fit="cover"/><span aria-hidden="true" class="wp-block-cover__background has-background-dim-0 has-background-dim"></span><div class="wp-block-cover__inner-container"><!-- wp:group {"className":"astara-principles","layout":{"type":"default"}} -->
+			<div class="wp-block-group astara-principles">
+					<!-- wp:group {"className":"astara-principle","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+					<div class="wp-block-group astara-principle">
+						<!-- wp:paragraph {"className":"astara-principle__number"} -->
+						<p class="astara-principle__number">01</p>
+						<!-- /wp:paragraph -->
+						<!-- wp:group {"className":"astara-principle__text","layout":{"type":"constrained"}} -->
+						<div class="wp-block-group astara-principle__text">
+							<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
+							<h3 class="wp-block-heading astara-principle__title">Balanced Partnership</h3>
+							<!-- /wp:heading -->
+							<!-- wp:paragraph {"className":"astara-body"} -->
+							<p class="astara-body">We are in service to management; here to provide what they need to succeed, not to dictate how they get there.</p>
+							<!-- /wp:paragraph -->
+						</div>
+						<!-- /wp:group -->
+					</div>
+					<!-- /wp:group -->
+
+					<!-- wp:group {"className":"astara-principle","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+					<div class="wp-block-group astara-principle">
+						<!-- wp:paragraph {"className":"astara-principle__number"} -->
+						<p class="astara-principle__number">02</p>
+						<!-- /wp:paragraph -->
+						<!-- wp:group {"className":"astara-principle__text","layout":{"type":"constrained"}} -->
+						<div class="wp-block-group astara-principle__text">
+							<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
+							<h3 class="wp-block-heading astara-principle__title">Empowered Teams</h3>
+							<!-- /wp:heading -->
+							<!-- wp:paragraph {"className":"astara-body"} -->
+							<p class="astara-body">We bring financial, operational, and strategic resources to great management teams, positioning them for long-term success.</p>
+							<!-- /wp:paragraph -->
+						</div>
+						<!-- /wp:group -->
+					</div>
+					<!-- /wp:group -->
+
+					<!-- wp:group {"className":"astara-principle","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+					<div class="wp-block-group astara-principle">
+						<!-- wp:paragraph {"className":"astara-principle__number"} -->
+						<p class="astara-principle__number">03</p>
+						<!-- /wp:paragraph -->
+						<!-- wp:group {"className":"astara-principle__text","layout":{"type":"constrained"}} -->
+						<div class="wp-block-group astara-principle__text">
+							<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
+							<h3 class="wp-block-heading astara-principle__title">Transparent Communication</h3>
+							<!-- /wp:heading -->
+							<!-- wp:paragraph {"className":"astara-body"} -->
+							<p class="astara-body">We say what we mean, listen as much as we talk, and build every relationship one honest conversation at a time.</p>
+							<!-- /wp:paragraph -->
+						</div>
+						<!-- /wp:group -->
+					</div>
+					<!-- /wp:group -->
+
+					<!-- wp:group {"className":"astara-principle","layout":{"type":"flex","flexWrap":"nowrap"}} -->
+					<div class="wp-block-group astara-principle">
+						<!-- wp:paragraph {"className":"astara-principle__number"} -->
+						<p class="astara-principle__number">04</p>
+						<!-- /wp:paragraph -->
+						<!-- wp:group {"className":"astara-principle__text","layout":{"type":"constrained"}} -->
+						<div class="wp-block-group astara-principle__text">
+							<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
+							<h3 class="wp-block-heading astara-principle__title">Prudent Capitalization</h3>
+							<!-- /wp:heading -->
+							<!-- wp:paragraph {"className":"astara-body"} -->
+							<p class="astara-body">We capitalize companies to fund what long-term success requires — people, process, equipment, IP, and infrastructure.</p>
+							<!-- /wp:paragraph -->
+						</div>
+						<!-- /wp:group -->
+					</div>
+					<!-- /wp:group -->
+
+			</div>
+			<!-- /wp:group --></div></div>
+		<!-- /wp:cover -->
 	</div>
 	<!-- /wp:group -->
 </div>
 <!-- /wp:group -->
-

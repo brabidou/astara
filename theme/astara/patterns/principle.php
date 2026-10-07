@@ -17,8 +17,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<!-- wp:paragraph {"className":"astara-principle__number"} -->
 	<p class="astara-principle__number">05</p>
 	<!-- /wp:paragraph -->
-	<!-- wp:group {"layout":{"type":"constrained"}} -->
-	<div class="wp-block-group">
+	<!-- wp:group {"className":"astara-principle__text","layout":{"type":"constrained"}} -->
+	<div class="wp-block-group astara-principle__text">
 		<!-- wp:heading {"level":3,"className":"astara-principle__title"} -->
 		<h3 class="wp-block-heading astara-principle__title">Principle title</h3>
 		<!-- /wp:heading -->
