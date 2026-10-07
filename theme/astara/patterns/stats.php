@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<!-- wp:group {"className":"astara-stats","layout":{"type":"constrained","contentSize":"1552px"}} -->
-<div class="wp-block-group astara-stats">
+<!-- wp:group {"align":"full","className":"astara-stats","layout":{"type":"constrained","contentSize":"1552px"}} -->
+<div class="wp-block-group alignfull astara-stats">
 	<!-- wp:heading {"level":2,"className":"astara-section-heading astara-stats__heading"} -->
 	<h2 class="wp-block-heading astara-section-heading astara-stats__heading">Astara by the Numbers</h2>
 	<!-- /wp:heading -->

@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<!-- wp:group {"className":"astara-how-we-help","layout":{"type":"constrained","contentSize":"1552px"}} -->
-<div class="wp-block-group astara-how-we-help">
+<!-- wp:group {"align":"full","className":"astara-how-we-help","layout":{"type":"constrained","contentSize":"1552px"}} -->
+<div class="wp-block-group alignfull astara-how-we-help">
 	<!-- wp:group {"className":"astara-how-we-help__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group astara-how-we-help__row">
 		<!-- wp:image {"className":"astara-how-we-help__image","sizeSlug":"large"} -->

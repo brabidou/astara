@@ -15,7 +15,7 @@
 	font-weight: 300;
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-navy);
-	max-width: 1100px;
+	max-width: none;
 	margin: 0 0 64px;
 }
 
@@ -52,6 +52,16 @@
 	margin: 0 0 24px;
 }
 
+/*
+ * Full-bleed bands: the sections are alignfull so their backgrounds run to
+ * the edge of the page, with the content inside kept to the 1552px container.
+ * Cap the band on very large monitors so it doesn't stretch forever.
+ */
+.alignfull:is(.astara-hero, .astara-how-we-work, .astara-how-we-help, .astara-stats, .astara-criteria, .astara-sectors) {
+	max-width: 2560px;
+	margin-inline: auto;
+}
+
 /* How We Work / How We Help shared section padding */
 .astara-how-we-work,
 .astara-how-we-help {
@@ -61,10 +71,7 @@
 
 .astara-how-we-work {
 	background: var(--wp--preset--color--astara-off-white);
-	/* Figma puts this section's content at the page gutter (x=88 on a 1728
-	   canvas), so don't add the usual inset on top of the 1552px container.
-	   The gutter still applies below that width. */
-	padding-inline: max(0px, calc(clamp(20px, 5vw, 88px) - max(0px, (100vw - 1552px) / 2)));
+	padding-inline: clamp(20px, 5vw, 88px);
 }
 
 /* How We Help — photo left, stacked cards right */

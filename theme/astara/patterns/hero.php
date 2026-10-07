@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<!-- wp:group {"className":"astara-hero","layout":{"type":"constrained","contentSize":"1552px"}} -->
-<div class="wp-block-group astara-hero">
+<!-- wp:group {"align":"full","className":"astara-hero","layout":{"type":"constrained","contentSize":"1552px"}} -->
+<div class="wp-block-group alignfull astara-hero">
 	<!-- wp:heading {"level":1,"className":"astara-hero__title"} -->
 	<h1 class="wp-block-heading astara-hero__title">Investors and Operators Partnering to Build Great Businesses</h1>
 	<!-- /wp:heading -->

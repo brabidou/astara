@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<!-- wp:group {"className":"astara-criteria","layout":{"type":"constrained","contentSize":"1552px"}} -->
-<div class="wp-block-group astara-criteria" id="investment-criteria">
+<!-- wp:group {"align":"full","className":"astara-criteria","layout":{"type":"constrained","contentSize":"1552px"}} -->
+<div class="wp-block-group alignfull astara-criteria" id="investment-criteria">
 	<!-- wp:paragraph {"className":"astara-eyebrow astara-criteria__eyebrow"} -->
 	<p class="astara-eyebrow astara-criteria__eyebrow">Investment Criteria</p>
 	<!-- /wp:paragraph -->

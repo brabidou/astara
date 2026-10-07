@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<!-- wp:group {"className":"astara-sectors","layout":{"type":"constrained","contentSize":"1552px"}} -->
-<div class="wp-block-group astara-sectors">
+<!-- wp:group {"align":"full","className":"astara-sectors","layout":{"type":"constrained","contentSize":"1552px"}} -->
+<div class="wp-block-group alignfull astara-sectors">
 	<!-- wp:group {"className":"astara-sectors__photos","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group astara-sectors__photos">
 		<!-- wp:image {"className":"astara-sectors__photo","sizeSlug":"large"} -->
