@@ -137,7 +137,7 @@ add_action( 'add_meta_boxes', 'astara_portfolio_company_meta_box' );
 function astara_portfolio_company_case_study_meta_box() {
 	add_meta_box(
 		'astara_portfolio_company_case_study',
-		__( 'Case Study', 'astara' ),
+		__( 'Company description', 'astara' ),
 		'astara_render_portfolio_company_case_study_meta_box',
 		'astara_portfolio_co',
 		'normal',
@@ -154,7 +154,7 @@ add_action( 'add_meta_boxes', 'astara_portfolio_company_case_study_meta_box' );
 function astara_render_portfolio_company_case_study_meta_box( $post ) {
 	astara_render_richtext_meta_box( $post, 'astara_case_study' );
 	?>
-	<p class="description"><?php esc_html_e( 'Not used on the Portfolio page, whose "Case Study" button now opens a PDF or link (set under Investment Details). This text only appears on the company\'s own page.', 'astara' ); ?></p>
+	<p class="description"><?php esc_html_e( 'Shown in the details popup (and on the company\'s own page) opened from its logo on the Portfolio page. The separate "Case Study" button only appears when a PDF or link is set under Investment Details.', 'astara' ); ?></p>
 	<?php
 }
 
