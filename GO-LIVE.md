@@ -11,7 +11,8 @@ Everything that has to be checked, changed or finished before the Astara site go
 ## 1. Blockers — the site is not launchable until these are done
 
 - [ ] **Replace every placeholder `#` link.** Home page content and the `astara/*` patterns have buttons that go nowhere:
-  hero "View Case Studies" and "Contact"; How We Help "View Case Studies", "Meet our Team" and "Apply to Operations Associate Program"; Investment Criteria "Download Criteria" (needs the PDF uploaded and linked). Footer LinkedIn and X icons (`parts/footer.html`) also point to `#`. Fix on the live pages **and** in `theme/astara/patterns/` so new insertions are right.
+  hero "View Case Studies" and "Contact"; How We Help "View Case Studies", "Meet our Team" and "Apply to Operations Associate Program"; Investment Criteria "Download Criteria" (needs the PDF uploaded and linked). Fix on the live pages **and** in `theme/astara/patterns/` so new insertions are right.
+- [ ] **Enter the LinkedIn and X profile URLs under Site Settings** (admin menu → Site Settings). The footer icons are hidden until a URL is set; the current astaracapital.com doesn't publish any, so the client needs to supply them. Also check the phone, email and the two addresses on that page are right. These are stored in the database (option `astara_site_settings`), so enter them on each environment, and they are *not* carried by a content-only database push.
 - [ ] **Publish a Privacy Policy.** The page exists but is a draft on staging. Write it, publish it, link it from the footer. See section 6.
 - [ ] **Newsletter signup: real reCAPTCHA keys and notify address** (section 5). Without keys the form is protected by the honeypot only.
 - [ ] **Change every password** (section 3) before launch.
@@ -53,7 +54,7 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [ ] Tags: all imported items use the existing "Press" tag. Decide the final tag set (Company News / Insights / Press) and re-tag as needed; the original site split items into "Press Releases" and "In The News" tabs.
 - [ ] Search content for leftover staging URLs (`astara.mystagingwebsite.com`) and `localhost`.
 - [ ] Contact page: confirm address, phone, email and the embedded map pin are correct. The page body is a Classic block of raw HTML stored in the database.
-- [ ] Footer: contact details and copyright year.
+- [ ] Footer: contact details (now from Site Settings). The copyright year updates itself.
 - [ ] After any `content:push-db`, re-verify the home page content on the live site (the pattern-based sections have to survive the push).
 
 ## 5. Forms and email — Newsletter signup (Contact page)
@@ -124,4 +125,5 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [x] 2026-10-07 — Staging is blocked from search engines by Pressable's robots.txt (re-check on live: section 2).
 - [x] 2026-10-07 — News posts can link straight to a PDF or website ("Link directly to a file or website" field); cards open it in a new tab and the post page redirects there.
 - [x] 2026-10-07 — Press & News PDFs scraped from astaracapital.com/media and imported locally into the Media Library (`uploads/press-and-news/`), and 29 News posts created from them (locally).
+- [x] 2026-10-07 — Site Settings page added (LinkedIn/X links, phone, email, addresses) feeding the footer and Contact page; footer copyright year is now automatic.
 - [x] 2026-10-07 — Newsletter signup built (stores subscribers, emails a notification, reCAPTCHA v2 + honeypot); tested locally with Google's test keys.

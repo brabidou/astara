@@ -126,6 +126,9 @@ function astara_editor_blocks() {
 		'astara/news-grid'                => array( __( 'News Grid', 'astara' ), 'megaphone', __( 'The latest news cards.', 'astara' ) ),
 		'astara/news-archive'             => array( __( 'News Archive', 'astara' ), 'archive', __( 'The full filterable news archive.', 'astara' ) ),
 		'astara/news-single-post'         => array( __( 'News Post Detail', 'astara' ), 'media-text', __( "A single news post's content. Used on each post's own page.", 'astara' ) ),
+		'astara/social-links'             => array( __( 'Social Links', 'astara' ), 'share', __( 'LinkedIn and X icons, from Site Settings. Icons without a URL are hidden.', 'astara' ) ),
+		'astara/copyright'                => array( __( 'Copyright', 'astara' ), 'info', __( 'The footer copyright line. The year updates itself.', 'astara' ) ),
+		'astara/footer-contact'           => array( __( 'Footer Contact Details', 'astara' ), 'phone', __( 'The footer phone number and address, from Site Settings.', 'astara' ) ),
 	);
 }
 

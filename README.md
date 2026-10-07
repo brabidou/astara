@@ -144,6 +144,10 @@ There's no `push-media`-style delete or a combined "push everything" script on p
 
 This is a fixture, not a backup: `seed/content.xml` and `seed/media/` are committed to git, so **never run `content:seed-export` straight from a `content:pull`**. Review `seed/content.xml` for anything sensitive (real names/emails, unpublished drafts) and keep `seed/media/` trimmed to a small, representative set of images before committing — not a copy of the full production media library.
 
+## Site Settings (editable links and contact details)
+
+Details that appear in more than one place live under **Site Settings** in the admin (`inc/settings.php`), not in templates: LinkedIn and X profile URLs, phone, email, the Contact-page address and the shorter footer address. The footer reads them through server-rendered blocks (`astara/social-links`, `astara/footer-contact`, and `astara/copyright`, whose year updates itself), and the Contact page's content uses the `[astara_contact_address]` and `[astara_contact_reach]` shortcodes. A social icon only appears once its URL is set. The values are stored in the `astara_site_settings` option, so they are per-environment (a content-only database push doesn't carry them).
+
 ## Newsletter signup
 
 The Contact page's "Stay in touch" box is built into the theme (`inc/newsletter.php`, `assets/js/newsletter.js`), with no plugin. Embed it anywhere with the `[astara_newsletter]` shortcode.
