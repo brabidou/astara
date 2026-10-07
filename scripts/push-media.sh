@@ -20,8 +20,11 @@ trap 'rm -rf "$TMP_UPLOADS"' EXIT
 echo "==> Copying local uploads out of the container..."
 docker cp "${WP_CONTAINER}:/var/www/html/wp-content/uploads/." "${TMP_UPLOADS}/"
 
+# mktemp -d makes the staging folder owner-only (0700), and rsync -a would copy
+# that onto the remote uploads directory, so the web server couldn't read any
+# media. Force normal web-readable modes instead.
 echo "==> Syncing to production..."
-rsync -az -e "ssh -p ${PRESSABLE_SFTP_PORT}" \
+rsync -az --chmod=D755,F644 -e "ssh -p ${PRESSABLE_SFTP_PORT}" \
 	"${TMP_UPLOADS}/" \
 	"${PRESSABLE_SFTP_USER}@${PRESSABLE_SFTP_HOST}:${PRESSABLE_WP_ROOT}/wp-content/uploads/"
 
