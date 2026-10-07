@@ -49,7 +49,8 @@ add_action( 'init', 'astara_register_news_blocks' );
  *   date/category meta as a subtitle line underneath. Used by the News
  *   archive listing.
  *
- * The whole card links to the post's own page either way.
+ * The whole card links to the post's own page, or straight to its direct
+ * link (a PDF or outside URL) when it has one — see inc/news-links.php.
  *
  * @param WP_Post $post_obj Post.
  * @param string  $variant  'grid' or 'list'.
@@ -62,7 +63,7 @@ function astara_render_news_card( $post_obj, $variant = 'grid' ) {
 	if ( 'list' === $variant ) {
 		ob_start();
 		?>
-		<a class="astara-news-card astara-news-card--list" href="<?php echo esc_url( get_permalink( $post_obj ) ); ?>">
+		<a class="astara-news-card astara-news-card--list" href="<?php echo esc_url( astara_news_card_url( $post_obj ) ); ?>"<?php echo astara_news_card_link_attrs( $post_obj ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed literal attributes. ?>>
 			<?php if ( has_post_thumbnail( $post_obj ) ) : ?>
 				<div class="astara-news-card__image">
 					<?php echo get_the_post_thumbnail( $post_obj, 'thumbnail' ); ?>
@@ -76,6 +77,9 @@ function astara_render_news_card( $post_obj, $variant = 'grid' ) {
 					<?php if ( $tag ) : ?>
 						<span class="astara-news-card__tag"><?php echo esc_html( $tag->name ); ?></span>
 					<?php endif; ?>
+					<?php if ( astara_news_card_file_label( $post_obj ) ) : ?>
+						<span class="astara-news-card__tag"><?php echo esc_html( astara_news_card_file_label( $post_obj ) ); ?></span>
+					<?php endif; ?>
 				</div>
 			</div>
 		</a>
@@ -85,11 +89,14 @@ function astara_render_news_card( $post_obj, $variant = 'grid' ) {
 
 	ob_start();
 	?>
-	<a class="astara-news-card" href="<?php echo esc_url( get_permalink( $post_obj ) ); ?>">
+	<a class="astara-news-card" href="<?php echo esc_url( astara_news_card_url( $post_obj ) ); ?>"<?php echo astara_news_card_link_attrs( $post_obj ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- fixed literal attributes. ?>>
 		<div class="astara-news-card__meta">
 			<span class="astara-news-card__date"><?php echo esc_html( get_the_date( 'F j, Y', $post_obj ) ); ?></span>
 			<?php if ( $tag ) : ?>
 				<span class="astara-news-card__tag"><?php echo esc_html( $tag->name ); ?></span>
+			<?php endif; ?>
+			<?php if ( astara_news_card_file_label( $post_obj ) ) : ?>
+				<span class="astara-news-card__tag"><?php echo esc_html( astara_news_card_file_label( $post_obj ) ); ?></span>
 			<?php endif; ?>
 		</div>
 		<?php if ( has_post_thumbnail( $post_obj ) ) : ?>
