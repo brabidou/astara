@@ -73,7 +73,20 @@
 }
 
 .astara-nav .wp-block-navigation__container {
-	gap: 53px;
+	gap: clamp(24px, 3.07vw, 53px);
+}
+
+/* The six nav links need ~1200px, so use the hamburger below that instead of
+   letting them wrap (core's own switch is at 600px). This restates core's
+   mobile rules at a wider breakpoint. */
+@media (max-width: 1200px) {
+	.astara-nav .wp-block-navigation__responsive-container:not(.hidden-by-default):not(.is-menu-open) {
+		display: none;
+	}
+
+	.astara-nav .wp-block-navigation__responsive-container-open:not(.always-shown) {
+		display: flex;
+	}
 }
 
 .astara-header .astara-nav .wp-block-navigation-item__content {

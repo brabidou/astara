@@ -210,7 +210,7 @@ a.astara-portfolio-tile:focus-visible .astara-portfolio-tile__badge {
     margin-bottom: 40px;
 }
 
-@media (max-width: 782px) {
+@media (max-width: 899px) {
     .astara-portfolio-grid {
         grid-template-columns: 1fr 1fr;
     }

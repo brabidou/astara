@@ -11,7 +11,8 @@
 
 .astara-hero__title {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--heading-1);
+	/* 90px (Figma H1) at the 1728px design width, scaling down below it */
+	font-size: clamp(44px, 5.2vw, 90px);
 	font-weight: 300;
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-navy);
@@ -33,19 +34,19 @@
 }
 
 .astara-hero__image {
-	flex: 1 1 480px;
+	flex: 1 1 360px;
 	max-width: 888px;
 	margin: 0;
 }
 
 .astara-hero__copy {
-	flex: 1 1 420px;
+	flex: 1 1 320px;
 	max-width: 546px;
 }
 
 .astara-hero__heading {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--heading-2);
+	font-size: clamp(30px, 3vw, 44px);
 	font-weight: 300;
 	line-height: 1.15;
 	color: var(--wp--preset--color--astara-navy);
@@ -308,14 +309,16 @@
 	padding-inline: clamp(20px, 5vw, 88px);
 }
 
-.astara-sectors__photos {
+.wp-block-group.astara-sectors__photos {
+	flex-wrap: nowrap;
 	column-gap: 24px;
 	row-gap: 24px;
 	margin-bottom: 64px;
 }
 
 .astara-sectors__photo {
-	flex: 1 1 300px;
+	flex: 1 1 0;
+	min-width: 0;
 	margin: 0;
 }
 
@@ -366,7 +369,37 @@
 	color: var(--wp--preset--color--astara-bright-orange);
 }
 
-@media (max-width: 782px) {
+/* Small laptops and tablets in landscape (900-1280px): there isn't room for
+   photo-beside-copy, so How We Work and How We Help stack with full-width
+   content instead of leaving a narrow column and a lot of empty space. */
+@media (min-width: 900px) and (max-width: 1280px) {
+	.astara-how-we-work__copy {
+		flex-basis: 100%;
+		max-width: none;
+	}
+
+	.wp-block-cover.astara-how-we-work__panel {
+		flex-basis: 100%;
+		max-width: none;
+	}
+
+	.astara-how-we-help__image {
+		flex-basis: 100%;
+		max-width: none;
+	}
+
+	.astara-how-we-help__image img {
+		height: auto;
+		aspect-ratio: 16 / 9;
+	}
+
+	.astara-how-we-help__copy {
+		flex-basis: 100%;
+		max-width: none;
+	}
+}
+
+@media (max-width: 899px) {
 	/* Gutters and vertical rhythm */
 	.astara-hero,
 	.astara-how-we-work,

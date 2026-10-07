@@ -117,7 +117,7 @@
     border-top: none;
 }
 
-@media (max-width: 782px) {
+@media (max-width: 899px) {
     .astara-strategy-hero {
         padding-block: 120px 60px;
     }

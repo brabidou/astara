@@ -99,7 +99,7 @@
 	color: var(--wp--preset--color--astara-neutral-green);
 }
 
-@media (max-width: 782px) {
+@media (max-width: 899px) {
 	.astara-contact__title {
 		font-size: var(--wp--preset--font-size--heading-2);
 	}

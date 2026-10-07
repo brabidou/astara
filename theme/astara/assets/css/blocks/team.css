@@ -64,9 +64,13 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.astara-team-member {
+    min-width: 0;
+}
+
 .astara-team-card {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas:
         "photo photo"
         "info toggle";
@@ -281,7 +285,7 @@
     color: var(--wp--preset--color--astara-navy);
 }
 
-@media (max-width: 782px) {
+@media (max-width: 899px) {
     .astara-team-category {
         grid-template-columns: 1fr;
     }
