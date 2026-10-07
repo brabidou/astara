@@ -27,7 +27,7 @@ function astara_register_portfolio_company() {
 			'has_archive'   => false,
 			'rewrite'       => array( 'slug' => 'portfolio' ),
 			'menu_icon'     => 'dashicons-building',
-			'supports'      => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions' ),
+			'supports'      => array( 'title', 'excerpt', 'thumbnail', 'page-attributes', 'revisions' ),
 			'menu_position' => 21,
 		)
 	);
@@ -82,6 +82,14 @@ function astara_register_portfolio_company_meta() {
 add_action( 'init', 'astara_register_portfolio_company_meta' );
 
 /**
+ * Register the rich-text case study field.
+ */
+function astara_register_portfolio_company_case_study_meta() {
+	astara_register_richtext_meta( 'astara_portfolio_co', 'astara_case_study' );
+}
+add_action( 'init', 'astara_register_portfolio_company_case_study_meta' );
+
+/**
  * Add a meta box for investment date, industry-tagged excerpt, and website URL.
  * (Industry itself is the post excerpt — mirrors the Team Member "role" pattern.)
  */
@@ -95,6 +103,33 @@ function astara_portfolio_company_meta_box() {
 	);
 }
 add_action( 'add_meta_boxes', 'astara_portfolio_company_meta_box' );
+
+/**
+ * Add the Case Study meta box in the main column, standing in for the block editor.
+ */
+function astara_portfolio_company_case_study_meta_box() {
+	add_meta_box(
+		'astara_portfolio_company_case_study',
+		__( 'Case Study', 'astara' ),
+		'astara_render_portfolio_company_case_study_meta_box',
+		'astara_portfolio_co',
+		'normal',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'astara_portfolio_company_case_study_meta_box' );
+
+/**
+ * Render the Case Study meta box.
+ *
+ * @param WP_Post $post Current post object.
+ */
+function astara_render_portfolio_company_case_study_meta_box( $post ) {
+	astara_render_richtext_meta_box( $post, 'astara_case_study' );
+	?>
+	<p class="description"><?php esc_html_e( 'Leave this empty for a logo-only tile with no case study popup — add content to enable one.', 'astara' ); ?></p>
+	<?php
+}
 
 /**
  * Render the Investment Details meta box.
@@ -115,7 +150,7 @@ function astara_render_portfolio_company_meta_box( $post ) {
 		<label for="astara_website_url"><?php esc_html_e( 'Company Website', 'astara' ); ?></label>
 		<input type="url" id="astara_website_url" name="astara_website_url" class="widefat" value="<?php echo esc_attr( $website_url ); ?>" />
 	</p>
-	<p class="description"><?php esc_html_e( 'Use the Excerpt field for Industry. Leave the main content editor empty for a logo-only tile with no case study popup — add content there to enable one.', 'astara' ); ?></p>
+	<p class="description"><?php esc_html_e( 'Use the Excerpt field for Industry.', 'astara' ); ?></p>
 	<?php
 }
 
@@ -143,3 +178,13 @@ function astara_save_portfolio_company_meta( $post_id ) {
 	}
 }
 add_action( 'save_post_astara_portfolio_co', 'astara_save_portfolio_company_meta' );
+
+/**
+ * Save the Case Study meta box.
+ *
+ * @param int $post_id Post ID being saved.
+ */
+function astara_save_portfolio_company_case_study( $post_id ) {
+	astara_save_richtext_meta( $post_id, 'astara_case_study' );
+}
+add_action( 'save_post_astara_portfolio_co', 'astara_save_portfolio_company_case_study' );

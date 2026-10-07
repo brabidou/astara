@@ -44,7 +44,7 @@ add_action( 'init', 'astara_register_blocks' );
  */
 function astara_render_team_member_bio( $member, $name_tag = 'h3', $name_id = '' ) {
 	$role         = $member->post_excerpt;
-	$bio          = $member->post_content;
+	$bio          = (string) get_post_meta( $member->ID, 'astara_bio', true );
 	$linkedin_url = get_post_meta( $member->ID, 'astara_linkedin_url', true );
 	$email        = get_post_meta( $member->ID, 'astara_email', true );
 	$id_attr      = $name_id ? ' id="' . esc_attr( $name_id ) . '"' : '';
@@ -56,7 +56,7 @@ function astara_render_team_member_bio( $member, $name_tag = 'h3', $name_id = ''
 	<?php endif; ?>
 	<<?php echo tag_escape( $name_tag ); ?><?php echo $id_attr; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- built from esc_attr() above. ?> class="astara-team-bio__name"><?php echo esc_html( $member->post_title ); ?></<?php echo tag_escape( $name_tag ); ?>>
 	<p class="astara-team-bio__role"><?php echo esc_html( $role ); ?></p>
-	<div class="astara-team-bio__bio"><?php echo apply_filters( 'the_content', $bio ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- 'the_content' is WordPress core's own filter, not a custom hook; it already sanitizes/renders blocks. ?></div>
+	<div class="astara-team-bio__bio"><?php echo astara_richtext_html( $bio ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- astara_richtext_html() runs wp_kses_post(). ?></div>
 	<?php if ( $email || $linkedin_url ) : ?>
 		<div class="astara-team-bio__links">
 			<?php if ( $email ) : ?>
@@ -107,8 +107,10 @@ function astara_render_team_directory() {
 			array(
 				'post_type'      => 'astara_team_member',
 				'posts_per_page' => -1,
-				'orderby'        => 'menu_order',
-				'order'          => 'ASC',
+				'orderby'        => array(
+					'menu_order' => 'ASC',
+					'ID'         => 'ASC',
+				),
 				'tax_query'      => array( // phpcs:ignore WordPress.DB.SlowDBQuery.slow_db_query_tax_query
 					array(
 						'taxonomy' => 'astara_team_category',

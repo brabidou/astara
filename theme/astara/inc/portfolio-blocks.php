@@ -43,7 +43,8 @@ add_action( 'init', 'astara_register_portfolio_blocks' );
  */
 function astara_render_portfolio_company_case_study( $company, $name_tag = 'h3', $name_id = '' ) {
 	$industry        = $company->post_excerpt;
-	$story           = trim( wp_strip_all_tags( $company->post_content ) ) ? $company->post_content : __( 'Case study coming soon.', 'astara' );
+	$case_study      = (string) get_post_meta( $company->ID, 'astara_case_study', true );
+	$story           = trim( wp_strip_all_tags( $case_study ) ) ? $case_study : '<p>' . esc_html__( 'Case study coming soon.', 'astara' ) . '</p>';
 	$investment_date = get_post_meta( $company->ID, 'astara_investment_date', true );
 	$website_url     = get_post_meta( $company->ID, 'astara_website_url', true );
 	$id_attr         = $name_id ? ' id="' . esc_attr( $name_id ) . '"' : '';
@@ -80,7 +81,7 @@ function astara_render_portfolio_company_case_study( $company, $name_tag = 'h3',
 			<?php endif; ?>
 		</div>
 	<?php endif; ?>
-	<div class="astara-portfolio-case__story"><?php echo apply_filters( 'the_content', $story ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped, WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound -- 'the_content' is WordPress core's own filter; content is admin-authored. ?></div>
+	<div class="astara-portfolio-case__story"><?php echo astara_richtext_html( $story ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- astara_richtext_html() runs wp_kses_post(). ?></div>
 	<?php if ( $website_url ) : ?>
 		<a class="astara-portfolio-case__visit" href="<?php echo esc_url( $website_url ); ?>" target="_blank" rel="noopener noreferrer">
 			<?php
@@ -112,8 +113,10 @@ function astara_render_portfolio_directory() {
 		array(
 			'post_type'      => 'astara_portfolio_co',
 			'posts_per_page' => -1,
-			'orderby'        => 'menu_order',
-			'order'          => 'ASC',
+			'orderby'        => array(
+				'menu_order' => 'ASC',
+				'ID'         => 'ASC',
+			),
 		)
 	);
 

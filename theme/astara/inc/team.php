@@ -27,7 +27,7 @@ function astara_register_team_member() {
 			'has_archive'   => false,
 			'rewrite'       => array( 'slug' => 'team' ),
 			'menu_icon'     => 'dashicons-groups',
-			'supports'      => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes', 'revisions' ),
+			'supports'      => array( 'title', 'excerpt', 'thumbnail', 'page-attributes', 'revisions' ),
 			'menu_position' => 20,
 		)
 	);
@@ -100,6 +100,14 @@ function astara_register_team_member_meta() {
 add_action( 'init', 'astara_register_team_member_meta' );
 
 /**
+ * Register the rich-text bio field.
+ */
+function astara_register_team_member_bio_meta() {
+	astara_register_richtext_meta( 'astara_team_member', 'astara_bio' );
+}
+add_action( 'init', 'astara_register_team_member_bio_meta' );
+
+/**
  * Add a simple meta box for LinkedIn/email, since the block editor doesn't
  * surface register_post_meta fields in its UI without a custom sidebar plugin.
  */
@@ -113,6 +121,33 @@ function astara_team_member_meta_box() {
 	);
 }
 add_action( 'add_meta_boxes', 'astara_team_member_meta_box' );
+
+/**
+ * Add the Bio meta box in the main column, standing in for the block editor.
+ */
+function astara_team_member_bio_meta_box() {
+	add_meta_box(
+		'astara_team_member_bio',
+		__( 'Bio', 'astara' ),
+		'astara_render_team_member_bio_meta_box',
+		'astara_team_member',
+		'normal',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'astara_team_member_bio_meta_box' );
+
+/**
+ * Render the Bio meta box.
+ *
+ * @param WP_Post $post Current post object.
+ */
+function astara_render_team_member_bio_meta_box( $post ) {
+	astara_render_richtext_meta_box( $post, 'astara_bio' );
+	?>
+	<p class="description"><?php esc_html_e( 'Use the Excerpt field below for the role or title shown under the name.', 'astara' ); ?></p>
+	<?php
+}
 
 /**
  * Render the Contact Links meta box.
@@ -160,3 +195,13 @@ function astara_save_team_member_meta( $post_id ) {
 	}
 }
 add_action( 'save_post_astara_team_member', 'astara_save_team_member_meta' );
+
+/**
+ * Save the Bio meta box.
+ *
+ * @param int $post_id Post ID being saved.
+ */
+function astara_save_team_member_bio( $post_id ) {
+	astara_save_richtext_meta( $post_id, 'astara_bio' );
+}
+add_action( 'save_post_astara_team_member', 'astara_save_team_member_bio' );
