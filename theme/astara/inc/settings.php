@@ -17,14 +17,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Starting values. Used until someone saves the settings page, so the site
- * looks right out of the box. Social URLs start empty, and their icons stay
- * hidden until a URL is entered.
+ * looks right out of the box. An empty social URL hides its icon until one is
+ * entered (X has none yet).
  *
  * @return array<string, string>
  */
 function astara_site_setting_defaults() {
 	return array(
-		'linkedin_url'   => '',
+		'linkedin_url'   => 'https://www.linkedin.com/company/astara-capital-partners',
 		'x_url'          => '',
 		'phone'          => '+1 (609) 529-0199',
 		'email'          => 'bd@astaracapital.com',
