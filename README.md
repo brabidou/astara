@@ -128,8 +128,8 @@ These use `wp search-replace --export`, not a raw `wp db export`, so serialized 
 | Script | What it does |
 |---|---|
 | `npm run content:pull` | Pulls the production database and media **down** into local dev, overwriting local content. Safe to run anytime — never touches production. |
-| `npm run content:push-db` | Pushes the local database **up** to production, overwriting live content. Requires typing `PUSH` to confirm. Pull first if you haven't recently, so you're not clobbering newer production changes. |
-| `npm run content:push-media` | Pushes local media **up** to production. Additive only (no `--delete`) — existing remote files are never removed. Requires typing `PUSH` to confirm. |
+| `npm run content:push-db` | Pushes the local database **up** to production, overwriting live content. Runs immediately, with no confirmation prompt. Pull first if you haven't recently, so you're not clobbering newer production changes. |
+| `npm run content:push-media` | Pushes local media **up** to production. Additive only (no `--delete`) — existing remote files are never removed. Runs immediately, with no confirmation prompt. |
 
 There's no `push-media`-style delete or a combined "push everything" script on purpose — pushing to production should be a deliberate, per-artifact decision, not a single button.
 

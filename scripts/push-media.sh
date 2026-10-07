@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Push local media (wp-content/uploads) up to Pressable. Additive only —
-# never deletes remote files the local copy doesn't have. Requires confirmation.
+# never deletes remote files the local copy doesn't have. Runs immediately (no confirmation prompt).
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/lib/env.sh"
 
@@ -8,11 +8,6 @@ WP_CONTAINER=$(find_container wordpress)
 
 echo "⚠️  This uploads local media into production at ${PRESSABLE_SITE_URL}."
 echo "    Existing remote files with no local match are left alone (no --delete)."
-read -r -p "Type PUSH to continue: " CONFIRM
-if [ "$CONFIRM" != "PUSH" ]; then
-	echo "Aborted."
-	exit 1
-fi
 
 TMP_UPLOADS="$(mktemp -d -t astara-uploads-push-XXXXXX)"
 trap 'rm -rf "$TMP_UPLOADS"' EXIT

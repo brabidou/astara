@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Push the local database to Pressable, overwriting production content.
-# Requires typed confirmation. Does not touch media — see push-media.sh.
+# Runs immediately (no confirmation prompt). Does not touch media — see push-media.sh.
 set -euo pipefail
 source "$(dirname "${BASH_SOURCE[0]}")/lib/env.sh"
 
@@ -8,11 +8,6 @@ CLI_CONTAINER=$(find_container cli)
 
 echo "⚠️  This OVERWRITES the live database at ${PRESSABLE_SITE_URL} with your local content."
 echo "    Run pull-content.sh first if you haven't recently, so you're not clobbering newer production changes."
-read -r -p "Type PUSH to continue: " CONFIRM
-if [ "$CONFIRM" != "PUSH" ]; then
-	echo "Aborted."
-	exit 1
-fi
 
 TMP_SQL="$(mktemp -t astara-push-XXXXXX.sql)"
 trap 'rm -f "$TMP_SQL"' EXIT
