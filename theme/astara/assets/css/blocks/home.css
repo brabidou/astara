@@ -74,31 +74,34 @@
 	padding-inline: clamp(20px, 5vw, 88px);
 }
 
-/* How We Help — photo left, stacked cards right */
-.astara-how-we-help__row {
-	align-items: flex-start;
-	column-gap: 64px;
+/* How We Help — portrait photo left (fills the column height), stacked cards right.
+   .wp-block-group on the row beats core's align-items: center in the editor. */
+.wp-block-group.astara-how-we-help__row {
+	align-items: stretch;
+	column-gap: 120px;
 	row-gap: 32px;
 }
 
 .astara-how-we-help__image {
-	flex: 1 1 400px;
-	max-width: 700px;
+	flex: 1 1 320px;
+	max-width: 750px;
 	margin: 0;
+	display: flex;
 }
 
 .astara-how-we-help__image img {
 	border-radius: 10px;
 	display: block;
 	width: 100%;
-	height: auto;
+	height: 100%;
 	object-fit: cover;
-	aspect-ratio: 1 / 1;
 }
 
+/* The copy column keeps its full width (two buttons fit on one row at 687px);
+   the photo gives up the space on narrower screens. */
 .astara-how-we-help__copy {
-	flex: 1 1 420px;
-	max-width: 620px;
+	flex: 1 1 687px;
+	max-width: 687px;
 }
 
 /* How We Work — copy left, photo panel right with the principle cards on top */
@@ -174,8 +177,12 @@
 .astara-help-card {
 	background: var(--wp--preset--color--astara-off-white);
 	border-radius: 10px;
-	padding: 32px;
+	padding: 32px 48px 38px;
 	margin-top: 24px;
+}
+
+.astara-help-card .wp-block-buttons {
+	margin-top: 36px;
 }
 
 .astara-help-card__title {
@@ -426,6 +433,11 @@
 
 	.astara-help-card {
 		padding: 24px;
+	}
+
+	.astara-how-we-help__image img {
+		height: auto;
+		aspect-ratio: 4 / 3;
 	}
 
 	.wp-block-cover.astara-how-we-work__panel {
