@@ -215,7 +215,8 @@
 
 .astara-stat__number {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--heading-1);
+	/* 90px (Figma H1) at the 1728px design width, scaling down on smaller screens */
+	font-size: clamp(56px, 5.2vw, 90px);
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-bright-orange);
 	margin: 0;
@@ -240,6 +241,7 @@
 
 .astara-criteria__eyebrow {
 	text-align: center;
+	color: var(--wp--preset--color--astara-off-white);
 }
 
 .astara-criteria__heading {
@@ -256,19 +258,26 @@
 	margin-bottom: 48px;
 }
 
-.astara-criteria__table {
+.wp-block-group.astara-criteria__table {
 	background: var(--wp--preset--color--astara-off-white);
 	border-radius: 8px;
-	padding: 32px;
+	max-width: 1308px;
+	margin-inline: auto;
+	padding: 43px 20px 50px;
 	column-gap: 0;
 	row-gap: 24px;
 	margin-bottom: 48px;
+	align-items: flex-start;
+	justify-content: stretch;
 }
 
-.astara-criteria__item {
-	flex: 1 1 180px;
+/* Five equal columns; the 26px side padding leaves ~200px for text, so long
+   values wrap onto two lines like the design. */
+.wp-block-group.astara-criteria__item {
+	flex: 1 1 0;
+	min-width: 0;
 	text-align: center;
-	padding-inline: 16px;
+	padding-inline: 26px;
 	border-left: 1px solid var(--wp--preset--color--astara-gray);
 }
 
@@ -280,13 +289,15 @@
 	font-family: var(--wp--preset--font-family--manrope);
 	font-weight: 700;
 	font-size: 24px;
+	line-height: 1.2;
 	color: #918e7f;
-	margin: 0 0 8px;
+	margin: 0 0 24px;
 }
 
 .astara-criteria__value {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--heading-2);
+	line-height: 1.15;
 	color: var(--wp--preset--color--astara-navy);
 	margin: 0;
 }
@@ -406,12 +417,13 @@
 		font-size: var(--wp--preset--font-size--heading-3);
 	}
 
-	.astara-criteria__table {
+	.wp-block-group.astara-criteria__table {
 		padding: 20px;
 	}
 
-	.astara-criteria__item {
-		flex-basis: 45%;
+	.wp-block-group.astara-criteria__item {
+		flex: 1 1 45%;
+		padding-inline: 16px;
 		border-left: none;
 		border-top: 1px solid var(--wp--preset--color--astara-gray);
 		padding-top: 16px;
