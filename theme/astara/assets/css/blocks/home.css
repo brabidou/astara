@@ -395,13 +395,13 @@
 	}
 
 	.astara-hero__title {
-		font-size: var(--wp--preset--font-size--heading-2);
+		font-size: clamp(30px, 8.6vw, 44px);
 		margin-bottom: 32px;
 	}
 
 	.astara-hero__heading,
 	.astara-section-heading {
-		font-size: var(--wp--preset--font-size--heading-3);
+		font-size: clamp(24px, 6.8vw, 36px);
 	}
 
 	.astara-body {
@@ -410,11 +410,11 @@
 	}
 
 	.astara-stat__number {
-		font-size: var(--wp--preset--font-size--heading-2);
+		font-size: clamp(34px, 9.5vw, 44px);
 	}
 
 	.astara-criteria__heading {
-		font-size: var(--wp--preset--font-size--heading-3);
+		font-size: clamp(24px, 6.8vw, 36px);
 	}
 
 	.wp-block-group.astara-criteria__table {
@@ -430,7 +430,7 @@
 	}
 
 	.astara-criteria__value {
-		font-size: var(--wp--preset--font-size--heading-3);
+		font-size: clamp(24px, 6.4vw, 36px);
 	}
 
 	.astara-arrow-list li {
@@ -470,5 +470,10 @@
 
 	.astara-principle__text {
 		padding: 20px 20px;
+	}
+
+	.astara-principle__title,
+	.astara-help-card__title {
+		font-size: 20px;
 	}
 }
