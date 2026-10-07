@@ -76,6 +76,27 @@
 	border: 1px solid var(--wp--preset--color--astara-bright-orange);
 }
 
+/* "Opens in a new tab" arrow. Added in CSS to every link that has target="_blank"
+   — including links an editor adds later — so no link needs marking up by hand.
+   It's a small arrow drawn with a mask, so it takes the link's text colour
+   (and hover colour) automatically. Skipped for links with no text of their own:
+   the footer social icons and linked images. The second `content` line gives
+   screen readers a "(opens in a new tab)" label in browsers that support it. */
+a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:has(> img))::after,
+.astara-news-card[target="_blank"] .astara-news-card__title::after {
+	content: "";
+	content: "" / "(opens in a new tab)";
+	display: inline-block;
+	flex: 0 0 auto;
+	width: 0.62em;
+	height: 0.62em;
+	margin-left: 0.35em;
+	vertical-align: 0.08em;
+	background: currentColor;
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11L11 3M11 3H4.5M11 3V9.5'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 14 14' fill='none' stroke='black' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 11L11 3M11 3H4.5M11 3V9.5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
 /* Header — Figma frame 400:10 "Main Nav" (Web design_Rd. 3) */
 .astara-header {
 	padding-block: 24px;

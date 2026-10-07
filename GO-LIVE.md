@@ -131,6 +131,7 @@ Use this when you need to change a link, or to verify them all before launch. "A
 | LinkedIn profile link (footer icon) | **Admin → Site Settings** | Built-in default is `linkedin.com/company/astara-capital-partners`. Opens in a new tab. |
 | X (Twitter) profile link (footer icon) | **Admin → Site Settings** | Empty today, so the icon is hidden. Fill it in to show the icon. |
 | Footer copyright year | Automatic | Always the current year; nothing to edit. |
+| The small "opens in a new tab" arrow after a link | Automatic (CSS in `global.css`) | Added to every link that has `target="_blank"`, including links an editor adds later with "Open in new tab" ticked. It isn't drawn on icon-only links (footer social icons) or linked images; on news cards it follows the title. |
 | Header and footer menu links | **Admin → Appearance → Editor → Navigation** ("Navigation" menu), or click the menu inside the Header/Footer template part | One menu feeds both. "Investment Criteria" is a custom link to `/#investment-criteria`; Strategy, Team, Portfolio, News & Media and Contact point at those pages, so they follow if a page's URL changes. |
 | Logo link in the header (goes to `/`) | **Admin → Appearance → Editor → Patterns → Template parts → Header** | It's a Custom HTML block (`parts/header.html`). |
 | Footer "Get in Touch" button (goes to `/contact/`) | **Admin → Appearance → Editor → Patterns → Template parts → Footer** | A normal Button block (`parts/footer.html`). |
@@ -155,6 +156,7 @@ Use this when you need to change a link, or to verify them all before launch. "A
 - [x] 2026-10-07 — Staging is blocked from search engines by Pressable's robots.txt (re-check on live: section 2).
 - [x] 2026-10-07 — News posts can link straight to a PDF or website ("Link directly to a file or website" field); cards open it in a new tab and the post page redirects there.
 - [x] 2026-10-07 — Press & News PDFs scraped from astaracapital.com/media and imported locally into the Media Library (`uploads/press-and-news/`), and 29 News posts created from them (locally).
+- [x] 2026-10-07 — A small "opens in a new tab" arrow is drawn by CSS after every `target="_blank"` link (screen readers get "(opens in a new tab)" where the browser supports it).
 - [x] 2026-10-07 — Company details scraped from astaracapital.com/companies/ into the 8 local Portfolio Companies (Dynatec Systems created); popup shows them. Still local only.
 - [x] 2026-10-07 — Portfolio "Case Study" button only appears when a company has a case study PDF/link, and the site's outline and solid buttons now have a consistent hover.
 - [x] 2026-10-07 — LinkedIn profile URL set as the default (footer icon live once deployed).
