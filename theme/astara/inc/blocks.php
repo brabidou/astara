@@ -135,10 +135,10 @@ function astara_render_team_directory() {
 					<div class="astara-team-member" data-wp-interactive="astara/modal" data-wp-context='{ "isOpen": false }' data-wp-on-window--keydown="actions.closeOnEscape">
 						<div class="astara-team-card">
 							<?php if ( has_post_thumbnail( $member ) ) : ?>
-								<div class="astara-team-card__photo"><?php echo get_the_post_thumbnail( $member, 'large' ); ?></div>
+								<div class="astara-team-card__photo"><a href="<?php echo esc_url( get_permalink( $member ) ); ?>" class="astara-team-card__link" data-wp-on--click="actions.open" aria-hidden="true" tabindex="-1"><?php echo get_the_post_thumbnail( $member, 'large', array( 'alt' => '' ) ); ?></a></div>
 							<?php endif; ?>
 							<div class="astara-team-card__info">
-								<p class="astara-team-card__name"><?php echo esc_html( $member->post_title ); ?></p>
+								<p class="astara-team-card__name"><a href="<?php echo esc_url( get_permalink( $member ) ); ?>" class="astara-team-card__link" data-wp-on--click="actions.open" aria-haspopup="dialog"><?php echo esc_html( $member->post_title ); ?></a></p>
 								<p class="astara-team-card__role"><?php echo esc_html( $member->post_excerpt ); ?></p>
 							</div>
 							<a href="<?php echo esc_url( get_permalink( $member ) ); ?>" class="astara-team-card__toggle" data-wp-on--click="actions.open" aria-haspopup="dialog" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: team member name */ __( 'View bio for %s', 'astara' ), $member->post_title ) ); ?>">+</a>
