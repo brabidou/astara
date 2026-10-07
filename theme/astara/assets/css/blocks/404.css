@@ -1,0 +1,51 @@
+/* 404 page — branded "page not found" using the hero's look. */
+
+.astara-404 {
+	padding-block: 160px 160px;
+	padding-inline: clamp(20px, 5vw, 88px);
+}
+
+.astara-404__title {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: clamp(36px, 4.2vw, 72px);
+	font-weight: 300;
+	line-height: 1.2;
+	color: var(--wp--preset--color--astara-navy);
+	margin: 0 0 32px;
+}
+
+.astara-404__body {
+	margin-bottom: 40px;
+}
+
+/* Limit the line length with right padding rather than a max-width: a capped
+   child of a constrained layout gets centred, which would pull the title and
+   copy out of line with the eyebrow and buttons above and below them. */
+.astara-404__title,
+.astara-404__body {
+	box-sizing: border-box;
+}
+
+.astara-404__title {
+	padding-right: max(0px, calc(min(100%, 1552px) - 1000px));
+}
+
+.astara-404__body {
+	padding-right: max(0px, calc(min(100%, 1552px) - 620px));
+}
+
+@media (max-width: 899px) {
+	.astara-404 {
+		padding-block: 56px 80px;
+		padding-inline: 24px;
+	}
+
+	.astara-404__title {
+		font-size: clamp(28px, 8vw, 44px);
+		margin-bottom: 24px;
+	}
+
+	.astara-404__body {
+		margin-bottom: 28px;
+	}
+}

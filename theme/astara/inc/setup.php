@@ -20,7 +20,7 @@ function astara_setup() {
 
 	// Without this, 'editor-styles' support does nothing — the editor iframe
 	// only picks up theme.json styles, not our own stylesheets.
-	add_editor_style( array( 'assets/css/global.css', 'assets/css/blocks/home.css', 'assets/css/blocks/team.css', 'assets/css/blocks/contact.css', 'assets/css/blocks/portfolio.css', 'assets/css/blocks/news.css', 'assets/css/blocks/strategy.css' ) );
+	add_editor_style( array( 'assets/css/global.css', 'assets/css/blocks/home.css', 'assets/css/blocks/team.css', 'assets/css/blocks/contact.css', 'assets/css/blocks/portfolio.css', 'assets/css/blocks/news.css', 'assets/css/blocks/strategy.css', 'assets/css/blocks/404.css' ) );
 
 	load_theme_textdomain( 'astara', ASTARA_THEME_DIR . '/languages' );
 }

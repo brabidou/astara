@@ -100,6 +100,15 @@ function astara_enqueue_assets() {
 		);
 	}
 
+	if ( is_404() ) {
+		wp_enqueue_style(
+			'astara-404',
+			ASTARA_THEME_URI . '/assets/css/blocks/404.css',
+			array( 'astara-global' ),
+			astara_asset_version( '/assets/css/blocks/404.css' )
+		);
+	}
+
 	if ( is_page( 'strategy' ) ) {
 		wp_enqueue_style(
 			'astara-strategy',
