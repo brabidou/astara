@@ -219,8 +219,11 @@ function astara_render_news_archive() {
 	$archive_page = get_page_by_path( 'news-archive' );
 	$archive_url  = $archive_page ? get_permalink( $archive_page ) : home_url( '/news-archive/' );
 
-	$year  = isset( $_GET['year'] ) ? absint( $_GET['year'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only filter, no state change.
-	$month = isset( $_GET['month'] ) ? absint( $_GET['month'] ) : 0; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only filter, no state change.
+	// Not ?year= / ?month=: "year" is one of WordPress's reserved query variables, so on a
+	// page it triggers a date archive lookup and 404s for any year other than the page's own.
+	// The old names are still read so existing links keep working where WordPress allows it.
+	$year  = absint( isset( $_GET['news_year'] ) ? $_GET['news_year'] : ( isset( $_GET['year'] ) ? $_GET['year'] : 0 ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- read-only filter; absint() sanitizes.
+	$month = absint( isset( $_GET['news_month'] ) ? $_GET['news_month'] : ( isset( $_GET['month'] ) ? $_GET['month'] : 0 ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- read-only filter; absint() sanitizes.
 	$paged = isset( $_GET['paged'] ) ? absint( $_GET['paged'] ) : 1; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only filter, no state change.
 
 	$tags = get_terms(
@@ -240,10 +243,10 @@ function astara_render_news_archive() {
 	// Carry the tag filter over onto date links, and the date filter over onto tag links, so the two combine.
 	$date_args = array();
 	if ( $year ) {
-		$date_args['year'] = $year;
+		$date_args['news_year'] = $year;
 	}
 	if ( $month ) {
-		$date_args['month'] = $month;
+		$date_args['news_month'] = $month;
 	}
 	$tag_args = $active_tag ? array( 'tag' => $active_tag ) : array();
 
@@ -254,6 +257,12 @@ function astara_render_news_archive() {
 		GROUP BY YEAR(post_date), MONTH(post_date)
 		ORDER BY post_date DESC"
 	);
+
+	// Month rows grouped by year, newest first, for the collapsible date filter.
+	$by_year = array();
+	foreach ( $months as $row ) {
+		$by_year[ (int) $row->year ][] = $row;
+	}
 
 	$query_args = array(
 		'post_type'      => 'post',
@@ -276,46 +285,6 @@ function astara_render_news_archive() {
 	?>
 	<div class="astara-news-archive">
 		<div class="astara-news-archive__sidebar">
-			<nav class="astara-news-archive__nav" aria-label="<?php esc_attr_e( 'Filter by date', 'astara' ); ?>">
-				<a href="<?php echo esc_url( $tag_args ? add_query_arg( $tag_args, $archive_url ) : $archive_url ); ?>" class="astara-news-archive__nav-link<?php echo ( ! $year ) ? ' is-active' : ''; ?>">
-					<?php esc_html_e( 'All Posts', 'astara' ); ?>
-				</a>
-				<?php
-				$current_year = null;
-				foreach ( $months as $row ) :
-					if ( (int) $row->year !== $current_year ) {
-						if ( null !== $current_year ) {
-							echo '</ul>';
-						}
-						$current_year = (int) $row->year;
-						echo '<p class="astara-news-archive__year">' . esc_html( $current_year ) . '</p><ul class="astara-news-archive__months">';
-					}
-					$is_active = ( $year === (int) $row->year && $month === (int) $row->month );
-					$month_url = add_query_arg(
-						array_merge(
-							$tag_args,
-							array(
-								'year'  => $row->year,
-								'month' => $row->month,
-							)
-						),
-						$archive_url
-					);
-					?>
-					<li>
-						<a href="<?php echo esc_url( $month_url ); ?>" class="astara-news-archive__nav-link<?php echo $is_active ? ' is-active' : ''; ?>">
-							<?php echo esc_html( date_i18n( 'F', mktime( 0, 0, 0, (int) $row->month, 1 ) ) ); ?>
-							<span class="astara-news-archive__count">(<?php echo esc_html( $row->post_count ); ?>)</span>
-						</a>
-					</li>
-					<?php
-				endforeach;
-				if ( null !== $current_year ) {
-					echo '</ul>';
-				}
-				?>
-			</nav>
-
 			<nav class="astara-news-archive__nav astara-news-archive__nav--tags" aria-label="<?php esc_attr_e( 'Filter by tag', 'astara' ); ?>">
 				<p class="astara-news-archive__year"><?php esc_html_e( 'Topics', 'astara' ); ?></p>
 				<ul class="astara-news-archive__months">
@@ -332,6 +301,53 @@ function astara_render_news_archive() {
 						</li>
 					<?php endforeach; ?>
 				</ul>
+			</nav>
+
+			<nav class="astara-news-archive__nav" aria-label="<?php esc_attr_e( 'Filter by date', 'astara' ); ?>">
+				<a href="<?php echo esc_url( $tag_args ? add_query_arg( $tag_args, $archive_url ) : $archive_url ); ?>" class="astara-news-archive__nav-link<?php echo ( ! $year ) ? ' is-active' : ''; ?>">
+					<?php esc_html_e( 'All Posts', 'astara' ); ?>
+				</a>
+				<?php
+				foreach ( $by_year as $group_year => $group_months ) :
+					$year_total = array_sum( wp_list_pluck( $group_months, 'post_count' ) );
+					$is_open    = ( $year === $group_year ); // Only the selected year, or the year of the selected month.
+					?>
+					<details class="astara-news-archive__year-group"<?php echo $is_open ? ' open' : ''; ?>>
+						<summary><?php echo esc_html( $group_year ); ?></summary>
+						<ul class="astara-news-archive__months">
+							<li>
+								<a href="<?php echo esc_url( add_query_arg( array_merge( $tag_args, array( 'news_year' => $group_year ) ), $archive_url ) ); ?>" class="astara-news-archive__nav-link<?php echo ( $year === $group_year && ! $month ) ? ' is-active' : ''; ?>">
+									<?php
+									/* translators: %s: year, e.g. 2025 */
+									echo esc_html( sprintf( __( 'All %s', 'astara' ), $group_year ) );
+									?>
+									<span class="astara-news-archive__count">(<?php echo esc_html( $year_total ); ?>)</span>
+								</a>
+							</li>
+							<?php
+							foreach ( $group_months as $row ) :
+								$is_active = ( $year === $group_year && $month === (int) $row->month );
+								$month_url = add_query_arg(
+									array_merge(
+										$tag_args,
+										array(
+											'news_year'  => $row->year,
+											'news_month' => $row->month,
+										)
+									),
+									$archive_url
+								);
+								?>
+								<li>
+									<a href="<?php echo esc_url( $month_url ); ?>" class="astara-news-archive__nav-link<?php echo $is_active ? ' is-active' : ''; ?>">
+										<?php echo esc_html( date_i18n( 'F', mktime( 0, 0, 0, (int) $row->month, 1 ) ) ); ?>
+										<span class="astara-news-archive__count">(<?php echo esc_html( $row->post_count ); ?>)</span>
+									</a>
+								</li>
+							<?php endforeach; ?>
+						</ul>
+					</details>
+				<?php endforeach; ?>
 			</nav>
 		</div>
 

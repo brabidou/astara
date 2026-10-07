@@ -296,12 +296,53 @@
     margin: 24px 0 8px;
 }
 
-.astara-news-archive__nav:first-child .astara-news-archive__year {
+.astara-news-archive__nav--tags .astara-news-archive__year {
     margin-top: 0;
 }
 
-.astara-news-archive__nav--tags .astara-news-archive__year {
-    margin-top: 0;
+/* Collapsible years: a native <details>, so it needs no JS and works with the
+   keyboard. Only the selected year (or the year of the selected month) is open. */
+.astara-news-archive__year-group {
+    margin-top: 4px;
+    border-bottom: 1px solid rgba(30, 45, 62, 0.12);
+}
+
+.astara-news-archive__year-group > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--wp--preset--font-family--manrope);
+    font-weight: 700;
+    font-size: var(--wp--preset--font-size--heading-4);
+    color: var(--wp--preset--color--astara-navy);
+}
+
+.astara-news-archive__year-group > summary::-webkit-details-marker {
+    display: none;
+}
+
+.astara-news-archive__year-group > summary::after {
+    content: "+";
+    flex: 0 0 auto;
+    font-weight: 400;
+    color: var(--wp--preset--color--astara-bright-orange);
+}
+
+.astara-news-archive__year-group[open] > summary::after {
+    content: "\2212";
+}
+
+.astara-news-archive__year-group > summary:hover,
+.astara-news-archive__year-group > summary:focus-visible {
+    color: var(--wp--preset--color--astara-bright-orange);
+}
+
+.astara-news-archive__year-group .astara-news-archive__months {
+    padding-bottom: 12px;
 }
 
 .astara-news-archive__months {
