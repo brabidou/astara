@@ -173,6 +173,9 @@ function astara_render_team_directory() {
  */
 function astara_render_team_member_detail() {
 	$member = get_queried_object();
+	if ( ! ( $member instanceof WP_Post ) ) {
+		$member = astara_editor_preview_post( 'astara_team_member' );
+	}
 
 	if ( ! ( $member instanceof WP_Post ) || 'astara_team_member' !== $member->post_type ) {
 		return '';

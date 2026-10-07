@@ -364,6 +364,9 @@ function astara_render_news_archive() {
  */
 function astara_render_news_single_post() {
 	$post_obj = get_queried_object();
+	if ( ! ( $post_obj instanceof WP_Post ) ) {
+		$post_obj = astara_editor_preview_post( 'post' );
+	}
 
 	if ( ! ( $post_obj instanceof WP_Post ) || 'post' !== $post_obj->post_type ) {
 		return '';

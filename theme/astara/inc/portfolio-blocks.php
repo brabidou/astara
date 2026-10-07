@@ -159,6 +159,9 @@ function astara_render_portfolio_directory() {
  */
 function astara_render_portfolio_company_detail() {
 	$company = get_queried_object();
+	if ( ! ( $company instanceof WP_Post ) ) {
+		$company = astara_editor_preview_post( 'astara_portfolio_co' );
+	}
 
 	if ( ! ( $company instanceof WP_Post ) || 'astara_portfolio_co' !== $company->post_type ) {
 		return '';
