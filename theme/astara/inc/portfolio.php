@@ -67,6 +67,20 @@ function astara_register_portfolio_company_meta() {
 
 	register_post_meta(
 		'astara_portfolio_co',
+		'astara_case_study_url',
+		array(
+			'type'              => 'string',
+			'single'            => true,
+			'show_in_rest'      => true,
+			'sanitize_callback' => 'esc_url_raw',
+			'auth_callback'     => function () {
+				return current_user_can( 'edit_posts' );
+			},
+		)
+	);
+
+	register_post_meta(
+		'astara_portfolio_co',
 		'astara_website_url',
 		array(
 			'type'              => 'string',
@@ -88,6 +102,19 @@ function astara_register_portfolio_company_case_study_meta() {
 	astara_register_richtext_meta( 'astara_portfolio_co', 'astara_case_study' );
 }
 add_action( 'init', 'astara_register_portfolio_company_case_study_meta' );
+
+/**
+ * The case study PDF or link for a company, or '' when it doesn't have one.
+ * The Portfolio page's "Case Study" button only appears when this is set.
+ *
+ * @param int|WP_Post $post Company post or ID.
+ * @return string
+ */
+function astara_portfolio_case_study_url( $post ) {
+	$post = get_post( $post );
+
+	return $post ? esc_url_raw( (string) get_post_meta( $post->ID, 'astara_case_study_url', true ) ) : '';
+}
 
 /**
  * Add a meta box for investment date, industry-tagged excerpt, and website URL.
@@ -127,7 +154,7 @@ add_action( 'add_meta_boxes', 'astara_portfolio_company_case_study_meta_box' );
 function astara_render_portfolio_company_case_study_meta_box( $post ) {
 	astara_render_richtext_meta_box( $post, 'astara_case_study' );
 	?>
-	<p class="description"><?php esc_html_e( 'Leave this empty for a logo-only tile with no case study popup — add content to enable one.', 'astara' ); ?></p>
+	<p class="description"><?php esc_html_e( 'Not used on the Portfolio page, whose "Case Study" button now opens a PDF or link (set under Investment Details). This text only appears on the company\'s own page.', 'astara' ); ?></p>
 	<?php
 }
 
@@ -141,6 +168,7 @@ function astara_render_portfolio_company_meta_box( $post ) {
 
 	$investment_date = get_post_meta( $post->ID, 'astara_investment_date', true );
 	$website_url     = get_post_meta( $post->ID, 'astara_website_url', true );
+	$case_study_url  = get_post_meta( $post->ID, 'astara_case_study_url', true );
 	?>
 	<p>
 		<label for="astara_investment_date"><?php esc_html_e( 'Investment Date', 'astara' ); ?></label>
@@ -150,7 +178,12 @@ function astara_render_portfolio_company_meta_box( $post ) {
 		<label for="astara_website_url"><?php esc_html_e( 'Company Website', 'astara' ); ?></label>
 		<input type="url" id="astara_website_url" name="astara_website_url" class="widefat" value="<?php echo esc_attr( $website_url ); ?>" />
 	</p>
-	<p class="description"><?php esc_html_e( 'Use the Excerpt field for Industry.', 'astara' ); ?></p>
+	<p>
+		<label for="astara_case_study_url"><?php esc_html_e( 'Case study PDF or link', 'astara' ); ?></label>
+		<input type="url" id="astara_case_study_url" name="astara_case_study_url" class="widefat" placeholder="https://" value="<?php echo esc_attr( $case_study_url ); ?>" />
+		<button type="button" class="button astara-choose-file" data-target="#astara_case_study_url" style="margin-top:6px;"><?php esc_html_e( 'Choose file from Media Library', 'astara' ); ?></button>
+	</p>
+	<p class="description"><?php esc_html_e( 'The "Case Study" button on the Portfolio page only appears when this is filled in, and opens it in a new tab. Use the Excerpt field for Industry.', 'astara' ); ?></p>
 	<?php
 }
 
@@ -171,6 +204,15 @@ function astara_save_portfolio_company_meta( $post_id ) {
 
 	if ( isset( $_POST['astara_investment_date'] ) ) {
 		update_post_meta( $post_id, 'astara_investment_date', sanitize_text_field( wp_unslash( $_POST['astara_investment_date'] ) ) );
+	}
+
+	if ( isset( $_POST['astara_case_study_url'] ) ) {
+		$case_study_url = esc_url_raw( wp_unslash( $_POST['astara_case_study_url'] ) );
+		if ( $case_study_url ) {
+			update_post_meta( $post_id, 'astara_case_study_url', $case_study_url );
+		} else {
+			delete_post_meta( $post_id, 'astara_case_study_url' );
+		}
 	}
 
 	if ( isset( $_POST['astara_website_url'] ) ) {

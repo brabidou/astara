@@ -147,3 +147,25 @@ function astara_enqueue_editor_blocks() {
 	wp_add_inline_script( 'astara-editor-blocks', 'window.astaraEditorBlocks = ' . wp_json_encode( astara_editor_blocks() ) . ';', 'before' );
 }
 add_action( 'enqueue_block_editor_assets', 'astara_enqueue_editor_blocks' );
+
+/**
+ * Load the Media Library picker (for "Choose file" buttons next to a URL field)
+ * on the screens that have one: News posts and Portfolio Companies.
+ *
+ * @param string $hook_suffix Current admin page.
+ */
+function astara_media_picker_assets( $hook_suffix ) {
+	if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ), true ) || ! in_array( get_post_type(), array( 'post', 'astara_portfolio_co' ), true ) ) {
+		return;
+	}
+
+	wp_enqueue_media();
+	wp_enqueue_script(
+		'astara-media-picker',
+		ASTARA_THEME_URI . '/assets/js/media-picker.js',
+		array( 'jquery' ),
+		astara_asset_version( '/assets/js/media-picker.js' ),
+		true
+	);
+}
+add_action( 'admin_enqueue_scripts', 'astara_media_picker_assets' );

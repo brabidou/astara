@@ -46,6 +46,7 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 
 - [ ] Final **copy and photography** approved by the client for every page (hero, How We Work/Help, Sectors photos, Strategy, Team portraits, Portfolio logos, Contact).
 - [ ] Team (20 members) and Portfolio (7 companies): bios, roles, case studies, LinkedIn/email links reviewed. Empty case studies show a "Case study coming soon" fallback.
+- [ ] **Portfolio case studies:** the "Case Study" button now only shows for a company that has a PDF or link (Investment Details box), so no company has one until it's added. Decide whether the old text case study field and each company's own page (no longer linked from the Portfolio page) should be retired.
 - [ ] Display order checked on Team and Portfolio. Members with the same "Order" now fall back to creation order, so set Order on each entry if the sequence matters.
 - [ ] Remove sample/test content: "Sample Page", the test subscriber, any dummy posts.
 - [ ] **News & Media: push the imported press content to staging/production.** 29 News posts now exist locally (one per item on the old site's /media page: 13 linking to PDFs in the Media Library under `uploads/press-and-news/`, 16 linking to PR Newswire/PRWeb), all tagged "Press" and dated with their original release date. Run `content:push-media` **and** push the database (the posts and attachment records live in the DB). The full list is in `docs/press-and-news.md`.
@@ -135,6 +136,7 @@ Use this when you need to change a link, or to verify them all before launch. "A
 | Contact page map | **Admin → Pages → Contact** (Classic block, "Text" view) | A Google Maps `<iframe>`; the address is in its `q=` parameter. |
 | Newsletter notification email, reCAPTCHA keys | **Admin → Subscribers → Settings** (or `wp-config.php` constants) | See section 5. |
 | Team member LinkedIn and email | **Admin → Team Members → edit a member → "Contact Links" box** | LinkedIn opens in a new tab. |
+| Portfolio "Case Study" button (Portfolio page tiles) | **Admin → Portfolio Companies → edit → "Investment Details" box → "Case study PDF or link"** | The button only appears when this is filled in, and opens the PDF/link in a new tab. Pick a PDF from the Media Library or paste a URL. |
 | Portfolio company website ("Visit …" button) | **Admin → Portfolio Companies → edit → "Investment Details" box** | Opens in a new tab. |
 | News item that is a PDF or outside link | **Admin → Posts → edit → "Link directly to a file or website" box** | Cards open it in a new tab; the post's own page redirects there. |
 | "Back to Team", "Back to Portfolio" links; the News "View More" link | In the theme code (`inc/blocks.php`, `inc/portfolio-blocks.php`, `inc/news-blocks.php`) | Built from the paths `/team/`, `/portfolio/` and `/news-archive/`. **If the slug of the Team, Portfolio or All News page ever changes, these break**, so keep those slugs or update the code. |
@@ -150,6 +152,7 @@ Use this when you need to change a link, or to verify them all before launch. "A
 - [x] 2026-10-07 — Staging is blocked from search engines by Pressable's robots.txt (re-check on live: section 2).
 - [x] 2026-10-07 — News posts can link straight to a PDF or website ("Link directly to a file or website" field); cards open it in a new tab and the post page redirects there.
 - [x] 2026-10-07 — Press & News PDFs scraped from astaracapital.com/media and imported locally into the Media Library (`uploads/press-and-news/`), and 29 News posts created from them (locally).
+- [x] 2026-10-07 — Portfolio "Case Study" button only appears when a company has a case study PDF/link, and the site's outline and solid buttons now have a consistent hover.
 - [x] 2026-10-07 — LinkedIn profile URL set as the default (footer icon live once deployed).
 - [x] 2026-10-07 — Site Settings page added (LinkedIn/X links, phone, email, addresses) feeding the footer and Contact page; footer copyright year is now automatic.
 - [x] 2026-10-07 — Newsletter signup built (stores subscribers, emails a notification, reCAPTCHA v2 + honeypot); tested locally with Google's test keys.

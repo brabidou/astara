@@ -138,7 +138,7 @@ function astara_render_news_link_meta_box( $post ) {
 		<input type="url" id="astara_news_link_url" name="astara_news_link" class="widefat" value="<?php echo esc_attr( $value ); ?>" placeholder="https://" />
 	</p>
 	<p>
-		<button type="button" class="button" id="astara_news_link_choose"><?php esc_html_e( 'Choose file from Media Library', 'astara' ); ?></button>
+		<button type="button" class="button astara-choose-file" data-target="#astara_news_link_url"><?php esc_html_e( 'Choose file from Media Library', 'astara' ); ?></button>
 	</p>
 	<p class="description">
 		<?php esc_html_e( "For items that are just a PDF or an outside link. News & Media then links straight there (in a new tab) and this post's own page isn't used. Leave blank to use the post page as normal.", 'astara' ); ?>
@@ -171,40 +171,3 @@ function astara_save_news_link( $post_id ) {
 	}
 }
 add_action( 'save_post_post', 'astara_save_news_link' );
-
-/**
- * Load the media-picker script on the post editor.
- *
- * @param string $hook_suffix Current admin page.
- */
-function astara_news_link_admin_assets( $hook_suffix ) {
-	if ( ! in_array( $hook_suffix, array( 'post.php', 'post-new.php' ), true ) || 'post' !== get_post_type() ) {
-		return;
-	}
-
-	wp_enqueue_media();
-	wp_enqueue_script(
-		'astara-news-link-admin',
-		ASTARA_THEME_URI . '/assets/js/news-link-admin.js',
-		array( 'jquery' ),
-		astara_asset_version( '/assets/js/news-link-admin.js' ),
-		true
-	);
-}
-add_action( 'admin_enqueue_scripts', 'astara_news_link_admin_assets' );
-
-/**
- * A stand-in tile for news items with no image, so image-less rows (such as the
- * press releases that are only a PDF or an outside link) line up with the rest.
- *
- * @param WP_Post $post Post.
- * @return string Escaped HTML.
- */
-function astara_news_card_placeholder( $post ) {
-	$label = astara_news_card_file_label( $post );
-	if ( ! $label ) {
-		$label = astara_news_direct_link( $post ) ? __( 'Link', 'astara' ) : __( 'News', 'astara' );
-	}
-
-	return '<div class="astara-news-card__image astara-news-card__image--placeholder" aria-hidden="true"><span class="astara-news-card__placeholder-label">' . esc_html( $label ) . '</span></div>';
-}

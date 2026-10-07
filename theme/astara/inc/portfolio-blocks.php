@@ -101,10 +101,9 @@ function astara_render_portfolio_company_case_study( $company, $name_tag = 'h3',
 
 /**
  * Render the portfolio grid, queried live from the Portfolio Company post
- * type. Companies with case study content get a "Case Study" badge whose
- * "+" is a real link to that company's own page (crawlable, works with JS
- * off) that also opens a popup in place via the Interactivity API when JS
- * is available. Companies with no content render as a plain logo tile.
+ * type: one logo tile per company. A company with a case study PDF or link
+ * (set in its Investment Details) also gets a "Case Study" button that opens
+ * it in a new tab; without one, the tile is just the logo.
  *
  * @return string
  */
@@ -128,21 +127,17 @@ function astara_render_portfolio_directory() {
 	?>
 	<div class="astara-portfolio-grid">
 		<?php foreach ( $companies as $company ) : ?>
-			<?php $modal_id = 'portfolio-modal-' . $company->ID . '-' . wp_unique_id(); ?>
-			<div class="astara-portfolio-company" data-wp-interactive="astara/modal" data-wp-context='{ "isOpen": false }' data-wp-on-window--keydown="actions.closeOnEscape">
-				<a href="<?php echo esc_url( get_permalink( $company ) ); ?>" class="astara-portfolio-tile" data-wp-on--click="actions.open" aria-haspopup="dialog" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: portfolio company name */ __( 'View case study for %s', 'astara' ), $company->post_title ) ); ?>">
+			<?php $case_study_url = astara_portfolio_case_study_url( $company ); ?>
+			<div class="astara-portfolio-company">
+				<div class="astara-portfolio-tile">
 					<?php if ( has_post_thumbnail( $company ) ) : ?>
 						<?php echo get_the_post_thumbnail( $company, 'medium', array( 'class' => 'astara-portfolio-tile__logo' ) ); ?>
 					<?php endif; ?>
-					<span class="astara-portfolio-tile__badge"><?php esc_html_e( 'Case Study', 'astara' ); ?></span>
-				</a>
-
-				<div class="astara-portfolio-modal" data-wp-class--is-open="context.isOpen" data-wp-bind--hidden="!context.isOpen" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr( $modal_id ); ?>">
-					<div class="astara-portfolio-modal__backdrop" data-wp-on--click="actions.close"></div>
-					<div class="astara-portfolio-modal__panel">
-						<button type="button" class="astara-portfolio-modal__close" data-wp-on--click="actions.close" aria-label="<?php esc_attr_e( 'Close', 'astara' ); ?>">&times;</button>
-						<?php echo str_replace( 'astara-portfolio-case', 'astara-portfolio-modal', astara_render_portfolio_company_case_study( $company, 'h3', $modal_id ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- astara_render_portfolio_company_case_study() already escapes its own output. ?>
-					</div>
+					<?php if ( $case_study_url ) : ?>
+						<a class="astara-portfolio-tile__button" href="<?php echo esc_url( $case_study_url ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: portfolio company name */ __( 'Case study for %s (opens in a new tab)', 'astara' ), $company->post_title ) ); ?>">
+							<?php esc_html_e( 'Case Study', 'astara' ); ?>
+						</a>
+					<?php endif; ?>
 				</div>
 			</div>
 		<?php endforeach; ?>

@@ -51,15 +51,7 @@
     border-radius: 8px;
     aspect-ratio: 437 / 300;
     padding: 32px;
-    text-decoration: none;
     color: inherit;
-    cursor: pointer;
-    transition: box-shadow 0.2s ease;
-}
-
-a.astara-portfolio-tile:hover,
-a.astara-portfolio-tile:focus-visible {
-    box-shadow: 0 4px 16px rgba(30, 45, 62, 0.15);
 }
 
 .astara-portfolio-tile__logo {
@@ -68,22 +60,32 @@ a.astara-portfolio-tile:focus-visible {
     object-fit: contain;
 }
 
-.astara-portfolio-tile__badge {
+/* "Case Study" — only rendered when the company has a PDF or link. Styled like
+   the site's outline buttons (see .astara-btn-outline in global.css), including
+   the hover: fills orange. */
+.astara-portfolio-tile__button {
     position: absolute;
     left: 24px;
     bottom: 24px;
-    background: var(--wp--preset--color--astara-gray);
-    color: var(--wp--preset--color--astara-navy);
-    font-family: var(--wp--preset--font-family--manrope);
-    font-size: 14px;
-    border-radius: 30px;
+    display: inline-flex;
+    align-items: center;
     padding: 10px 20px;
-    transition: background-color 0.2s ease;
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    color: var(--wp--preset--color--astara-navy);
+    background: transparent;
+    border: 1px solid var(--wp--preset--color--astara-bright-orange);
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-a.astara-portfolio-tile:hover .astara-portfolio-tile__badge,
-a.astara-portfolio-tile:focus-visible .astara-portfolio-tile__badge {
-    background: var(--wp--preset--color--astara-peach);
+.astara-portfolio-tile__button:hover,
+.astara-portfolio-tile__button:focus-visible {
+    background: var(--wp--preset--color--astara-bright-orange);
+    color: var(--wp--preset--color--astara-off-white);
 }
 
 /* Shared case study content (popup + single page) */

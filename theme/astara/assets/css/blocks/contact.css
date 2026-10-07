@@ -130,8 +130,8 @@
 
 .astara-contact__newsletter-submit:hover:not(:disabled),
 .astara-contact__newsletter-submit:focus-visible {
-	background: transparent;
-	color: var(--wp--preset--color--astara-navy);
+	background: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 82%, #000);
+	border-color: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 82%, #000);
 }
 
 .astara-contact__newsletter-submit:disabled {
