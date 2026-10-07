@@ -159,6 +159,30 @@ The Contact page's "Stay in touch" box is built into the theme (`inc/newsletter.
 - The form posts to a public REST route (`POST /wp-json/astara/v1/newsletter`) and uses no nonce, so it keeps working on page-cached pages.
 - Local wp-env has no mail server, so the notification email can't be delivered there. The entry is still saved and flagged `astara_notified = 0`.
 
+## Automated tests (Playwright)
+
+Specs live in `tests/e2e/`; config in `playwright.config.js`. Each runs at 1440 (desktop), 768 (tablet) and 375 (mobile).
+
+| Spec | Checks |
+| --- | --- |
+| `a11y.spec.js` | axe-core, WCAG 2.2 A/AA + best practice, every page |
+| `structure.spec.js` | landmarks, one H1, titles/meta description, image alt, no sideways scroll, 404 |
+| `styles.spec.js` | computed styles vs. Figma values (stats, buttons, eyebrow) at 1728 |
+| `behaviour.spec.js` | Team popup/page navigation, mobile menu |
+| `visual.spec.js` | full-page screenshots compared with a baseline |
+
+```bash
+npm run test:e2e                                   # against local wp-env (npx wp-env start first)
+E2E_BASE_URL=https://astara.mystagingwebsite.com npm run test:e2e   # against staging
+npx playwright test visual --update-snapshots      # accept the current look as the new baseline
+```
+
+Add new pages to `tests/e2e/pages.js`. Local screenshot baselines are gitignored (27 MB, platform-specific).
+
+**CI:** the `test` job in `.github/workflows/deploy.yml` runs after each deploy against staging. Visual baselines are kept in the GitHub Actions cache: the first run records them, later runs compare. After an intentional design change, run the workflow manually (Actions → Run workflow) with "Accept the current look as the new visual baseline" ticked. Deploy happens first, so a red test run means fix forward.
+
+Known exception: the brand-orange buttons (white text, 2.6:1) are excluded from the axe check until the client decides on an accessible colour (see `GO-LIVE.md`).
+
 ## Go-live checklist
 
 Everything to check before launch is in [`GO-LIVE.md`](GO-LIVE.md). Keep it up to date as you work; `CLAUDE.md` explains the rule.
