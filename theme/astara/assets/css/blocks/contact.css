@@ -39,6 +39,16 @@
 	border-radius: 8px;
 }
 
+/* Embedded Google Map, kept to the same proportions as the original image. */
+.astara-contact__map iframe {
+	display: block;
+	width: 100%;
+	height: auto;
+	aspect-ratio: 1200 / 762;
+	border: 0;
+	border-radius: 8px;
+}
+
 .astara-contact__org {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--heading-3);
