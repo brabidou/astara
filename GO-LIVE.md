@@ -47,7 +47,7 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [ ] Team (20 members) and Portfolio (7 companies): bios, roles, case studies, LinkedIn/email links reviewed. Empty case studies show a "Case study coming soon" fallback.
 - [ ] Display order checked on Team and Portfolio. Members with the same "Order" now fall back to creation order, so set Order on each entry if the sequence matters.
 - [ ] Remove sample/test content: "Sample Page", the test subscriber, any dummy posts.
-- [ ] News & Media posts and the "All News" archive populated with real content.
+- [ ] News & Media posts and the "All News" archive populated with real content. The 29 items from the current site (13 PDFs, 16 PR Newswire/PRWeb links) are listed in `docs/press-and-news.md`; the 13 PDFs are already in the local Media Library under `uploads/press-and-news/`, but **no News posts exist for them yet**. Push the PDFs to staging/production with `content:push-media` plus the database.
 - [ ] Search content for leftover staging URLs (`astara.mystagingwebsite.com`) and `localhost`.
 - [ ] Contact page: confirm address, phone, email and the embedded map pin are correct. The page body is a Classic block of raw HTML stored in the database.
 - [ ] Footer: contact details and copyright year.
@@ -119,4 +119,6 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [x] 2026-10-07 — Staging home page rebuilt with the new full-width sections and verified at desktop, tablet and phone widths.
 - [x] 2026-10-07 — Branded 404 page added (`404.php`, not editable in the Site Editor).
 - [x] 2026-10-07 — Staging is blocked from search engines by Pressable's robots.txt (re-check on live: section 2).
+- [x] 2026-10-07 — News posts can link straight to a PDF or website ("Link directly to a file or website" field); cards open it in a new tab and the post page redirects there.
+- [x] 2026-10-07 — Press & News PDFs scraped from astaracapital.com/media and imported locally into the Media Library (`uploads/press-and-news/`).
 - [x] 2026-10-07 — Newsletter signup built (stores subscribers, emails a notification, reCAPTCHA v2 + honeypot); tested locally with Google's test keys.
