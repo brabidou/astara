@@ -45,6 +45,6 @@ These live on PR Newswire / PRWeb. They aren't files, so they're not in the Medi
 | 2023-09-07 | Astara Capital Partners Closes Inaugural Fund at $312 Million | <https://www.prnewswire.com/news-releases/astara-capital-partners-closes-inaugural-fund-at-312-million-301920327.html?tc=eml_cleartime> |
 | 2022-11-08 | Astara Capital Partners Completes Investment in Del-Air Heating and Air Conditioning | <https://www.prnewswire.com/news-releases/astara-capital-partners-completes-investment-in-del-air-heating-and-air-conditioning-301670657.html?tc=eml_cleartime> |
 
-## Next step
+## News posts
 
-No News posts have been created from these yet. Creating one post per row above (title, date, and the PDF or link in the direct-link field) is the remaining work.
+One published News post per row above exists locally, tagged "Press", dated with the release date, with the PDF (Media Library URL) or press-release URL in the "Link directly to a file or website" field and a short summary line. They have no featured image, so cards show a navy "PDF"/"LINK" tile. These are local only until the database and media are pushed.

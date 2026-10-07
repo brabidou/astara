@@ -47,7 +47,10 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [ ] Team (20 members) and Portfolio (7 companies): bios, roles, case studies, LinkedIn/email links reviewed. Empty case studies show a "Case study coming soon" fallback.
 - [ ] Display order checked on Team and Portfolio. Members with the same "Order" now fall back to creation order, so set Order on each entry if the sequence matters.
 - [ ] Remove sample/test content: "Sample Page", the test subscriber, any dummy posts.
-- [ ] News & Media posts and the "All News" archive populated with real content. The 29 items from the current site (13 PDFs, 16 PR Newswire/PRWeb links) are listed in `docs/press-and-news.md`; the 13 PDFs are already in the local Media Library under `uploads/press-and-news/`, but **no News posts exist for them yet**. Push the PDFs to staging/production with `content:push-media` plus the database.
+- [ ] **News & Media: push the imported press content to staging/production.** 29 News posts now exist locally (one per item on the old site's /media page: 13 linking to PDFs in the Media Library under `uploads/press-and-news/`, 16 linking to PR Newswire/PRWeb), all tagged "Press" and dated with their original release date. Run `content:push-media` **and** push the database (the posts and attachment records live in the DB). The full list is in `docs/press-and-news.md`.
+- [ ] **Delete the 6 sample News posts** (IDs 87–92: "Astara Closes Investment in Ally Building Products", "Astara Named a Top Lower Middle Market Firm", etc.) and replace them with real news. They have stock thumbnails and invented text.
+- [ ] The imported press posts have **no featured images**, so they show a navy "PDF"/"LINK" tile. Add images if the client wants them, and check the News & Media grid (it shows the 4 newest) looks right once the sample posts are gone.
+- [ ] Tags: all imported items use the existing "Press" tag. Decide the final tag set (Company News / Insights / Press) and re-tag as needed; the original site split items into "Press Releases" and "In The News" tabs.
 - [ ] Search content for leftover staging URLs (`astara.mystagingwebsite.com`) and `localhost`.
 - [ ] Contact page: confirm address, phone, email and the embedded map pin are correct. The page body is a Classic block of raw HTML stored in the database.
 - [ ] Footer: contact details and copyright year.
@@ -120,5 +123,5 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [x] 2026-10-07 — Branded 404 page added (`404.php`, not editable in the Site Editor).
 - [x] 2026-10-07 — Staging is blocked from search engines by Pressable's robots.txt (re-check on live: section 2).
 - [x] 2026-10-07 — News posts can link straight to a PDF or website ("Link directly to a file or website" field); cards open it in a new tab and the post page redirects there.
-- [x] 2026-10-07 — Press & News PDFs scraped from astaracapital.com/media and imported locally into the Media Library (`uploads/press-and-news/`).
+- [x] 2026-10-07 — Press & News PDFs scraped from astaracapital.com/media and imported locally into the Media Library (`uploads/press-and-news/`), and 29 News posts created from them (locally).
 - [x] 2026-10-07 — Newsletter signup built (stores subscribers, emails a notification, reCAPTCHA v2 + honeypot); tested locally with Google's test keys.

@@ -192,3 +192,19 @@ function astara_news_link_admin_assets( $hook_suffix ) {
 	);
 }
 add_action( 'admin_enqueue_scripts', 'astara_news_link_admin_assets' );
+
+/**
+ * A stand-in tile for news items with no image, so image-less rows (such as the
+ * press releases that are only a PDF or an outside link) line up with the rest.
+ *
+ * @param WP_Post $post Post.
+ * @return string Escaped HTML.
+ */
+function astara_news_card_placeholder( $post ) {
+	$label = astara_news_card_file_label( $post );
+	if ( ! $label ) {
+		$label = astara_news_direct_link( $post ) ? __( 'Link', 'astara' ) : __( 'News', 'astara' );
+	}
+
+	return '<div class="astara-news-card__image astara-news-card__image--placeholder" aria-hidden="true"><span class="astara-news-card__placeholder-label">' . esc_html( $label ) . '</span></div>';
+}

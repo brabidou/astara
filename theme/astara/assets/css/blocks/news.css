@@ -188,6 +188,33 @@
     aspect-ratio: 1 / 1;
 }
 
+/* Stand-in tile for items with no image (e.g. a PDF-only press release). */
+.astara-news-card__image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 3 / 2;
+    background: var(--wp--preset--color--astara-navy);
+    color: var(--wp--preset--color--astara-off-white);
+}
+
+.astara-news-card__placeholder-label {
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.astara-news-card--list .astara-news-card__image--placeholder {
+    aspect-ratio: auto;
+}
+
+.astara-news-card--list .astara-news-card__placeholder-label {
+    font-size: 13px;
+    letter-spacing: 2px;
+}
+
 .astara-news-card--list .astara-news-card__body {
     min-width: 0;
 }

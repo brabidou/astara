@@ -68,6 +68,8 @@ function astara_render_news_card( $post_obj, $variant = 'grid' ) {
 				<div class="astara-news-card__image">
 					<?php echo get_the_post_thumbnail( $post_obj, 'thumbnail' ); ?>
 				</div>
+			<?php else : ?>
+				<?php echo astara_news_card_placeholder( $post_obj ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- escaped inside the helper. ?>
 			<?php endif; ?>
 			<div class="astara-news-card__body">
 				<h3 class="astara-news-card__title"><?php echo esc_html( get_the_title( $post_obj ) ); ?></h3>
@@ -103,6 +105,15 @@ function astara_render_news_card( $post_obj, $variant = 'grid' ) {
 			<div class="astara-news-card__image">
 				<?php echo get_the_post_thumbnail( $post_obj, 'medium_large' ); ?>
 				<span class="astara-news-card__arrow" aria-hidden="true">
+					<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+					</svg>
+				</span>
+			</div>
+		<?php else : ?>
+			<div class="astara-news-card__image astara-news-card__image--placeholder" aria-hidden="true">
+				<span class="astara-news-card__placeholder-label"><?php echo esc_html( astara_news_card_file_label( $post_obj ) ? astara_news_card_file_label( $post_obj ) : ( astara_news_direct_link( $post_obj ) ? __( 'Link', 'astara' ) : __( 'News', 'astara' ) ) ); ?></span>
+				<span class="astara-news-card__arrow">
 					<svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
 						<path d="M3 11L11 3M11 3H4.5M11 3V9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
 					</svg>
