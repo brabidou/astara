@@ -288,6 +288,31 @@
     gap: 40px;
 }
 
+/* Resets the topic and date filters in one go; only shown while one is active. */
+.astara-news-archive__clear {
+    align-self: flex-start;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    margin-bottom: -16px;
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-decoration: none;
+    color: var(--wp--preset--color--astara-navy);
+    border: 1px solid var(--wp--preset--color--astara-bright-orange);
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.astara-news-archive__clear:hover,
+.astara-news-archive__clear:focus-visible {
+    background: var(--wp--preset--color--astara-bright-orange);
+    color: var(--wp--preset--color--astara-off-white);
+}
+
 .astara-news-archive__year {
     font-family: var(--wp--preset--font-family--manrope);
     font-weight: 700;

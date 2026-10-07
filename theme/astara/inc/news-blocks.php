@@ -285,6 +285,12 @@ function astara_render_news_archive() {
 	?>
 	<div class="astara-news-archive">
 		<div class="astara-news-archive__sidebar">
+			<?php if ( $active_tag || $year ) : ?>
+				<a class="astara-news-archive__clear" href="<?php echo esc_url( $archive_url ); ?>">
+					<span aria-hidden="true">&times;</span> <?php esc_html_e( 'Clear all filters', 'astara' ); ?>
+				</a>
+			<?php endif; ?>
+
 			<nav class="astara-news-archive__nav astara-news-archive__nav--tags" aria-label="<?php esc_attr_e( 'Filter by tag', 'astara' ); ?>">
 				<p class="astara-news-archive__year"><?php esc_html_e( 'Topics', 'astara' ); ?></p>
 				<ul class="astara-news-archive__months">
