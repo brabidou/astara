@@ -51,3 +51,35 @@ function astara_no_page_templates() {
 }
 add_filter( 'theme_astara_team_member_templates', 'astara_no_page_templates' );
 add_filter( 'theme_astara_portfolio_co_templates', 'astara_no_page_templates' );
+
+/**
+ * Keep the inserter's Patterns tab to the theme's own patterns: turn off
+ * WordPress's bundled and remote (patterns directory) patterns, then
+ * unregister anything else a plugin has added.
+ */
+function astara_limit_patterns() {
+	remove_theme_support( 'core-block-patterns' );
+	add_filter( 'should_load_remote_block_patterns', '__return_false' );
+}
+add_action( 'after_setup_theme', 'astara_limit_patterns' );
+
+/**
+ * Unregister every pattern and pattern category that isn't Astara's.
+ * Runs late on init so plugin-registered patterns are already in place.
+ */
+function astara_unregister_other_patterns() {
+	$patterns = WP_Block_Patterns_Registry::get_instance();
+	foreach ( $patterns->get_all_registered() as $pattern ) {
+		if ( 0 !== strpos( $pattern['name'], 'astara/' ) ) {
+			unregister_block_pattern( $pattern['name'] );
+		}
+	}
+
+	$categories = WP_Block_Pattern_Categories_Registry::get_instance();
+	foreach ( $categories->get_all_registered() as $category ) {
+		if ( 'astara' !== $category['name'] ) {
+			unregister_block_pattern_category( $category['name'] );
+		}
+	}
+}
+add_action( 'init', 'astara_unregister_other_patterns', 100 );
