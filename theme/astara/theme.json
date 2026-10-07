@@ -78,7 +78,7 @@
 			"contentSize": "1552px",
 			"wideSize": "1728px"
 		},
-		"useRootPaddingAwareAlignments": true
+		"useRootPaddingAwareAlignments": false
 	},
 	"styles": {
 		"color": {
