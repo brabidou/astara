@@ -119,6 +119,16 @@ Pixel-perfect screenshot matching is not the goal, because font rendering and re
 - Template parts (`.html` files) are **not** PHP — `<?php ... ?>` inside them is printed as literal text, not executed. For anything that needs `esc_url()`/`home_url()`/dynamic PHP, either use a native block that already handles it (e.g. logos via CSS `background-image` on a static anchor, not inline PHP) or move the logic into a real PHP-rendered block.
 - `core/navigation` block CSS ships a `color: inherit` rule at `.wp-block-navigation .wp-block-navigation-item__content.wp-block-navigation-item__content` (specificity 0,3,0, via a duplicated class). A typical 2-class override (e.g. `.astara-nav .wp-block-navigation-item__content`) silently loses to it. Match or beat that specificity (e.g. `.astara-header .astara-nav .wp-block-navigation-item__content`) whenever styling nav link color, and verify with `getComputedStyle` — don't trust a screenshot alone, since two dark colors can look identical at a glance.
 
+## Go-live checklist (`GO-LIVE.md`) — keep it current
+
+`GO-LIVE.md` at the repo root is the single list of everything that must be checked, changed or finished before the site launches. It is a **living document that every session maintains**:
+
+- **Read it** when you start work that touches launch readiness (deployment, content sync, forms/email, SEO/indexing, credentials, third-party services, privacy, placeholder content), and before telling the user something is "ready" or "done for launch".
+- **Add an item in the same change** whenever you introduce or discover something that must be handled before launch: a placeholder or dummy value, a dev-only setting or key, a staging-only workaround, a manual step that must be repeated on production, a third-party account/key the owner has to create, a known bug or limitation you're deferring, or a script/config that only works in dev. Put it under the right section with enough detail that someone who wasn't here can act on it (what, where, why).
+- **Tick it off** (`- [x]`, with the date and how it was verified) when it's done, and move it to the "Done" section. Never delete an open item unless the owner says it no longer applies; if one turns out to be wrong, edit it and say so.
+- **Tell the user** in your reply which items you added or ticked, in one line.
+- Update the "Last updated" date at the top whenever you edit the file.
+
 ## Open questions (ask, don't assume)
 
 - Final theme slug and name. `astara` is assumed.

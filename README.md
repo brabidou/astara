@@ -144,6 +144,21 @@ There's no `push-media`-style delete or a combined "push everything" script on p
 
 This is a fixture, not a backup: `seed/content.xml` and `seed/media/` are committed to git, so **never run `content:seed-export` straight from a `content:pull`**. Review `seed/content.xml` for anything sensitive (real names/emails, unpublished drafts) and keep `seed/media/` trimmed to a small, representative set of images before committing — not a copy of the full production media library.
 
+## Newsletter signup
+
+The Contact page's "Stay in touch" box is built into the theme (`inc/newsletter.php`, `assets/js/newsletter.js`), with no plugin. Embed it anywhere with the `[astara_newsletter]` shortcode.
+
+- Each signup is stored as a private entry under **Subscribers** in the admin (admin-only, no "Add New"), with an **Export CSV** button.
+- An email notification goes to the address set under **Subscribers → Settings** (defaults to the site admin email).
+- Spam protection: Google **reCAPTCHA v2** ("I'm not a robot") plus a hidden honeypot field, one attempt per address per minute and a site-wide hourly cap. Enter the keys under Subscribers → Settings, or set them in `wp-config.php`, which wins over the saved settings: `ASTARA_RECAPTCHA_SITE_KEY`, `ASTARA_RECAPTCHA_SECRET_KEY`, `ASTARA_NEWSLETTER_NOTIFY_EMAIL`. Create a key pair at https://www.google.com/recaptcha/admin.
+- Local wp-env uses Google's **public test keys** (set as constants in `.wp-env.json`, so they live in the config, not the database, and are never pushed with the database). The widget shows a "for testing purposes only" notice.
+- The form posts to a public REST route (`POST /wp-json/astara/v1/newsletter`) and uses no nonce, so it keeps working on page-cached pages.
+- Local wp-env has no mail server, so the notification email can't be delivered there. The entry is still saved and flagged `astara_notified = 0`.
+
+## Go-live checklist
+
+Everything to check before launch is in [`GO-LIVE.md`](GO-LIVE.md). Keep it up to date as you work; `CLAUDE.md` explains the rule.
+
 ## Required plugins
 
 _TBD._ Plugins are installed at the site level, not bundled in the theme. For local dev, list them in `.wp-env.json`. The theme feature-detects them and shows an admin notice if a critical one is missing.
