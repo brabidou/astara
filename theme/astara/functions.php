@@ -21,3 +21,4 @@ require ASTARA_THEME_DIR . '/inc/portfolio.php';
 require ASTARA_THEME_DIR . '/inc/blocks.php';
 require ASTARA_THEME_DIR . '/inc/portfolio-blocks.php';
 require ASTARA_THEME_DIR . '/inc/news-blocks.php';
+require ASTARA_THEME_DIR . '/inc/newsletter.php';
