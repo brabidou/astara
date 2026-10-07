@@ -27,6 +27,18 @@ function astara_setup() {
 add_action( 'after_setup_theme', 'astara_setup' );
 
 /**
+ * Register the pattern category the theme's patterns are filed under, so
+ * editors find them together in the inserter's Patterns tab.
+ */
+function astara_register_pattern_category() {
+	register_block_pattern_category(
+		'astara',
+		array( 'label' => __( 'Astara', 'astara' ) )
+	);
+}
+add_action( 'init', 'astara_register_pattern_category' );
+
+/**
  * Hide the Template dropdown in Post Attributes for Team Members and
  * Portfolio Companies. It only listed the theme's own single-* templates,
  * which WordPress already applies automatically — Order is the only

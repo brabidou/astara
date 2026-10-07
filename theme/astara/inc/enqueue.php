@@ -23,6 +23,28 @@ function astara_asset_version( $relative_path ) {
 }
 
 /**
+ * Whether the current singular post uses one of the home-section patterns
+ * (hero, how we work, etc.) — those are styled by home.css, so it has to load
+ * wherever an editor drops them, not just on the front page.
+ *
+ * @return bool
+ */
+function astara_has_home_sections() {
+	if ( ! is_singular() ) {
+		return false;
+	}
+
+	$content = (string) get_post_field( 'post_content', get_queried_object_id() );
+	foreach ( array( 'astara-hero', 'astara-how-we-work', 'astara-how-we-help', 'astara-stats', 'astara-criteria', 'astara-sectors' ) as $marker ) {
+		if ( false !== strpos( $content, $marker ) ) {
+			return true;
+		}
+	}
+
+	return false;
+}
+
+/**
  * Enqueue the theme's global stylesheet — only what theme.json can't express.
  */
 function astara_enqueue_assets() {
@@ -33,7 +55,7 @@ function astara_enqueue_assets() {
 		astara_asset_version( '/assets/css/global.css' )
 	);
 
-	if ( is_front_page() ) {
+	if ( is_front_page() || astara_has_home_sections() ) {
 		wp_enqueue_style(
 			'astara-home',
 			ASTARA_THEME_URI . '/assets/css/blocks/home.css',
