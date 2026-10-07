@@ -24,4 +24,5 @@ require ASTARA_THEME_DIR . '/inc/news-blocks.php';
 require ASTARA_THEME_DIR . '/inc/news-links.php';
 require ASTARA_THEME_DIR . '/inc/newsletter.php';
 require ASTARA_THEME_DIR . '/inc/settings.php';
+require ASTARA_THEME_DIR . '/inc/seo.php';
 require ASTARA_THEME_DIR . '/inc/editor.php';
