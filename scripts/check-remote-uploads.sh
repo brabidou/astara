@@ -27,6 +27,23 @@ echo "== is 2026/09 there, and what are the permissions?"
 ls -la "$WP_ROOT/wp-content/uploads/2026/09" 2>&1 | head -8
 
 echo
-echo "== what WordPress thinks its uploads folder is"
-wp --path="$WP_ROOT" eval 'echo wp_get_upload_dir()["basedir"], PHP_EOL;' 2>&1 | tail -3
+echo "== which way of calling WP-CLI works? (prints the site URL when it does)"
+try() {
+	echo "-- $1"
+	shift
+	"$@" 2>&1 | tail -2
+}
+try "wp (no --path), from home"            wp option get home
+try "cd /htdocs && wp"                     bash -c 'cd /htdocs && wp option get home'
+try "wp --path=/htdocs (what the scripts use now)" wp --path=/htdocs option get home
+try "wp --path=/srv/htdocs"                wp --path=/srv/htdocs option get home
+
+echo
+echo "== WP-CLI details and where core lives"
+wp --info 2>&1 | grep -iE "wp-cli (config|packages)|php binary|wp-cli version" | head -4
+ls -d /wordpress/core/* 2>&1 | head -3
+ls -la /srv/htdocs/wp-config.php /htdocs/wp-config.php 2>&1 | head -2
+echo
+echo "== WordPress's own uploads folder"
+wp eval 'echo wp_get_upload_dir()["basedir"], PHP_EOL;' 2>&1 | tail -2
 REMOTE
