@@ -414,3 +414,28 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 .has-astara-navy-background-color :where(a, button, summary):focus-visible {
 	outline-color: var(--wp--preset--color--astara-bright-orange);
 }
+
+/* Navy button with orange text (4.9:1): the accessible alternative to white on
+   orange, shown to the client next to the brand-orange buttons. */
+.astara-btn-navy .wp-block-button__link {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-weight: 700;
+	font-size: 18px;
+	line-height: 1.2;
+	border-radius: 4px;
+	padding: 12px 24px;
+	height: 50px;
+	box-sizing: border-box;
+	display: inline-flex;
+	align-items: center;
+	background: var(--wp--preset--color--astara-navy);
+	color: var(--wp--preset--color--astara-bright-orange);
+	border: 1px solid var(--wp--preset--color--astara-navy);
+	transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.astara-btn-navy .wp-block-button__link:hover,
+.astara-btn-navy .wp-block-button__link:focus-visible {
+	background: color-mix(in srgb, var(--wp--preset--color--astara-navy) 80%, #000);
+	color: var(--wp--preset--color--astara-bright-orange);
+}
