@@ -11,7 +11,9 @@ TMP_SQL="$(mktemp -t astara-pull-XXXXXX.sql)"
 trap 'rm -f "$TMP_SQL"' EXIT
 
 echo "==> Exporting remote database with URLs rewritten for local..."
-"${SSH_CMD[@]}" "wp --path='${PRESSABLE_WP_ROOT}' search-replace '${PRESSABLE_SITE_URL}' '${LOCAL_URL}' --all-tables --export=-" > "$TMP_SQL"
+# WordPress core lives outside the web root on Pressable, so `wp --path=<web root>` fails;
+# run wp from inside the web root instead.
+"${SSH_CMD[@]}" "cd '${PRESSABLE_WP_ROOT}' && wp search-replace '${PRESSABLE_SITE_URL}' '${LOCAL_URL}' --all-tables --export=-" > "$TMP_SQL"
 
 echo "==> Importing into local database..."
 docker cp "$TMP_SQL" "${CLI_CONTAINER}:/tmp/pull-content.sql"
