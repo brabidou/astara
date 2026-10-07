@@ -367,6 +367,7 @@
 }
 
 @media (max-width: 782px) {
+	/* Gutters and vertical rhythm */
 	.astara-hero,
 	.astara-how-we-work,
 	.astara-how-we-help,
@@ -377,13 +378,13 @@
 	}
 
 	.astara-hero {
-		padding-block: 120px 48px;
+		padding-block: 56px 40px;
 	}
 
 	.astara-how-we-work,
 	.astara-how-we-help,
 	.astara-sectors {
-		padding-block: 48px;
+		padding-block: 40px;
 	}
 
 	.astara-stats {
@@ -391,12 +392,25 @@
 	}
 
 	.astara-criteria {
-		padding-block: 56px 40px;
+		padding-block: 48px 40px;
+	}
+
+	.wp-block-group.astara-hero__row,
+	.wp-block-group.astara-how-we-work__row,
+	.wp-block-group.astara-how-we-help__row {
+		row-gap: 24px;
+	}
+
+	/* Type */
+	.astara-eyebrow {
+		font-size: 16px;
+		letter-spacing: 3px;
+		margin-bottom: 12px;
 	}
 
 	.astara-hero__title {
 		font-size: clamp(30px, 8.6vw, 44px);
-		margin-bottom: 32px;
+		margin-bottom: 24px;
 	}
 
 	.astara-hero__heading,
@@ -406,33 +420,140 @@
 
 	.astara-body {
 		font-size: 16px;
-		margin-bottom: 20px;
+		margin-bottom: 16px;
+	}
+
+	/* How We Work — full-bleed photo panel, each principle a card with the
+	   number as a strip above the text so the text gets the full width. */
+	.wp-block-cover.astara-how-we-work__panel {
+		flex: none;
+		width: calc(100% + 48px);
+		max-width: none;
+		margin-inline: -24px;
+		border-radius: 0;
+		min-height: 0 !important;
+		padding: 16px;
+	}
+
+	.wp-block-group.astara-principle {
+		flex-direction: column;
+		align-items: stretch;
+		min-height: 0;
+		margin-block-start: 12px;
+	}
+
+	.astara-principle:first-child {
+		margin-block-start: 0;
+	}
+
+	.astara-principle__number {
+		flex: 0 0 auto;
+		justify-content: flex-start;
+		padding: 8px 20px;
+		font-size: 28px;
+	}
+
+	.astara-principle__text {
+		flex: 1 1 auto;
+		padding: 16px 20px 20px;
+	}
+
+	.astara-principle__title,
+	.astara-help-card__title {
+		font-size: 20px;
+	}
+
+	/* How We Help */
+	.astara-how-we-help__image img {
+		height: auto;
+		aspect-ratio: 4 / 3;
+	}
+
+	.astara-help-card {
+		padding: 24px 20px;
+	}
+
+	.astara-help-card .wp-block-buttons {
+		margin-top: 24px;
+		flex-direction: column;
+		align-items: stretch;
+	}
+
+	.astara-help-card .wp-block-button {
+		width: 100%;
+	}
+
+	.astara-help-card .wp-block-button__link {
+		width: 100%;
+		height: auto;
+		min-height: 50px;
+		justify-content: center;
+		text-align: center;
+	}
+
+	/* Stats — two by two */
+	.wp-block-group.astara-stats__row {
+		align-items: flex-start;
+		column-gap: 16px;
+		row-gap: 28px;
+	}
+
+	.astara-stat {
+		flex: 1 1 calc(50% - 8px);
+		min-width: 0;
 	}
 
 	.astara-stat__number {
-		font-size: clamp(34px, 9.5vw, 44px);
+		font-size: clamp(28px, 8.2vw, 36px);
 	}
 
+	.astara-stat__label {
+		font-size: 15px;
+	}
+
+	/* Investment criteria */
 	.astara-criteria__heading {
 		font-size: clamp(24px, 6.8vw, 36px);
+		margin-bottom: 16px;
+	}
+
+	.astara-criteria__body {
+		margin-bottom: 28px;
 	}
 
 	.wp-block-group.astara-criteria__table {
-		padding: 20px;
+		padding: 8px 16px;
+		margin-bottom: 32px;
+		row-gap: 0;
 	}
 
 	.wp-block-group.astara-criteria__item {
 		flex: 1 1 45%;
-		padding-inline: 16px;
+		padding: 16px 8px;
 		border-left: none;
 		border-top: 1px solid var(--wp--preset--color--astara-gray);
-		padding-top: 16px;
+	}
+
+	.astara-criteria__item:first-child,
+	.astara-criteria__item:nth-child(2) {
+		border-top: none;
+	}
+
+	/* An odd last item (Geography) spans both columns. */
+	.wp-block-group.astara-criteria__item:last-child:nth-child(odd) {
+		flex-basis: 100%;
+	}
+
+	.astara-criteria__label {
+		font-size: 18px;
+		margin-bottom: 8px;
 	}
 
 	.astara-criteria__value {
-		font-size: clamp(24px, 6.4vw, 36px);
+		font-size: clamp(22px, 6vw, 32px);
 	}
 
+	/* Sectors */
 	.astara-arrow-list li {
 		font-size: 18px;
 		padding-left: 32px;
@@ -440,40 +561,6 @@
 	}
 
 	.astara-sectors__row {
-		padding-block: 32px;
-	}
-
-	.astara-help-card {
-		padding: 24px;
-	}
-
-	.astara-how-we-help__image img {
-		height: auto;
-		aspect-ratio: 4 / 3;
-	}
-
-	.wp-block-cover.astara-how-we-work__panel {
-		flex-basis: 100%;
-		min-height: 0 !important;
-		padding: 24px;
-	}
-
-	.astara-principle {
-		min-height: 0;
-		margin-block-start: 16px;
-	}
-
-	.astara-principle__number {
-		font-size: var(--wp--preset--font-size--heading-3);
-		flex-basis: 72px;
-	}
-
-	.astara-principle__text {
-		padding: 20px 20px;
-	}
-
-	.astara-principle__title,
-	.astara-help-card__title {
-		font-size: 20px;
+		padding-block: 24px;
 	}
 }
