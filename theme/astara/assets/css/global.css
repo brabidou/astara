@@ -439,3 +439,11 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 	background: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 92%, #000);
 	color: var(--wp--preset--color--astara-navy);
 }
+
+/* Short note above the accessibility comparison button. */
+.astara-a11y-note {
+	font-family: var(--wp--preset--font-family--manrope);
+	font-size: 14px;
+	line-height: 1.5;
+	margin: 24px 0 12px;
+}
