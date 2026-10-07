@@ -53,21 +53,22 @@
 
 .astara-btn-outline .wp-block-button__link:hover,
 .astara-btn-outline .wp-block-button__link:focus-visible {
-	background: var(--wp--preset--color--astara-bright-orange);
-	color: var(--wp--preset--color--astara-navy);
+	background: #c2410c;
+	border-color: #c2410c;
+	color: var(--wp--preset--color--astara-off-white);
 }
 
 .astara-btn-solid .wp-block-button__link:hover,
 .astara-btn-solid .wp-block-button__link:focus-visible {
-	background: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 92%, #000);
-	border-color: color-mix(in srgb, var(--wp--preset--color--astara-bright-orange) 92%, #000);
-	color: var(--wp--preset--color--astara-navy);
+	background: #9a3412;
+	border-color: #9a3412;
+	color: var(--wp--preset--color--astara-off-white);
 }
 
 .astara-btn-solid .wp-block-button__link {
-	background: var(--wp--preset--color--astara-bright-orange);
-	color: var(--wp--preset--color--astara-navy);
-	border: 1px solid var(--wp--preset--color--astara-bright-orange);
+	background: #c2410c; /* deeper orange: white text reaches 4.8:1 (brand orange is 2.6:1) */
+	color: var(--wp--preset--color--astara-off-white);
+	border: 1px solid #c2410c;
 }
 
 .astara-btn-outline .wp-block-button__link {
