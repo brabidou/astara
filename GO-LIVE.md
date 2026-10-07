@@ -99,6 +99,7 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [ ] **Performance:** image sizes and formats (team portraits are 100–900 KB originals), ShortPixel configured, Lighthouse run on Home and Team.
 - [ ] Decide the **browser support floor** (open question in CLAUDE.md).
 - [ ] 404 page tested on the live domain. Note: a missing file under `/wp-content/uploads/` gets Pressable's plain nginx 404, not the themed page.
+- [ ] **Click every link on the live site** (header, footer, home buttons, Team and Portfolio pages, News cards, Contact page) using the table in section 12 to know where each is set. External links should open in a new tab; this was verified in the codebase on 2026-10-07 (38 external links, all with `target=\"_blank\"` and `rel=\"noopener noreferrer\"`). Links an editor adds by hand in the block editor are not forced to: tick "Open in new tab" on each.
 - [ ] Mobile menu: consider adding a "Get in Touch" button and contact details to the overlay (currently logo + links only).
 
 ## 10. Launch day
@@ -115,6 +116,30 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [ ] Decide what happens to staging (keep it, and keep it out of search).
 
 ---
+
+## 12. Reference — where every link and contact detail is set
+
+Use this when you need to change a link, or to verify them all before launch. "Admin" paths are in the WordPress admin menu on the left.
+
+| What | Where to change it | Notes |
+|---|---|---|
+| Phone, email, Contact-page address, footer address | **Admin → Site Settings** | Used in the footer and on the Contact page (call and mail links are built from them). Stored in the database, so enter per environment. |
+| LinkedIn profile link (footer icon) | **Admin → Site Settings** | Built-in default is `linkedin.com/company/astara-capital-partners`. Opens in a new tab. |
+| X (Twitter) profile link (footer icon) | **Admin → Site Settings** | Empty today, so the icon is hidden. Fill it in to show the icon. |
+| Footer copyright year | Automatic | Always the current year; nothing to edit. |
+| Header and footer menu links | **Admin → Appearance → Editor → Navigation** ("Navigation" menu), or click the menu inside the Header/Footer template part | One menu feeds both. "Investment Criteria" is a custom link to `/#investment-criteria`; Strategy, Team, Portfolio, News & Media and Contact point at those pages, so they follow if a page's URL changes. |
+| Logo link in the header (goes to `/`) | **Admin → Appearance → Editor → Patterns → Template parts → Header** | It's a Custom HTML block (`parts/header.html`). |
+| Footer "Get in Touch" button (goes to `/contact/`) | **Admin → Appearance → Editor → Patterns → Template parts → Footer** | A normal Button block (`parts/footer.html`). |
+| Home page buttons ("View Case Studies", "Contact", "Meet our Team", "Apply to Operations Associate Program", "Download Criteria") | **Admin → Pages → Home**, click each button | All still `#` placeholders (section 1). New copies come from the patterns in `theme/astara/patterns/`, which also need the real links. |
+| Strategy page links | **Admin → Pages → Strategy** | Normal page content. |
+| Contact page map | **Admin → Pages → Contact** (Classic block, "Text" view) | A Google Maps `<iframe>`; the address is in its `q=` parameter. |
+| Newsletter notification email, reCAPTCHA keys | **Admin → Subscribers → Settings** (or `wp-config.php` constants) | See section 5. |
+| Team member LinkedIn and email | **Admin → Team Members → edit a member → "Contact Links" box** | LinkedIn opens in a new tab. |
+| Portfolio company website ("Visit …" button) | **Admin → Portfolio Companies → edit → "Investment Details" box** | Opens in a new tab. |
+| News item that is a PDF or outside link | **Admin → Posts → edit → "Link directly to a file or website" box** | Cards open it in a new tab; the post's own page redirects there. |
+| "Back to Team", "Back to Portfolio" links; the News "View More" link | In the theme code (`inc/blocks.php`, `inc/portfolio-blocks.php`, `inc/news-blocks.php`) | Built from the paths `/team/`, `/portfolio/` and `/news-archive/`. **If the slug of the Team, Portfolio or All News page ever changes, these break**, so keep those slugs or update the code. |
+| 404 page buttons (Back to Home, Contact) | In the theme code (`404.php`) | Go to `/` and `/contact/`. |
+| Social links inside a team bio, or any link typed into page text | The page or member's editor | Add links with the block editor's link tool and tick "Open in new tab" for outside sites. |
 
 ## Done
 
