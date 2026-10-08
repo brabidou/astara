@@ -7,8 +7,6 @@
 	"testsEnvironment": false,
 	"config": {
 		"DB_COLLATE": "utf8mb4_general_ci",
-		"ASTARA_RECAPTCHA_SITE_KEY": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
-		"ASTARA_RECAPTCHA_SECRET_KEY": "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
 		"WP_DEBUG": true,
 		"WP_DEBUG_LOG": true,
 		"WP_DEBUG_DISPLAY": false

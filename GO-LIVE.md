@@ -38,7 +38,7 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 
 ## 3b. Dev-only things that must NOT reach production
 
-- [ ] `ASTARA_RECAPTCHA_SITE_KEY` / `ASTARA_RECAPTCHA_SECRET_KEY` in `.wp-env.json` are **Google's public test keys** (always pass). They only apply to local wp-env. Do not copy them to production; set real keys there (section 5).
+- [x] 2026-10-08 — Google's public test reCAPTCHA keys were removed from `.wp-env.json` (they were defined as constants and overrode the keys saved in wp-admin, causing the "keys are set in wp-config.php" notice). Local now uses whatever is saved under Subscribers → Settings; add `localhost` to the key's allowed domains in the reCAPTCHA admin or the widget shows a domain error locally.
 - [ ] `.claude/` (launch config, session hooks) is tooling, not site code.
 - [ ] Plugins active locally differ from staging (local: onepress-login, ShortPixel, Site Kit, UpdraftPlus, WP Security Audit Log; staging also runs Yoast SEO). Decide the final production plugin list and record it in README → "Required plugins" (currently "TBD").
 
