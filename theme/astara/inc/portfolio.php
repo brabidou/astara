@@ -82,10 +82,11 @@ function astara_register_portfolio_company_meta() {
 add_action( 'init', 'astara_register_portfolio_company_meta' );
 
 /**
- * Register the rich-text case study field.
+ * Register the rich-text Company Description and Case Study fields.
  */
 function astara_register_portfolio_company_case_study_meta() {
 	astara_register_richtext_meta( 'astara_portfolio_co', 'astara_case_study' );
+	astara_register_richtext_meta( 'astara_portfolio_co', 'astara_company_description' );
 }
 add_action( 'init', 'astara_register_portfolio_company_case_study_meta' );
 
@@ -103,6 +104,34 @@ function astara_portfolio_company_meta_box() {
 	);
 }
 add_action( 'add_meta_boxes', 'astara_portfolio_company_meta_box' );
+
+/**
+ * Add the Company Description meta box in the main column. Registered before
+ * the Case Study box so it appears above it.
+ */
+function astara_portfolio_company_description_meta_box() {
+	add_meta_box(
+		'astara_portfolio_company_description',
+		__( 'Company Description', 'astara' ),
+		'astara_render_portfolio_company_description_meta_box',
+		'astara_portfolio_co',
+		'normal',
+		'high'
+	);
+}
+add_action( 'add_meta_boxes', 'astara_portfolio_company_description_meta_box' );
+
+/**
+ * Render the Company Description meta box.
+ *
+ * @param WP_Post $post Current post object.
+ */
+function astara_render_portfolio_company_description_meta_box( $post ) {
+	astara_render_richtext_meta_box( $post, 'astara_company_description' );
+	?>
+	<p class="description"><?php esc_html_e( 'A short description of the company. Shown in the details popup (and on the company\'s own page) below the investment date and industry, above the Case Study.', 'astara' ); ?></p>
+	<?php
+}
 
 /**
  * Add the Case Study meta box in the main column, standing in for the block editor.
@@ -188,3 +217,13 @@ function astara_save_portfolio_company_case_study( $post_id ) {
 	astara_save_richtext_meta( $post_id, 'astara_case_study' );
 }
 add_action( 'save_post_astara_portfolio_co', 'astara_save_portfolio_company_case_study' );
+
+/**
+ * Save the Company Description meta box.
+ *
+ * @param int $post_id Post ID being saved.
+ */
+function astara_save_portfolio_company_description( $post_id ) {
+	astara_save_richtext_meta( $post_id, 'astara_company_description' );
+}
+add_action( 'save_post_astara_portfolio_co', 'astara_save_portfolio_company_description' );

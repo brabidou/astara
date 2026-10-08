@@ -47,6 +47,8 @@ function astara_render_portfolio_company_case_study( $company, $name_tag = 'h3',
 	$industry        = $company->post_excerpt;
 	$case_study      = (string) get_post_meta( $company->ID, 'astara_case_study', true );
 	$story           = trim( wp_strip_all_tags( $case_study ) ) ? $case_study : '';
+	$description_raw = (string) get_post_meta( $company->ID, 'astara_company_description', true );
+	$description     = trim( wp_strip_all_tags( $description_raw ) ) ? $description_raw : '';
 	$investment_date = get_post_meta( $company->ID, 'astara_investment_date', true );
 	$website_url     = get_post_meta( $company->ID, 'astara_website_url', true );
 	$id_attr         = $name_id ? ' id="' . esc_attr( $name_id ) . '"' : '';
@@ -74,6 +76,9 @@ function astara_render_portfolio_company_case_study( $company, $name_tag = 'h3',
 				</div>
 			<?php endif; ?>
 		</div>
+	<?php endif; ?>
+	<?php if ( $description ) : ?>
+		<div class="astara-portfolio-case__description"><?php echo astara_richtext_html( $description ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- astara_richtext_html() runs wp_kses_post(). ?></div>
 	<?php endif; ?>
 	<?php if ( $story ) : ?>
 		<?php $panel_id = 'astara-case-' . $company->ID . '-' . wp_unique_id(); ?>

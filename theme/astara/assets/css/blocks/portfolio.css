@@ -320,3 +320,18 @@
 .astara-portfolio-modal__accordion .astara-portfolio-modal__story {
     margin-bottom: 16px;
 }
+
+/* Company description: plain text between the meta row and the accordion */
+.astara-portfolio-case__description,
+.astara-portfolio-modal__description {
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--wp--preset--color--gray-1);
+    margin: 0 0 24px;
+}
+
+.astara-portfolio-case__description > :last-child,
+.astara-portfolio-modal__description > :last-child {
+    margin-bottom: 0;
+}
