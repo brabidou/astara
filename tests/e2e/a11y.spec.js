@@ -8,12 +8,16 @@ const pages = require( './pages' );
 // colour; remove these selectors once they do.
 const KNOWN_ORANGE_BUTTONS = [ '.astara-btn-solid .wp-block-button__link', '.astara-contact__newsletter-submit' ];
 
+// Google's reCAPTCHA widget (an iframe on the Contact page) has its own contrast
+// issues. It's third-party code we can't change, so it is excluded.
+const THIRD_PARTY = [ 'iframe[title="reCAPTCHA"]' ];
+
 for ( const { path, name } of pages ) {
 	test( `axe: ${ name }`, async ( { page } ) => {
 		await page.goto( path );
 		await page.waitForLoadState( 'networkidle' );
 		let axe = new AxeBuilder( { page } ).withTags( [ 'wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice' ] );
-		for ( const sel of KNOWN_ORANGE_BUTTONS ) {
+		for ( const sel of [ ...KNOWN_ORANGE_BUTTONS, ...THIRD_PARTY ] ) {
 			axe = axe.exclude( sel );
 		}
 		const { violations } = await axe.analyze();

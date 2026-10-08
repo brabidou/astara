@@ -48,16 +48,25 @@ test.describe( 'mobile menu', () => {
 } );
 
 test.describe( 'portfolio case study', () => {
-	test( 'every company with Case Study text has a Case Study button', async ( { page } ) => {
+	// Which companies have Case Study text depends on the content, so these tests
+	// work from what the page shows rather than assuming specific companies.
+	test( 'a company has a Case Study button exactly when it has a Case Study accordion', async ( { page } ) => {
 		await page.goto( '/portfolio/' );
-		const tiles = await page.locator( '.astara-portfolio-company' ).count();
-		expect( tiles ).toBeGreaterThan( 0 );
-		await expect( page.locator( '.astara-portfolio-tile__button' ) ).toHaveCount( tiles );
+		const companies = page.locator( '.astara-portfolio-company' );
+		const total = await companies.count();
+		expect( total ).toBeGreaterThan( 0 );
+		for ( let i = 0; i < total; i++ ) {
+			const company = companies.nth( i );
+			const hasAccordion = ( await company.locator( '.astara-portfolio-modal__accordion-toggle' ).count() ) > 0;
+			const hasButton = ( await company.locator( '.astara-portfolio-tile__button' ).count() ) > 0;
+			expect( hasButton, `company ${ i + 1 }: button should match accordion` ).toBe( hasAccordion );
+		}
 	} );
 
 	test( 'the Case Study button opens the popup with the accordion expanded; the accordion toggles', async ( { page }, testInfo ) => {
 		await page.goto( '/portfolio/' );
-		const company = page.locator( '.astara-portfolio-company' ).first();
+		const company = page.locator( '.astara-portfolio-company:has(.astara-portfolio-tile__button)' ).first();
+		test.skip( ( await company.count() ) === 0, 'no company has Case Study text right now' );
 		await company.locator( '.astara-portfolio-tile__button' ).click();
 		if ( testInfo.project.name !== 'desktop' ) {
 			// Small screens go to the company page, where the accordion starts open.
@@ -79,8 +88,31 @@ test.describe( 'portfolio case study', () => {
 	test( 'opening from the logo leaves the accordion closed', async ( { page }, testInfo ) => {
 		test.skip( testInfo.project.name !== 'desktop', 'popup is desktop only' );
 		await page.goto( '/portfolio/' );
-		const company = page.locator( '.astara-portfolio-company' ).first();
+		const company = page.locator( '.astara-portfolio-company:has(.astara-portfolio-modal__accordion-toggle)' ).first();
+		test.skip( ( await company.count() ) === 0, 'no company has Case Study text right now' );
 		await company.locator( '.astara-portfolio-tile' ).click();
+		await expect( company.locator( '.astara-portfolio-modal' ) ).toBeVisible();
 		await expect( company.locator( '.astara-portfolio-modal__accordion-panel' ) ).toBeHidden();
+	} );
+
+	test( 'the Company Description shows in the popup when a company has one', async ( { page }, testInfo ) => {
+		test.skip( testInfo.project.name !== 'desktop', 'popup is desktop only' );
+		await page.goto( '/portfolio/' );
+		const company = page.locator( '.astara-portfolio-company:has(.astara-portfolio-modal__description)' ).first();
+		test.skip( ( await company.count() ) === 0, 'no company has a description right now' );
+		await company.locator( '.astara-portfolio-tile' ).click();
+		const modal = company.locator( '.astara-portfolio-modal' );
+		await expect( modal.locator( '.astara-portfolio-modal__description' ) ).toBeVisible();
+		// Order: meta row, then description, then the Case Study accordion (if any).
+		const order = await modal.evaluate( ( el ) => {
+			const pos = ( sel ) => { const n = el.querySelector( sel ); return n ? n.getBoundingClientRect().top : null; };
+			return { meta: pos( '.astara-portfolio-modal__meta' ), description: pos( '.astara-portfolio-modal__description' ), accordion: pos( '.astara-portfolio-modal__accordion' ) };
+		} );
+		if ( order.meta !== null ) {
+			expect( order.description ).toBeGreaterThan( order.meta );
+		}
+		if ( order.accordion !== null ) {
+			expect( order.accordion ).toBeGreaterThan( order.description );
+		}
 	} );
 } );

@@ -181,7 +181,7 @@ Add new pages to `tests/e2e/pages.js`. Local screenshot baselines are gitignored
 
 **CI:** the `test` job in `.github/workflows/deploy.yml` runs after each deploy against staging. Visual baselines are kept in the GitHub Actions cache: the first run records them, later runs compare. After an intentional design change, run the workflow manually (Actions → Run workflow) with "Accept the current look as the new visual baseline" ticked. Deploy happens first, so a red test run means fix forward.
 
-Known exception: the brand-orange buttons (white text, 2.6:1) are excluded from the axe check until the client decides on an accessible colour (see `GO-LIVE.md`).
+Known exception: the brand-orange buttons (white text, 2.6:1) are excluded from the axe check until the client decides on an accessible colour (see `GO-LIVE.md`). Google's reCAPTCHA iframe on the Contact page is also excluded (third-party code). The Portfolio tests adapt to whichever companies currently have Case Study text or a description, so editing content won't break them.
 
 ## Go-live checklist
 
