@@ -46,3 +46,42 @@ test.describe( 'mobile menu', () => {
 		await expect( overlay ).toBeHidden();
 	} );
 } );
+
+test.describe( 'portfolio case study', () => {
+	test( 'every company with a case study has a Case Study button', async ( { page } ) => {
+		await page.goto( '/portfolio/' );
+		const tiles = await page.locator( '.astara-portfolio-company' ).count();
+		expect( tiles ).toBeGreaterThan( 0 );
+		await expect( page.locator( '.astara-portfolio-tile__button' ) ).toHaveCount( tiles );
+	} );
+
+	test( 'the Case Study button opens the popup with the accordion expanded; the accordion toggles', async ( { page }, testInfo ) => {
+		await page.goto( '/portfolio/' );
+		// A text-only case study (no PDF) opens the popup; one with a PDF opens the PDF.
+		const company = page.locator( '.astara-portfolio-company:has(a.astara-portfolio-tile__button:not([target]))' ).first();
+		await company.locator( '.astara-portfolio-tile__button' ).click();
+		if ( testInfo.project.name !== 'desktop' ) {
+			// Small screens go to the company page, where the accordion starts open.
+			await expect( page ).toHaveURL( /\/portfolio\/[^/]+\/$/ );
+			await expect( page.locator( 'details.astara-portfolio-case__accordion' ) ).toHaveAttribute( 'open', '' );
+			return;
+		}
+		const toggle = company.locator( '.astara-portfolio-modal__accordion-toggle' );
+		const panel = company.locator( '.astara-portfolio-modal__accordion-panel' );
+		await expect( company.locator( '.astara-portfolio-modal' ) ).toBeVisible();
+		await expect( toggle ).toHaveAttribute( 'aria-expanded', 'true' );
+		await expect( panel ).toBeVisible();
+		await toggle.click();
+		await expect( panel ).toBeHidden();
+		await toggle.click();
+		await expect( panel ).toBeVisible();
+	} );
+
+	test( 'opening from the logo leaves the accordion closed', async ( { page }, testInfo ) => {
+		test.skip( testInfo.project.name !== 'desktop', 'popup is desktop only' );
+		await page.goto( '/portfolio/' );
+		const company = page.locator( '.astara-portfolio-company' ).first();
+		await company.locator( '.astara-portfolio-tile' ).click();
+		await expect( company.locator( '.astara-portfolio-modal__accordion-panel' ) ).toBeHidden();
+	} );
+} );

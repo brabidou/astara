@@ -259,3 +259,64 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Case Study accordion (popup: button + panel; company page: details/summary) */
+.astara-portfolio-case__accordion,
+.astara-portfolio-modal__accordion {
+    border-top: 1px solid var(--wp--preset--color--astara-bright-orange);
+    border-bottom: 1px solid var(--wp--preset--color--astara-bright-orange);
+    margin: 0 0 24px;
+}
+
+.astara-portfolio-case__accordion-toggle,
+.astara-portfolio-modal__accordion-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 16px 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    list-style: none;
+    font-family: var(--wp--preset--font-family--manrope);
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--wp--preset--color--astara-navy);
+}
+
+.astara-portfolio-case__accordion-toggle::-webkit-details-marker,
+.astara-portfolio-modal__accordion-toggle::-webkit-details-marker {
+    display: none;
+}
+
+.astara-portfolio-case__accordion-toggle::after,
+.astara-portfolio-modal__accordion-toggle::after {
+    content: "+";
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1;
+    color: var(--wp--preset--color--astara-bright-orange);
+}
+
+.astara-portfolio-case__accordion-toggle[aria-expanded="true"]::after,
+.astara-portfolio-case__accordion[open] > .astara-portfolio-case__accordion-toggle::after,
+.astara-portfolio-modal__accordion-toggle[aria-expanded="true"]::after {
+    content: "\2212";
+}
+
+.astara-portfolio-case__accordion-panel,
+.astara-portfolio-modal__accordion-panel {
+    padding: 0 0 16px;
+}
+
+.astara-portfolio-case__accordion-panel[hidden],
+.astara-portfolio-modal__accordion-panel[hidden] {
+    display: none;
+}
+
+.astara-portfolio-case__accordion .astara-portfolio-case__story,
+.astara-portfolio-modal__accordion .astara-portfolio-modal__story {
+    margin-bottom: 16px;
+}

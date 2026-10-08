@@ -18,11 +18,31 @@ store( 'astara/modal', {
 			getContext().isOpen = true;
 		},
 		close() {
-			getContext().isOpen = false;
+			const context = getContext();
+			context.isOpen = false;
+			context.caseOpen = false;
+		},
+		// The popup's "Case Study" accordion.
+		toggleCase() {
+			const context = getContext();
+			context.caseOpen = ! context.caseOpen;
+		},
+		// The grid's "Case Study" button for a text-only case study: open the
+		// popup with the accordion expanded (small screens just follow the link).
+		openCase( event ) {
+			if ( noPopupQuery.matches ) {
+				return;
+			}
+			event.preventDefault();
+			const context = getContext();
+			context.isOpen = true;
+			context.caseOpen = true;
 		},
 		closeOnEscape( event ) {
 			if ( event.key === 'Escape' ) {
-				getContext().isOpen = false;
+				const context = getContext();
+				context.isOpen = false;
+				context.caseOpen = false;
 			}
 		},
 	},

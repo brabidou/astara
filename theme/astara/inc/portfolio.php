@@ -137,7 +137,7 @@ add_action( 'add_meta_boxes', 'astara_portfolio_company_meta_box' );
 function astara_portfolio_company_case_study_meta_box() {
 	add_meta_box(
 		'astara_portfolio_company_case_study',
-		__( 'Company description', 'astara' ),
+		__( 'Case Study', 'astara' ),
 		'astara_render_portfolio_company_case_study_meta_box',
 		'astara_portfolio_co',
 		'normal',
@@ -154,7 +154,7 @@ add_action( 'add_meta_boxes', 'astara_portfolio_company_case_study_meta_box' );
 function astara_render_portfolio_company_case_study_meta_box( $post ) {
 	astara_render_richtext_meta_box( $post, 'astara_case_study' );
 	?>
-	<p class="description"><?php esc_html_e( 'Shown in the details popup (and on the company\'s own page) opened from its logo on the Portfolio page. The separate "Case Study" button only appears when a PDF or link is set under Investment Details.', 'astara' ); ?></p>
+	<p class="description"><?php esc_html_e( 'Shown as the "Case Study" accordion in the details popup (and on the company\'s own page). The "Case Study" button on the Portfolio page appears when this has content or when a PDF or link is set under Investment Details.', 'astara' ); ?></p>
 	<?php
 }
 
@@ -183,7 +183,7 @@ function astara_render_portfolio_company_meta_box( $post ) {
 		<input type="url" id="astara_case_study_url" name="astara_case_study_url" class="widefat" placeholder="https://" value="<?php echo esc_attr( $case_study_url ); ?>" />
 		<button type="button" class="button astara-choose-file" data-target="#astara_case_study_url" style="margin-top:6px;"><?php esc_html_e( 'Choose file from Media Library', 'astara' ); ?></button>
 	</p>
-	<p class="description"><?php esc_html_e( 'The "Case Study" button on the Portfolio page only appears when this is filled in, and opens it in a new tab. Use the Excerpt field for Industry.', 'astara' ); ?></p>
+	<p class="description"><?php esc_html_e( 'The "Case Study" button on the Portfolio page opens this PDF or link in a new tab (the button also appears when the Case Study text box has content). Use the Excerpt field for Industry.', 'astara' ); ?></p>
 	<?php
 }
 
