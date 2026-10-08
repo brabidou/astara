@@ -48,7 +48,7 @@ test.describe( 'mobile menu', () => {
 } );
 
 test.describe( 'portfolio case study', () => {
-	test( 'every company with a case study has a Case Study button', async ( { page } ) => {
+	test( 'every company with Case Study text has a Case Study button', async ( { page } ) => {
 		await page.goto( '/portfolio/' );
 		const tiles = await page.locator( '.astara-portfolio-company' ).count();
 		expect( tiles ).toBeGreaterThan( 0 );
@@ -57,8 +57,7 @@ test.describe( 'portfolio case study', () => {
 
 	test( 'the Case Study button opens the popup with the accordion expanded; the accordion toggles', async ( { page }, testInfo ) => {
 		await page.goto( '/portfolio/' );
-		// A text-only case study (no PDF) opens the popup; one with a PDF opens the PDF.
-		const company = page.locator( '.astara-portfolio-company:has(a.astara-portfolio-tile__button:not([target]))' ).first();
+		const company = page.locator( '.astara-portfolio-company' ).first();
 		await company.locator( '.astara-portfolio-tile__button' ).click();
 		if ( testInfo.project.name !== 'desktop' ) {
 			// Small screens go to the company page, where the accordion starts open.

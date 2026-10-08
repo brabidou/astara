@@ -82,7 +82,7 @@
     color: var(--wp--preset--color--astara-navy);
 }
 
-/* The "Case Study" button — only rendered when the company has a PDF or link.
+/* The "Case Study" button, only rendered when the company has Case Study text.
    Styled like the site's outline buttons (see .astara-btn-outline in global.css),
    including the hover: fills orange. It sits over the tile's bottom-left corner
    as a sibling of the tile link (links can't be nested). */
