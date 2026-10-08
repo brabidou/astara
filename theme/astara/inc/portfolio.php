@@ -227,3 +227,41 @@ function astara_save_portfolio_company_description( $post_id ) {
 	astara_save_richtext_meta( $post_id, 'astara_company_description' );
 }
 add_action( 'save_post_astara_portfolio_co', 'astara_save_portfolio_company_description' );
+
+/**
+ * Add a Logo column (the featured image) to the Portfolio Companies list so a
+ * company with no logo is obvious at a glance.
+ *
+ * @param array $columns Existing list table columns.
+ * @return array
+ */
+function astara_portfolio_company_columns( $columns ) {
+	$new = array();
+	foreach ( $columns as $key => $label ) {
+		if ( 'title' === $key ) {
+			$new['astara_logo'] = __( 'Logo', 'astara' );
+		}
+		$new[ $key ] = $label;
+	}
+	return $new;
+}
+add_filter( 'manage_astara_portfolio_co_posts_columns', 'astara_portfolio_company_columns' );
+
+/**
+ * Render the Logo column.
+ *
+ * @param string $column  Column key.
+ * @param int    $post_id Post ID.
+ */
+function astara_portfolio_company_column_content( $column, $post_id ) {
+	if ( 'astara_logo' !== $column ) {
+		return;
+	}
+
+	if ( has_post_thumbnail( $post_id ) ) {
+		echo get_the_post_thumbnail( $post_id, 'medium', array( 'style' => 'width:120px;height:60px;object-fit:contain;object-position:left center;' ) ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- core-generated markup.
+	} else {
+		echo '<span style="color:#b32d2e;">' . esc_html__( 'No logo', 'astara' ) . '</span>';
+	}
+}
+add_action( 'manage_astara_portfolio_co_posts_custom_column', 'astara_portfolio_company_column_content', 10, 2 );
