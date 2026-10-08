@@ -82,9 +82,9 @@ jobs:
         id: baselines
         uses: actions/cache/restore@v6
         with:
-          path: tests/e2e/visual.spec.js-snapshots
-          key: visual-baselines-${{ github.run_id }}
-          restore-keys: visual-baselines-
+          path: tests/e2e/visual.spec.js-snapshots/remote
+          key: visual-baselines-v2-${{ github.run_id }}
+          restore-keys: visual-baselines-v2-
 
       - name: Visual tests
         run: |
@@ -101,8 +101,8 @@ jobs:
         if: always()
         uses: actions/cache/save@v6
         with:
-          path: tests/e2e/visual.spec.js-snapshots
-          key: visual-baselines-${{ github.run_id }}
+          path: tests/e2e/visual.spec.js-snapshots/remote
+          key: visual-baselines-v2-${{ github.run_id }}
 
       - name: Upload test report
         if: always()

@@ -177,7 +177,7 @@ E2E_BASE_URL=https://astara.mystagingwebsite.com npm run test:e2e   # against st
 npx playwright test visual --update-snapshots      # accept the current look as the new baseline
 ```
 
-Add new pages to `tests/e2e/pages.js`. Local screenshot baselines are gitignored (27 MB, platform-specific).
+Add new pages to `tests/e2e/pages.js`. Screenshot baselines are gitignored (large, platform-specific) and kept separately for local (`visual.spec.js-snapshots/local`) and staging/CI (`.../remote`). The Contact page hides the reCAPTCHA widget and the Team page masks headshots in screenshots, so those do not cause false failures.
 
 **CI:** the `test` job in `.github/workflows/deploy.yml` runs after each deploy against staging. Visual baselines are kept in the GitHub Actions cache: the first run records them, later runs compare. After an intentional design change, run the workflow manually (Actions → Run workflow) with "Accept the current look as the new visual baseline" ticked. Deploy happens first, so a red test run means fix forward.
 

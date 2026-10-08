@@ -7,6 +7,9 @@ const pages = require( './pages' );
 for ( const { path, name } of pages ) {
 	test( `visual: ${ name }`, async ( { page }, testInfo ) => {
 		await page.goto( path );
+		// Google's reCAPTCHA widget is third-party and only present when keys are
+		// saved, which changes the page height. Hide it so the layout is comparable.
+		await page.addStyleTag( { content: '[data-astara-recaptcha] { display: none !important; }' } );
 		await page.waitForLoadState( 'networkidle' );
 		// Let lazy images and web fonts settle, then start from the top.
 		await page.evaluate( async () => {
@@ -17,6 +20,9 @@ for ( const { path, name } of pages ) {
 			}
 			window.scrollTo( 0, 0 );
 		} );
-		await expect( page ).toHaveScreenshot( `${ name }-${ testInfo.project.name }.png`, { fullPage: true } );
+		// Team headshots are content, and their resampling shifts slightly between
+		// runs, so mask them: the layout, text and spacing around them are still checked.
+		const mask = [ page.locator( '.astara-team-card__photo img' ) ];
+		await expect( page ).toHaveScreenshot( `${ name }-${ testInfo.project.name }.png`, { fullPage: true, mask } );
 	} );
 }

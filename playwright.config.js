@@ -5,6 +5,9 @@ require( 'dotenv' ).config( { quiet: true } );
 
 const baseURL = process.env.E2E_BASE_URL || 'http://localhost:8888';
 const inCI = !! process.env.CI;
+// Local and staging render slightly differently (content, fonts), so each target
+// keeps its own screenshot baselines.
+const target = /localhost|127\.0\.0\.1/.test( baseURL ) ? 'local' : 'remote';
 
 module.exports = defineConfig( {
 	testDir: './tests/e2e',
@@ -15,6 +18,7 @@ module.exports = defineConfig( {
 	// First run with no baseline writes one instead of failing, so a new
 	// platform (Linux CI vs. macOS) isn't red until baselines are committed.
 	updateSnapshots: 'missing',
+	snapshotPathTemplate: `{testDir}/{testFileName}-snapshots/${ target }/{arg}{-platform}{ext}`,
 	expect: {
 		toHaveScreenshot: { maxDiffPixelRatio: 0.03, animations: 'disabled' },
 	},
