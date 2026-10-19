@@ -5,19 +5,19 @@
 
 /* Hero */
 .astara-hero {
-	padding-block: 160px 80px;
-	padding-inline: clamp(20px, 5vw, 88px);
+	padding-block: clamp(56px, 6vw, 96px) clamp(48px, 4.5vw, 64px);
+	padding-inline: var(--astara-gutter);
 }
 
 .astara-hero__title {
 	font-family: var(--wp--preset--font-family--manrope);
-	/* 90px (Figma H1) at the 1728px design width, scaling down below it */
-	font-size: clamp(44px, 5.2vw, 90px);
+	/* Figma H1 is 90px, but the client asked for everything one step smaller: 72px max */
+	font-size: clamp(40px, 4.4vw, 72px);
 	font-weight: 300;
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-navy);
-	max-width: none;
-	margin: 0 0 64px;
+	max-width: 16em; /* breaks after "Partnering to", as in the design */
+	margin: 0 0 clamp(32px, 3.5vw, 48px);
 }
 
 .astara-hero__row {
@@ -31,6 +31,10 @@
 	display: block;
 	width: 100%;
 	height: auto;
+	/* Keep the whole beige hero on screen on a laptop: the photo crops a little on
+	   shorter screens instead of pushing the buttons below the fold. */
+	max-height: clamp(280px, 46vh, 453px);
+	object-fit: cover;
 }
 
 .astara-hero__image {
@@ -46,7 +50,7 @@
 
 .astara-hero__heading {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: clamp(30px, 3vw, 44px);
+	font-size: clamp(26px, 2.5vw, 36px);
 	font-weight: 300;
 	line-height: 1.15;
 	color: var(--wp--preset--color--astara-navy);
@@ -66,13 +70,13 @@
 /* How We Work / How We Help shared section padding */
 .astara-how-we-work,
 .astara-how-we-help {
-	padding-block: 80px;
-	padding-inline: clamp(20px, 5vw, 88px);
+	padding-block: clamp(56px, 5vw, 72px);
+	padding-inline: var(--astara-gutter);
 }
 
 .astara-how-we-work {
 	background: var(--wp--preset--color--astara-off-white);
-	padding-inline: clamp(20px, 5vw, 88px);
+	padding-inline: var(--astara-gutter);
 }
 
 /* How We Help — portrait photo left (fills the column height), stacked cards right.
@@ -148,7 +152,7 @@
 .astara-principle__number {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--heading-2);
-	color: #a8380b; /* darker orange: 4:1 on the light-gray band (brand orange is 2:1) */
+	color: var(--wp--preset--color--astara-bright-orange);
 	line-height: 1.15;
 	margin: 0;
 	flex: 0 0 154px;
@@ -198,7 +202,7 @@
 .astara-stats {
 	background: var(--wp--preset--color--astara-navy);
 	padding-block: 64px;
-	padding-inline: clamp(20px, 5vw, 88px);
+	padding-inline: var(--astara-gutter);
 }
 
 .astara-stats__heading {
@@ -217,7 +221,7 @@
 .astara-stat__number {
 	font-family: var(--wp--preset--font-family--manrope);
 	/* 90px (Figma H1) at the 1728px design width, scaling down on smaller screens */
-	font-size: clamp(56px, 5.2vw, 90px);
+	font-size: clamp(48px, 4.4vw, 72px);
 	font-weight: 300;
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-bright-orange);
@@ -236,8 +240,8 @@
 	background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../../img/home/investment-criteria-bg.jpg");
 	background-size: cover;
 	background-position: center;
-	padding-block: 96px;
-	padding-inline: clamp(20px, 5vw, 88px);
+	padding-block: clamp(64px, 6vw, 80px);
+	padding-inline: var(--astara-gutter);
 	text-align: center;
 }
 
@@ -306,8 +310,8 @@
 
 /* Sectors / Transaction types */
 .astara-sectors {
-	padding-block: 80px;
-	padding-inline: clamp(20px, 5vw, 88px);
+	padding-block: clamp(56px, 5vw, 72px);
+	padding-inline: var(--astara-gutter);
 }
 
 .wp-block-group.astara-sectors__photos {

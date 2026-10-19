@@ -24,3 +24,10 @@ function astara_ensure_page_h1( $content ) {
 	return '<h1 class="screen-reader-text">' . esc_html( get_the_title() ) . '</h1>' . $content;
 }
 add_filter( 'the_content', 'astara_ensure_page_h1', 5 );
+
+/*
+ * Remove WordPress core's automatic "Skip to content" link (added to every
+ * block theme). Removed at the owner's request.
+ */
+remove_action( 'wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link' );
+remove_action( 'wp_footer', 'the_block_template_skip_link' );

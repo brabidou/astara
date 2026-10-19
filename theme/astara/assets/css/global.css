@@ -1,12 +1,20 @@
 /* Global styles that theme.json presets can't express. Keep this small. */
 
+/* One container for the whole site: header, footer and every section share the
+   same left/right edge. The gutter is 20-88px, and grows on wide screens so the
+   content never gets wider than 1552px (the Figma container). */
+:root {
+	--astara-container: 1552px;
+	--astara-gutter: max(clamp(20px, 5vw, 88px), calc((min(100%, 2560px) - var(--astara-container)) / 2));
+}
+
 /* Shared design-system classes, used across Home/Team/Contact and any future page. */
 .astara-eyebrow {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--eyebrow);
 	font-weight: 800;
 	line-height: 1;
-	letter-spacing: 5px;
+	letter-spacing: 4px;
 	text-transform: uppercase;
 	color: var(--wp--preset--color--astara-bright-orange);
 	margin: 0 0 16px;
@@ -33,11 +41,11 @@
 .astara-btn-outline .wp-block-button__link {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-weight: 700;
-	font-size: 18px;
+	font-size: var(--wp--preset--font-size--button);
 	line-height: 1.2;
 	border-radius: 4px;
-	padding: 12px 24px;
-	height: 50px;
+	padding: 10px 22px;
+	height: 44px;
 	box-sizing: border-box;
 	display: inline-flex;
 	align-items: center;
@@ -100,7 +108,7 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 /* Header — Figma frame 400:10 "Main Nav" (Web design_Rd. 3) */
 .astara-header {
 	padding-block: 24px;
-	padding-inline: clamp(20px, 5vw, 88px);
+	padding-inline: var(--astara-gutter);
 }
 
 .astara-header__inner {
@@ -173,7 +181,7 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 }
 
 .astara-header .astara-nav .wp-block-navigation__responsive-container.is-menu-open {
-	padding: 24px clamp(20px, 5vw, 88px) 48px;
+	padding: 24px var(--astara-gutter) 48px;
 	overflow-y: auto;
 }
 
@@ -251,7 +259,7 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 .astara-footer {
 	background: var(--wp--preset--color--astara-navy);
 	padding-block: 64px 40px;
-	padding-inline: clamp(20px, 5vw, 88px);
+	padding-inline: var(--astara-gutter);
 	margin-top: 0;
 }
 
@@ -302,12 +310,12 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 .astara-footer__cta .wp-block-button__link {
 	border: 1px solid var(--wp--preset--color--astara-peach);
 	border-radius: 4px;
-	height: 50px;
+	height: 44px;
 	box-sizing: border-box;
-	padding: 12px 24px;
+	padding: 10px 22px;
 	font-family: var(--wp--preset--font-family--manrope);
 	font-weight: 700;
-	font-size: 18px;
+	font-size: var(--wp--preset--font-size--button);
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-gray);
 	background: transparent;
@@ -390,23 +398,15 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 	display: none;
 }
 
-/* Accessibility: the brand orange is only 2-2.6:1 on the light section
-   backgrounds, so orange *text* on light uses a darker shade (4:1+, fine for
-   large text). Orange on navy/photo sections and orange fills are unchanged. */
+/* Eyebrows use the brand orange from Figma. */
 .astara-eyebrow {
-	color: var(--astara-orange-on-light, #a8380b);
-}
-
-.astara-hero .astara-eyebrow,
-.astara-criteria .astara-eyebrow,
-.astara-stats .astara-eyebrow {
 	color: var(--wp--preset--color--astara-bright-orange);
 }
 
-/* Keyboard focus: a clear ring on every interactive element. Orange on light,
-   off-white on the dark navy bands and the footer. */
+/* Keyboard focus: a clear ring on every interactive element. Navy on light
+   backgrounds, brand orange on the dark navy bands and the footer. */
 :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
-	outline: 3px solid #a8380b;
+	outline: 3px solid var(--wp--preset--color--astara-navy);
 	outline-offset: 3px;
 }
 

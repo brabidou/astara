@@ -6,7 +6,7 @@
     background-size: cover;
     background-position: center;
     border-radius: 8px;
-    margin: 40px clamp(20px, 5vw, 88px) 0;
+    margin: 40px var(--astara-gutter) 0;
     padding: 64px clamp(20px, 5vw, 120px);
     text-align: center;
 }
@@ -39,7 +39,7 @@
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 40px;
-    padding: 64px clamp(20px, 5vw, 88px) 96px;
+    padding: 64px var(--astara-gutter) 96px;
 }
 
 .astara-portfolio-company {
@@ -232,7 +232,7 @@
 .astara-portfolio-detail {
     max-width: 640px;
     margin: 0 auto;
-    padding: 64px clamp(20px, 5vw, 88px) 96px;
+    padding: 64px var(--astara-gutter) 96px;
     text-align: left;
 }
 

@@ -58,15 +58,15 @@
 				}
 			],
 			"fontSizes": [
-				{ "slug": "nav-copy", "name": "Nav Copy", "size": "16px" },
-				{ "slug": "body-copy", "name": "Body Copy", "size": "20px" },
-				{ "slug": "button", "name": "Button", "size": "18px" },
-				{ "slug": "heading-4", "name": "H4", "size": "24px" },
-				{ "slug": "heading-3", "name": "H3", "size": "36px" },
-				{ "slug": "heading-2", "name": "H2", "size": "44px" },
-				{ "slug": "heading-1", "name": "H1", "size": "90px" },
-				{ "slug": "footer-logo", "name": "Footer Logo", "size": "47.822px" },
-				{ "slug": "eyebrow", "name": "Eyebrow", "size": "20px" }
+				{ "slug": "nav-copy", "name": "Nav Copy", "size": "14px" },
+				{ "slug": "body-copy", "name": "Body Copy", "size": "18px" },
+				{ "slug": "button", "name": "Button", "size": "16px" },
+				{ "slug": "heading-4", "name": "H4", "size": "21px" },
+				{ "slug": "heading-3", "name": "H3", "size": "30px" },
+				{ "slug": "heading-2", "name": "H2", "size": "38px" },
+				{ "slug": "heading-1", "name": "H1", "size": "72px" },
+				{ "slug": "footer-logo", "name": "Footer Logo", "size": "40px" },
+				{ "slug": "eyebrow", "name": "Eyebrow", "size": "16px" }
 			],
 			"customFontSize": false
 		},

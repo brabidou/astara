@@ -4,7 +4,7 @@ Everything that has to be checked, changed or finished before the Astara site go
 
 - `- [ ]` open · `- [x]` done (add the date and, if useful, how it was verified)
 - Staging: https://astara.mystagingwebsite.com/ (auto-deploys from `main`)
-- Last updated: 2026-10-07
+- Last updated: 2026-10-19
 
 ---
 
@@ -111,7 +111,7 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [ ] Manual accessibility pass not yet done: keyboard-only tab order, mobile menu overlay, Team/Portfolio popups (focus trap and Esc to close), site editor, and a screen reader (VoiceOver). 
 - [ ] SEO: current favicon is the old red astaracapital.com icon (`assets/img/icons/`); replace with the new brand icon (or set Settings → General → Site Icon). Google sitelinks can't be forced; set the Site Title/tagline on production, submit the sitemap in Search Console, and note Yoast per-page fields override the theme's default descriptions.
 
-- [ ] Client decision: orange buttons (brand `#F9703E` with white text) are only 2.6:1 contrast, below WCAG AA (4.5:1). Buttons are currently as designed. Options tried and rejected: navy text on orange (looked weak), deeper orange `#c2410c` (didn't look right). Ask the client whether to keep as designed or adopt an accessible shade. Once decided, remove the `KNOWN_ORANGE_BUTTONS` exclusion in `tests/e2e/a11y.spec.js` so axe checks the buttons.
+- [x] 2026-10-19 — **Client decision: keep the Figma brand orange `#F9703E`.** It is below WCAG AA contrast as a button fill with white text (2.6:1) and as text on the light backgrounds (eyebrows, How We Work numbers, active News Archive filter: 2-2.6:1). The owner recommended an accessible shade; the client declined. The darker `#a8380b` was removed and these elements are excluded from the axe contrast check (`KNOWN_ORANGE_BUTTONS` in `tests/e2e/a11y.spec.js`).
 
 ## 10. Launch day
 
@@ -155,6 +155,8 @@ Use this when you need to change a link, or to verify them all before launch. "A
 | Social links inside a team bio, or any link typed into page text | The page or member's editor | Add links with the block editor's link tool and tick "Open in new tab" for outside sites. |
 
 ## Done
+
+- [x] 2026-10-19 — Removed WordPress core's automatic "Skip to content" link (owner's request). Note: it helps keyboard and screen-reader users skip the menu; re-add by deleting the two `remove_action` lines at the end of `inc/accessibility.php`.
 
 - [x] 2026-10-07 — Team and Portfolio bios/case studies moved from post content into rich-text fields; migration ran on staging.
 - [x] 2026-10-07 — Team and Portfolio photos restored on staging (the server's `uploads` folder had been left owner-only, `drwx------`); `push-media.sh` fixed so it can't happen again.

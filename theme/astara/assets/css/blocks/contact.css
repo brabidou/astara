@@ -1,7 +1,7 @@
 /* Contact page — Figma frame 400:379 "Contact" (Web design_Rd. 3) */
 
 .astara-contact {
-	padding: 80px clamp(20px, 5vw, 88px) 120px;
+	padding: clamp(56px, 5vw, 72px) var(--astara-gutter) clamp(80px, 7vw, 104px);
 }
 
 .astara-contact__row {
@@ -117,10 +117,10 @@
 .astara-contact__newsletter-submit {
 	flex: 0 0 auto;
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: 18px;
+	font-size: var(--wp--preset--font-size--button);
 	font-weight: 700;
 	line-height: 1.2;
-	padding: 12px 24px;
+	padding: 10px 22px;
 	border-radius: 4px;
 	border: 1px solid var(--wp--preset--color--astara-bright-orange);
 	background: var(--wp--preset--color--astara-bright-orange);

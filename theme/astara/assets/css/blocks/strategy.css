@@ -4,8 +4,8 @@
    global.css, not here. */
 
 .astara-strategy-hero {
-    padding-block: 160px 80px;
-    padding-inline: clamp(20px, 5vw, 88px);
+    padding-block: clamp(56px, 6vw, 96px) clamp(48px, 4.5vw, 64px);
+    padding-inline: var(--astara-gutter);
 }
 
 .astara-strategy-hero__title {
@@ -22,8 +22,8 @@
 }
 
 .astara-strategy-section {
-    padding-block: 80px;
-    padding-inline: clamp(20px, 5vw, 88px);
+    padding-block: clamp(56px, 5vw, 72px);
+    padding-inline: var(--astara-gutter);
 }
 
 .astara-strategy-section--alt {
