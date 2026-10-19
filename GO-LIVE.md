@@ -10,8 +10,7 @@ Everything that has to be checked, changed or finished before the Astara site go
 
 ## 1. Blockers — the site is not launchable until these are done
 
-- [ ] **Replace every placeholder `#` link.** Home page content and the `astara/*` patterns have buttons that go nowhere:
-  hero "View Case Studies" and "Contact"; How We Help "View Case Studies", "Meet our Team" and "Apply to Operations Associate Program"; Investment Criteria "Download Criteria" (needs the PDF uploaded and linked). Fix on the live pages **and** in `theme/astara/patterns/` so new insertions are right.
+- [ ] **Replace the last two placeholder `#` links.** Done 2026-10-19 (local content and patterns): hero "View Case Studies" → `/portfolio/`, hero "Contact" → `/contact/`, How We Help "View Case Studies" → `/portfolio/`, "Meet our Team" → `/team/`. **Still `#`:** How We Help "Apply to Operations Associate Program" (needs a destination from the client) and Investment Criteria "Download Criteria" (needs the PDF uploaded and linked). The home page fixes are in local content only: push content to staging/production.
 - [ ] **X (Twitter) profile URL** under Site Settings (admin menu → Site Settings). The footer's X icon is hidden until a URL is entered; the client hasn't supplied one. LinkedIn (`linkedin.com/company/astara-capital-partners`) is already the built-in default. While there, check the phone, email and the two addresses. These settings are stored in the database (option `astara_site_settings`), so anything changed in the admin has to be entered on each environment, and a content-only database push doesn't carry it.
 - [ ] **Publish a Privacy Policy.** The page exists but is a draft on staging. Write it, publish it, link it from the footer. See section 6.
 - [ ] **Newsletter signup: real reCAPTCHA keys and notify address** (section 5). Without keys the form is protected by the honeypot only.

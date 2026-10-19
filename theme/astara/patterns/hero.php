@@ -37,11 +37,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<!-- wp:buttons -->
 			<div class="wp-block-buttons">
 				<!-- wp:button {"className":"astara-btn-solid"} -->
-				<div class="wp-block-button astara-btn-solid"><a class="wp-block-button__link wp-element-button" href="#">View Case Studies</a></div>
+				<div class="wp-block-button astara-btn-solid"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/portfolio/' ) ); ?>">View Case Studies</a></div>
 				<!-- /wp:button -->
 
 				<!-- wp:button {"className":"astara-btn-outline"} -->
-				<div class="wp-block-button astara-btn-outline"><a class="wp-block-button__link wp-element-button" href="#">Contact</a></div>
+				<div class="wp-block-button astara-btn-outline"><a class="wp-block-button__link wp-element-button" href="<?php echo esc_url( home_url( '/contact/' ) ); ?>">Contact</a></div>
 				<!-- /wp:button -->
 			</div>
 			<!-- /wp:buttons -->
