@@ -60,7 +60,7 @@ function astara_render_team_member_bio( $member, $name_tag = 'h3', $name_id = ''
 	<?php if ( $email || $linkedin_url ) : ?>
 		<div class="astara-team-bio__links">
 			<?php if ( $email ) : ?>
-				<a href="<?php echo esc_url( 'mailto:' . $email ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'Email', 'astara' ); ?></a>
+				<a href="<?php echo esc_url( 'mailto:' . $email ); ?>" target="_blank" rel="noopener noreferrer"><?php echo esc_html( $email ); ?></a>
 			<?php endif; ?>
 			<?php if ( $linkedin_url ) : ?>
 				<a href="<?php echo esc_url( $linkedin_url ); ?>" target="_blank" rel="noopener noreferrer"><?php esc_html_e( 'LinkedIn', 'astara' ); ?></a>
