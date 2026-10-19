@@ -9,6 +9,52 @@
 	padding-inline: var(--astara-gutter);
 }
 
+/* Desktop and laptop (landscape): the hero fills the screen below the header, as in
+   the design. Tuned for a 14" MacBook Pro (1512x860 visible in the browser). The
+   header is about 74px tall. Content is centred vertically when there's room. */
+@media (min-width: 1025px) and (min-aspect-ratio: 4/3) {
+	.astara-hero {
+		/* Exactly one screen (minus the header) so it never runs past the fold. */
+		height: calc(100svh - 74px);
+		min-height: 640px;
+		max-height: 1100px;
+		box-sizing: border-box;
+		display: flex;
+		flex-direction: column;
+		padding-block: clamp(40px, 7svh, 96px) clamp(32px, 5svh, 64px);
+	}
+
+	/* The flex column would otherwise let WordPress's auto side margins shrink and
+	   centre these; keep them full width. */
+	.astara-hero > .astara-hero__row {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		width: 100%;
+		max-width: none;
+		/* The photo row takes all the remaining height. */
+		flex: 1 1 auto;
+		min-height: 0;
+		flex-wrap: nowrap;
+		align-items: stretch;
+	}
+
+	.astara-hero .astara-hero__image {
+		flex: 1 1 56%;
+		max-width: none;
+		display: flex;
+	}
+
+	.astara-hero .astara-hero__image img {
+		height: 100%;
+		max-height: none;
+	}
+
+	.astara-hero .astara-hero__copy {
+		flex: 0 1 546px;
+		align-self: center;
+	}
+}
+
 .astara-hero__title {
 	font-family: var(--wp--preset--font-family--manrope);
 	/* Figma H1: 90px in the 1728px frame = 5.2vw, so the first line spans the

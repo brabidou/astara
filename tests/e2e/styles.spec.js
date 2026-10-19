@@ -76,12 +76,15 @@ test.describe( 'layout', () => {
 		} );
 	}
 
-	test( 'the home hero fits on a 14-inch laptop screen (1512x860)', async ( { page }, testInfo ) => {
+	test( 'the home hero fills a 14-inch laptop screen (1512x860)', async ( { page }, testInfo ) => {
 		test.skip( testInfo.project.name !== 'desktop', 'desktop only' );
 		await page.setViewportSize( { width: 1512, height: 860 } );
 		await page.goto( '/' );
 		const bottom = await page.locator( '.astara-hero' ).evaluate( ( el ) => el.getBoundingClientRect().bottom );
-		expect( bottom ).toBeLessThanOrEqual( 860 );
+		// The hero fills the screen exactly: no beige cut off, no next section peeking in.
+		expect( Math.round( bottom ) ).toBe( 860 );
+		const buttons = await page.locator( '.astara-hero .wp-block-buttons' ).evaluate( ( el ) => el.getBoundingClientRect().bottom );
+		expect( buttons ).toBeLessThanOrEqual( 860 );
 	} );
 } );
 
