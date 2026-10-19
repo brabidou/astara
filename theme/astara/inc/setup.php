@@ -101,16 +101,65 @@ function astara_redirect_strategy_page() {
 add_action( 'template_redirect', 'astara_redirect_strategy_page' );
 
 /**
- * Same-page anchors (e.g. the menu's "Strategy" → /#how-we-work): some browsers jump
- * to the section before fonts and images have finished loading, and the page then
- * shifts or snaps back to the top. Once everything has loaded, re-align to the
- * anchored section, unless the visitor has already scrolled on their own.
+ * Same-page anchor links (e.g. the menu's "Investment Criteria" and "Strategy",
+ * which point at sections of the home page).
+ *
+ * 1. Clicks: Safari on a Mac keeps trackpad momentum running after a quick scroll.
+ *    If a #link is clicked while the page is still coasting, Safari jumps to the
+ *    section and the leftover momentum then snaps the page back. So for links to
+ *    a section on the current page we stop the momentum (freeze scrolling for one
+ *    frame), scroll to the section ourselves and update the address bar.
+ * 2. Page load: if the page opens on a #section (e.g. Strategy clicked from another
+ *    page) and fonts/images shift the layout while loading, re-align once loaded,
+ *    unless the visitor has already scrolled on their own.
  */
-function astara_anchor_settle_script() {
+function astara_anchor_links_script() {
 	?>
 	<script>
 	( function () {
-		if ( ! location.hash || location.hash.length < 2 ) {
+		function targetFor( hash ) {
+			if ( ! hash || hash.length < 2 ) {
+				return null;
+			}
+			try {
+				return document.getElementById( decodeURIComponent( hash.slice( 1 ) ) );
+			} catch ( e ) {
+				return null;
+			}
+		}
+
+		// 1. Same-page #links.
+		document.addEventListener( 'click', function ( event ) {
+			if ( event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey ) {
+				return;
+			}
+			var link = event.target.closest && event.target.closest( 'a[href*="#"]' );
+			if ( ! link || ( link.target && link.target !== '_self' ) ) {
+				return;
+			}
+			var url = new URL( link.href, location.href );
+			if ( url.origin !== location.origin || url.pathname !== location.pathname || url.search !== location.search ) {
+				return; // a different page: let the browser load it normally
+			}
+			var el = targetFor( url.hash );
+			if ( ! el ) {
+				return;
+			}
+			event.preventDefault();
+			var root = document.documentElement;
+			var previous = root.style.overflow;
+			root.style.overflow = 'hidden'; // cancels any momentum scroll still running
+			requestAnimationFrame( function () {
+				root.style.overflow = previous;
+				el.scrollIntoView( { block: 'start' } );
+				if ( location.hash !== url.hash ) {
+					history.pushState( null, '', url.hash );
+				}
+			} );
+		} );
+
+		// 2. Page opened on a #section: re-align after late layout shifts.
+		if ( ! targetFor( location.hash ) ) {
 			return;
 		}
 		var userMoved = false;
@@ -118,11 +167,8 @@ function astara_anchor_settle_script() {
 			window.addEventListener( type, function () { userMoved = true; }, { once: true, passive: true } );
 		} );
 		function settle() {
-			if ( userMoved ) {
-				return;
-			}
-			var el = document.getElementById( decodeURIComponent( location.hash.slice( 1 ) ) );
-			if ( el && Math.abs( el.getBoundingClientRect().top ) > 2 ) {
+			var el = targetFor( location.hash );
+			if ( ! userMoved && el && Math.abs( el.getBoundingClientRect().top ) > 2 ) {
 				el.scrollIntoView( { block: 'start' } );
 			}
 		}
@@ -137,4 +183,4 @@ function astara_anchor_settle_script() {
 	</script>
 	<?php
 }
-add_action( 'wp_footer', 'astara_anchor_settle_script', 99 );
+add_action( 'wp_footer', 'astara_anchor_links_script', 99 );

@@ -187,6 +187,7 @@
 	width: 100%;
 }
 
+
 /* .wp-block-group is there so this beats core's `align-items: center` flex
    rule in the editor, which otherwise stops the number block filling the card. */
 .wp-block-group.astara-principle {
@@ -255,7 +256,8 @@
 /* Stats band */
 .astara-stats {
 	background: var(--wp--preset--color--astara-navy);
-	padding-block: 64px;
+	/* Figma: 472px band at 1728 — ~72px above the heading, ~108px below the labels. */
+	padding-block: clamp(48px, 4.2vw, 72px) clamp(64px, 6.3vw, 108px);
 	padding-inline: var(--astara-gutter);
 }
 
@@ -264,6 +266,7 @@
 }
 
 .astara-stats__row {
+	margin-top: clamp(32px, 4.6vw, 80px) !important; /* heading → numbers, as in Figma */
 	column-gap: clamp(32px, 3.6vw, 64px);
 	row-gap: 32px;
 }
@@ -283,6 +286,7 @@
 }
 
 .astara-stat__label {
+	margin-top: clamp(8px, 1.3vw, 22px) !important;
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--body-copy);
 	color: var(--wp--preset--color--astara-off-white);
@@ -413,25 +417,35 @@
 
 .astara-arrow-list li {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--heading-3);
+	/* One step smaller than the section headings (client feedback). */
+	font-size: clamp(20px, 1.6vw, 26px);
+	font-weight: 300;
 	line-height: 1.3;
 	color: var(--wp--preset--color--astara-navy);
 	padding-block: 10px;
 	position: relative;
-	padding-left: 48px;
+	padding-left: clamp(52px, 4.2vw, 72px);
 }
 
+/* Figma's arrow: a long hairline arrow with a small head, drawn as an SVG mask so
+   it takes the brand orange (the "→" text glyph was short and too heavy). */
 .astara-arrow-list li::before {
-	content: "→";
+	content: "";
 	position: absolute;
 	left: 0;
-	color: var(--wp--preset--color--astara-bright-orange);
+	top: calc(10px + 0.65em - 6px); /* centred on the first line */
+	width: 34px;
+	height: 12px;
+	background: var(--wp--preset--color--astara-bright-orange);
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12' fill='none' stroke='black' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 6H33M28 1.5L33 6L28 10.5'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 34 12' fill='none' stroke='black' stroke-width='1.25' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 6H33M28 1.5L33 6L28 10.5'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
 /* Small laptops and tablets in landscape (900-1280px): there isn't room for
    photo-beside-copy, so How We Work and How We Help stack with full-width
    content instead of leaving a narrow column and a lot of empty space. */
-@media (min-width: 900px) and (max-width: 1280px) {
+/* Tablet landscape: How We Work stacks (laptops keep it side by side, scaled). */
+@media (min-width: 900px) and (max-width: 1024px) {
 	.astara-how-we-work__copy {
 		flex-basis: 100%;
 		max-width: none;
@@ -441,7 +455,9 @@
 		flex-basis: 100%;
 		max-width: none;
 	}
+}
 
+@media (min-width: 900px) and (max-width: 1280px) {
 	.astara-how-we-help__image {
 		flex-basis: 100%;
 		max-width: none;
@@ -653,11 +669,55 @@
 
 	.astara-arrow-list li {
 		font-size: 18px;
-		padding-left: 32px;
+		padding-left: 44px;
 		padding-block: 8px;
+	}
+
+	.astara-arrow-list li::before {
+		top: calc(8px + 0.65em - 6px);
+		width: 28px;
 	}
 
 	.astara-sectors__row {
 		padding-block: 24px;
+	}
+}
+
+/* Laptop/desktop: scale the whole section in proportion, like the Figma frame does
+   (1552px container: copy 530px = 34.2%, square panel 940px = 60.6%, panel padding
+   62/69/68/84px). Fixed pixel sizes made the panel tall and the cards narrow on a
+   14" screen. Padding percentages are of the row width. */
+@media (min-width: 1025px) {
+	.astara-how-we-work__row {
+		flex-wrap: nowrap;
+		justify-content: space-between;
+		column-gap: 0;
+	}
+
+	.astara-how-we-work__copy {
+		flex: 0 0 34.2%;
+		max-width: none;
+	}
+
+	.wp-block-cover.astara-how-we-work__panel {
+		flex: 0 0 60.6%;
+		max-width: none;
+		min-height: auto !important; /* overrides the inline 940px; lets the square grow if the cards need more room */
+		aspect-ratio: 1 / 1 !important; /* the block sets aspect-ratio: unset inline */
+		box-sizing: border-box;
+		padding: 4% 4.45% 4.38% 5.41%;
+	}
+
+	.wp-block-group.astara-principle {
+		min-height: clamp(120px, 10.3vw, 178px); /* Figma: 178px at 1728 */
+		margin-block-start: clamp(18px, 1.8vw, 30px);
+	}
+
+	.astara-principle__number {
+		flex-basis: 19.6%; /* 154px of the 786px card */
+	}
+
+	.astara-principle__text {
+		padding: clamp(16px, 1.4vw, 24px) clamp(24px, 2.6vw, 44px);
 	}
 }
