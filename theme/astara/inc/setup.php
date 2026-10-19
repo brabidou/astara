@@ -99,3 +99,18 @@ function astara_redirect_strategy_page() {
 	}
 }
 add_action( 'template_redirect', 'astara_redirect_strategy_page' );
+
+/**
+ * Menu links to home page sections are stored as "/#section" so they work from
+ * every page. On the home page itself, output them as plain "#section" hash links.
+ *
+ * @param string $block_content Rendered block HTML.
+ * @return string
+ */
+function astara_home_hash_links( $block_content ) {
+	if ( ! is_front_page() ) {
+		return $block_content;
+	}
+	return str_replace( 'href="/#', 'href="#', $block_content );
+}
+add_filter( 'render_block_core/navigation-link', 'astara_home_hash_links' );
