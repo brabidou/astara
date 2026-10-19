@@ -112,6 +112,32 @@ function astara_enqueue_assets() {
 add_action( 'wp_enqueue_scripts', 'astara_enqueue_assets' );
 
 /**
+ * Smooth scrolling for #section links (e.g. the menu's "Investment Criteria" and
+ * "Strategy" on the home page), using smooth-scroll v16.1.3 by Chris Ferdinandi
+ * (MIT, assets/js/lib/smooth-scroll.min.js). It only handles links to a section
+ * of the current page; links to other pages load normally. Animating the scroll
+ * also stops Safari's trackpad momentum from snapping the page back after a jump.
+ */
+function astara_enqueue_smooth_scroll() {
+	wp_enqueue_script(
+		'astara-smooth-scroll',
+		ASTARA_THEME_URI . '/assets/js/lib/smooth-scroll.min.js',
+		array(),
+		'16.1.3',
+		array( 'in_footer' => true )
+	);
+	wp_enqueue_script(
+		'astara-smooth-scroll-init',
+		ASTARA_THEME_URI . '/assets/js/smooth-scroll-init.js',
+		array( 'astara-smooth-scroll' ),
+		astara_asset_version( '/assets/js/smooth-scroll-init.js' ),
+		array( 'in_footer' => true )
+	);
+}
+add_action( 'wp_enqueue_scripts', 'astara_enqueue_smooth_scroll' );
+
+
+/**
  * Register Interactivity API script modules.
  */
 function astara_register_script_modules() {
