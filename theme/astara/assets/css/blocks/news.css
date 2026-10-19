@@ -19,7 +19,7 @@
 .astara-news-hero__heading {
     font-family: var(--wp--preset--font-family--manrope);
     font-size: var(--wp--preset--font-size--heading-2);
-    font-weight: 300;
+    font-weight: 200;
     line-height: 1.15;
     color: var(--wp--preset--color--astara-off-white);
     max-width: 860px;
@@ -65,7 +65,7 @@
 .astara-news-filter__tag:hover,
 .astara-news-filter__tag.is-active {
     color: var(--wp--preset--color--astara-navy);
-    font-weight: 700;
+    font-weight: 600;
     border-bottom-color: var(--wp--preset--color--astara-navy);
 }
 
@@ -108,7 +108,7 @@
 
 .astara-news-card__date {
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 700;
+    font-weight: 600;
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 0.04em;
@@ -154,7 +154,7 @@
 
 .astara-news-card__title {
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 400;
+    font-weight: 300;
     font-size: var(--wp--preset--font-size--heading-4);
     color: var(--wp--preset--color--astara-navy);
     margin: 0 0 8px;
@@ -201,7 +201,7 @@
 .astara-news-card__placeholder-label {
     font-family: var(--wp--preset--font-family--manrope);
     font-size: 24px;
-    font-weight: 700;
+    font-weight: 600;
     letter-spacing: 3px;
     text-transform: uppercase;
 }
@@ -221,7 +221,7 @@
 
 .astara-news-card--list .astara-news-card__title {
     font-size: var(--wp--preset--font-size--body-copy);
-    font-weight: 700;
+    font-weight: 600;
     margin: 0 0 4px;
 }
 
@@ -241,7 +241,7 @@
 }
 
 .astara-news-card--list .astara-news-card__date {
-    font-weight: 400;
+    font-weight: 300;
     text-transform: none;
     letter-spacing: normal;
     font-size: 13px;
@@ -257,7 +257,7 @@
     display: inline-block;
     font-family: var(--wp--preset--font-family--manrope);
     font-size: 16px;
-    font-weight: 700;
+    font-weight: 600;
     color: var(--wp--preset--color--astara-navy);
     border: 2px solid var(--wp--preset--color--astara-navy);
     border-radius: 30px;
@@ -298,7 +298,7 @@
     margin-bottom: -16px;
     font-family: var(--wp--preset--font-family--manrope);
     font-size: 14px;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1.2;
     text-decoration: none;
     color: var(--wp--preset--color--astara-navy);
@@ -315,7 +315,7 @@
 
 .astara-news-archive__year {
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 700;
+    font-weight: 600;
     font-size: var(--wp--preset--font-size--heading-4);
     color: var(--wp--preset--color--astara-navy);
     margin: 24px 0 8px;
@@ -341,7 +341,7 @@
     cursor: pointer;
     list-style: none;
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 700;
+    font-weight: 600;
     font-size: var(--wp--preset--font-size--heading-4);
     color: var(--wp--preset--color--astara-navy);
 }
@@ -353,7 +353,7 @@
 .astara-news-archive__year-group > summary::after {
     content: "+";
     flex: 0 0 auto;
-    font-weight: 400;
+    font-weight: 300;
     color: var(--wp--preset--color--astara-bright-orange);
 }
 
@@ -388,7 +388,7 @@
 .astara-news-archive__nav-link:hover,
 .astara-news-archive__nav-link.is-active {
     color: var(--wp--preset--color--astara-bright-orange);
-    font-weight: 700;
+    font-weight: 600;
 }
 
 .astara-news-archive__count {
@@ -422,7 +422,7 @@
 }
 
 .astara-news-archive__pagination .current {
-    font-weight: 700;
+    font-weight: 600;
     color: var(--wp--preset--color--astara-bright-orange);
 }
 
@@ -437,7 +437,7 @@
 .astara-news-single__back {
     display: inline-block;
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 700;
+    font-weight: 600;
     color: var(--wp--preset--color--astara-navy);
     margin-bottom: 40px;
 }
@@ -446,7 +446,7 @@
     display: inline-block;
     font-family: var(--wp--preset--font-family--manrope);
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.04em;
     color: var(--wp--preset--color--astara-bright-orange);
@@ -455,7 +455,7 @@
 
 .astara-news-single__title {
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 400;
+    font-weight: 300;
     font-size: var(--wp--preset--font-size--heading-2);
     color: var(--wp--preset--color--astara-navy);
     margin: 0 0 8px;

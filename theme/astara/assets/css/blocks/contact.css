@@ -1,24 +1,25 @@
 /* Contact page — Figma frame 400:379 "Contact" (Web design_Rd. 3) */
 
 .astara-contact {
-	padding: clamp(56px, 5vw, 72px) var(--astara-gutter) clamp(80px, 7vw, 104px);
+	padding: clamp(72px, 7vw, 120px) var(--astara-gutter) clamp(96px, 9vw, 144px);
 }
 
 .astara-contact__row {
 	display: flex;
 	flex-wrap: wrap;
 	align-items: flex-start;
-	column-gap: 64px;
+	justify-content: space-between;
+	column-gap: clamp(48px, 6vw, 112px);
 	row-gap: 48px;
 }
 
 .astara-contact__title {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--heading-1);
-	font-weight: 300;
-	line-height: 1.2;
+	font-size: clamp(36px, 3.4vw, 56px);
+	font-weight: 200;
+	line-height: 1.15;
 	color: var(--wp--preset--color--astara-navy);
-	margin: 0 0 48px;
+	margin: 0 0 clamp(32px, 3vw, 48px);
 }
 
 .astara-contact__col {
@@ -51,21 +52,21 @@
 
 .astara-contact__org {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--heading-3);
+	font-size: var(--wp--preset--font-size--heading-4);
 	font-weight: 300;
 	line-height: 1.3;
 	color: var(--wp--preset--color--astara-navy);
-	margin: 0 0 20px;
+	margin: 0 0 16px;
 }
 
 .astara-contact__address,
 .astara-contact__reach {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-weight: 700;
-	font-size: var(--wp--preset--font-size--heading-4);
-	line-height: 1.2;
+	font-weight: 300;
+	font-size: var(--wp--preset--font-size--body-copy);
+	line-height: 1.5;
 	color: var(--wp--preset--color--astara-navy);
-	margin: 0 0 20px;
+	margin: 0 0 24px;
 }
 
 .astara-contact__reach a {
@@ -78,19 +79,27 @@
 }
 
 .astara-contact__newsletter {
-	margin-top: 32px;
+	margin-top: 40px;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	column-gap: 24px;
+	row-gap: 12px;
 }
 
 .astara-contact__newsletter-heading {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--heading-3);
+	font-size: var(--wp--preset--font-size--heading-4);
 	font-weight: 300;
+	line-height: 44px; /* vertically centred on the 44px field */
+	white-space: nowrap;
 	color: var(--wp--preset--color--astara-navy);
-	margin: 0 0 16px;
+	margin: 0;
 }
 
 .astara-contact__newsletter-form {
-	max-width: 460px;
+	flex: 1 1 300px;
+	max-width: 440px;
 }
 
 .astara-contact__newsletter-field {
@@ -103,10 +112,12 @@
 	min-width: 0;
 	background: var(--wp--preset--color--astara-off-white);
 	border: none;
-	border-radius: 9px;
-	padding: 20px 32px;
+	border-radius: 4px;
+	height: 44px;
+	box-sizing: border-box;
+	padding: 0 16px;
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: var(--wp--preset--font-size--body-copy);
+	font-size: 16px;
 	color: var(--wp--preset--color--astara-navy);
 }
 
@@ -118,9 +129,10 @@
 	flex: 0 0 auto;
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--button);
-	font-weight: 700;
+	font-weight: 600;
 	line-height: 1.2;
-	padding: 10px 22px;
+	height: 44px;
+	padding: 0 22px;
 	border-radius: 4px;
 	border: 1px solid var(--wp--preset--color--astara-bright-orange);
 	background: var(--wp--preset--color--astara-bright-orange);
@@ -154,7 +166,7 @@
 
 .astara-contact__newsletter-message.is-success {
 	color: var(--wp--preset--color--astara-neutral-green);
-	font-weight: 700;
+	font-weight: 600;
 }
 
 .astara-contact__newsletter-message.is-error {
@@ -198,4 +210,15 @@
 	.astara-contact__newsletter-submit {
 		min-height: 50px;
 	}
+}
+
+/* Map: the dark map image from Figma, linking to the address in Google Maps. */
+.astara-contact__map a {
+	display: block;
+	border-radius: 8px;
+	overflow: hidden;
+}
+
+.astara-contact__map a::after {
+	display: none; /* no "opens in new tab" arrow on the map */
 }

@@ -9,6 +9,12 @@
     margin: 40px var(--astara-gutter) 0;
     padding: 64px clamp(20px, 5vw, 120px);
     text-align: center;
+    /* Figma: 738px tall at the 1728px design width. Content is centred in it. */
+    min-height: clamp(360px, 42.7vw, 738px);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .astara-team-hero__eyebrow {
@@ -19,7 +25,7 @@
 .astara-team-hero__heading {
     font-family: var(--wp--preset--font-family--manrope);
     font-size: var(--wp--preset--font-size--heading-2);
-    font-weight: 300;
+    font-weight: 200;
     line-height: 1.15;
     color: var(--wp--preset--color--astara-off-white);
     max-width: 860px;
@@ -41,9 +47,11 @@
 
 .astara-team-category {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    /* Figma (1728px frame): the label takes ~37.5% of the container and the photo
+       grid ~57.5%, with the rest left empty on the right. */
+    grid-template-columns: 37.5% 57.5%;
     align-items: start;
-    gap: 40px;
+    gap: 0;
     padding: 64px var(--astara-gutter);
 }
 
@@ -57,11 +65,19 @@
 }
 
 .astara-team-grid--wide {
+    /* Figma: two 400x349 photos with a 91px gap */
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 10.2%;
 }
 
 .astara-team-grid--narrow {
+    /* Figma: three 270x349 (portrait) photos with a 41px gap */
     grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 4.6%;
+}
+
+.astara-team-grid--narrow .astara-team-card__photo img {
+    aspect-ratio: 270 / 349;
 }
 
 .astara-team-member {
@@ -84,7 +100,7 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 8 / 7;
+    aspect-ratio: 400 / 349;
     object-fit: cover;
     border-radius: 8px;
 }
@@ -96,7 +112,7 @@
 
 .astara-team-card__name {
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 700;
+    font-weight: 600;
     font-size: var(--wp--preset--font-size--heading-4);
     color: var(--wp--preset--color--gray-1);
     margin: 0 0 4px;
@@ -182,7 +198,7 @@
 
 .astara-team-modal__name {
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 400;
+    font-weight: 300;
     font-size: var(--wp--preset--font-size--heading-3);
     color: var(--wp--preset--color--astara-navy);
     margin: 0 0 8px;
@@ -215,7 +231,7 @@
 .astara-team-modal__links a {
     font-family: var(--wp--preset--font-family--manrope);
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 300;
     color: var(--wp--preset--color--astara-navy);
 }
 
@@ -230,7 +246,7 @@
 .astara-team-detail__back {
     display: inline-block;
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 700;
+    font-weight: 600;
     color: var(--wp--preset--color--astara-navy);
     margin-bottom: 40px;
 }
@@ -248,7 +264,7 @@
 
 .astara-team-bio__name {
     font-family: var(--wp--preset--font-family--manrope);
-    font-weight: 400;
+    font-weight: 300;
     font-size: var(--wp--preset--font-size--heading-2);
     color: var(--wp--preset--color--astara-navy);
     margin: 0 0 8px;
@@ -281,7 +297,7 @@
 .astara-team-bio__links a {
     font-family: var(--wp--preset--font-family--manrope);
     font-size: 14px;
-    font-weight: 400;
+    font-weight: 300;
     color: var(--wp--preset--color--astara-navy);
 }
 
@@ -297,6 +313,7 @@
     .astara-team-grid--wide,
     .astara-team-grid--narrow {
         grid-template-columns: 1fr 1fr;
+        column-gap: 24px;
     }
 
     .astara-team-hero__heading {

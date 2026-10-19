@@ -12,8 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-<!-- wp:group {"align":"full","className":"astara-how-we-work","layout":{"type":"constrained","contentSize":"1552px"}} -->
-<div class="wp-block-group alignfull astara-how-we-work">
+<!-- wp:group {"anchor":"how-we-work","align":"full","className":"astara-how-we-work","layout":{"type":"constrained","contentSize":"1552px"}} -->
+<div class="wp-block-group alignfull astara-how-we-work" id="how-we-work">
 	<!-- wp:group {"className":"astara-how-we-work__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group astara-how-we-work__row">
 		<!-- wp:group {"className":"astara-how-we-work__copy","layout":{"type":"constrained"}} -->

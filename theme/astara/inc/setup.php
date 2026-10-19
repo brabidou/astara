@@ -20,7 +20,7 @@ function astara_setup() {
 
 	// Without this, 'editor-styles' support does nothing — the editor iframe
 	// only picks up theme.json styles, not our own stylesheets.
-	add_editor_style( array( 'assets/css/global.css', 'assets/css/blocks/home.css', 'assets/css/blocks/team.css', 'assets/css/blocks/contact.css', 'assets/css/blocks/portfolio.css', 'assets/css/blocks/news.css', 'assets/css/blocks/strategy.css' ) );
+	add_editor_style( array( 'assets/css/global.css', 'assets/css/blocks/home.css', 'assets/css/blocks/team.css', 'assets/css/blocks/contact.css', 'assets/css/blocks/portfolio.css', 'assets/css/blocks/news.css' ) );
 
 	load_theme_textdomain( 'astara', ASTARA_THEME_DIR . '/languages' );
 }
@@ -83,3 +83,19 @@ function astara_unregister_other_patterns() {
 	}
 }
 add_action( 'init', 'astara_unregister_other_patterns', 100 );
+
+/**
+ * The standalone Strategy page was retired; its content lives in the home page's
+ * "How We Work" section. Send old links (and search results) there.
+ */
+function astara_redirect_strategy_page() {
+	if ( ! is_404() ) {
+		return;
+	}
+	$path = trim( (string) wp_parse_url( isset( $_SERVER['REQUEST_URI'] ) ? esc_url_raw( wp_unslash( $_SERVER['REQUEST_URI'] ) ) : '', PHP_URL_PATH ), '/' );
+	if ( 'strategy' === $path ) {
+		wp_safe_redirect( home_url( '/#how-we-work' ), 301 );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'astara_redirect_strategy_page' );

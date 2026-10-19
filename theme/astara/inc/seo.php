@@ -27,7 +27,7 @@ function astara_seo_plugin_active() {
 
 /**
  * Default meta descriptions, keyed by page slug ('home' for the front page).
- * Search engines show roughly the first 155 characters. The home and strategy
+ * Search engines show roughly the first 155 characters. The home
  * wording comes from the current astaracapital.com.
  *
  * @return array<string, string>
@@ -36,7 +36,6 @@ function astara_seo_descriptions() {
 	return array(
 		'home'        => 'Astara is an integrated team of investors and operators that has worked together for years. With over 100 years of cumulative experience in the middle market, the members of the Astara team have participated in control equity investments and held C-level positions through every phase of the business cycle.',
 		'team'        => 'Meet the Astara Capital Partners team: investors and operators who work side by side with management to drive long-term success.',
-		'strategy'    => 'Astara invests in middle-market companies where our financial, operational, and strategic resources combine to build sustainable value and deliver exceptional returns to our investors.',
 		'portfolio'   => 'Explore the companies Astara Capital Partners has invested in, across building products, residential services, packaging, food, water infrastructure and more.',
 		'news-media'  => 'Updates, insights, and press from Astara Capital Partners: company announcements, press releases and news coverage.',
 		'news-archive' => 'Browse every Astara Capital Partners news item and press release by topic, year and month.',

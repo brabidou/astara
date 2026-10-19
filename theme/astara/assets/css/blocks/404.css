@@ -8,7 +8,7 @@
 .astara-404__title {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: clamp(32px, 3.6vw, 60px);
-	font-weight: 300;
+	font-weight: 200;
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-navy);
 	margin: 0 0 32px;

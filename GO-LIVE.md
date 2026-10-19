@@ -16,6 +16,9 @@ Everything that has to be checked, changed or finished before the Astara site go
 - [ ] **Newsletter signup: real reCAPTCHA keys and notify address** (section 5). Without keys the form is protected by the honeypot only.
 - [ ] **Change every password** (section 3) before launch.
 
+- [ ] **reCAPTCHA keys are the wrong type.** The keys saved in wp-admin (Subscribers → Settings) show "ERROR for site owner: Invalid key type" on the Contact page. The form needs **reCAPTCHA v2, "I'm not a robot" checkbox** keys; create a new key pair of that type at https://www.google.com/recaptcha/admin (domains: the live domain, `astara.mystagingwebsite.com`, and `localhost` for dev) and replace both keys. Seen 2026-10-19.
+- [ ] **Content changes from 2026-10-19 are local only — push content to staging/production:** Strategy page moved to trash (the menu's "Strategy" now goes to `/#how-we-work`, and `/strategy/` 301-redirects there via the theme); Main Navigation menu updated; home page How We Work anchor and button links; Contact page map is now the Figma map image linking to Google Maps (replacing the Google Maps embed).
+
 ## 2. Search engines and indexing
 
 Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`). The pages themselves still say `index, follow`, and "Discourage search engines" is **unchecked**, so staging is only protected by that robots.txt.

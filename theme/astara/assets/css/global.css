@@ -12,7 +12,7 @@
 .astara-eyebrow {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--eyebrow);
-	font-weight: 800;
+	font-weight: 700;
 	line-height: 1;
 	letter-spacing: 4px;
 	text-transform: uppercase;
@@ -23,7 +23,7 @@
 .astara-section-heading {
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: var(--wp--preset--font-size--heading-2);
-	font-weight: 300;
+	font-weight: 200;
 	line-height: 1.15;
 	color: var(--wp--preset--color--astara-navy);
 	margin: 0 0 24px;
@@ -40,7 +40,7 @@
 .astara-btn-solid .wp-block-button__link,
 .astara-btn-outline .wp-block-button__link {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-weight: 700;
+	font-weight: 600;
 	font-size: var(--wp--preset--font-size--button);
 	line-height: 1.2;
 	border-radius: 4px;
@@ -141,11 +141,11 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 
 .astara-header .astara-nav .wp-block-navigation-item__content {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: 16px;
+	font-size: var(--wp--preset--font-size--nav-copy);
 	line-height: 26px;
 	letter-spacing: 2.4px;
 	text-transform: uppercase;
-	font-weight: 400;
+	font-weight: 300;
 	color: var(--wp--preset--color--astara-navy);
 	padding: 0;
 	position: relative;
@@ -288,11 +288,11 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 .astara-footer .astara-footer__contact p,
 .astara-footer .astara-footer__copyright {
 	font-family: var(--wp--preset--font-family--manrope);
-	font-size: 16px;
+	font-size: 15px;
 	line-height: 26px;
 	letter-spacing: 2.4px;
 	text-transform: uppercase;
-	font-weight: 400;
+	font-weight: 300;
 	color: var(--wp--preset--color--astara-off-white);
 	padding: 0;
 	margin: 0;
@@ -314,7 +314,7 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 	box-sizing: border-box;
 	padding: 10px 22px;
 	font-family: var(--wp--preset--font-family--manrope);
-	font-weight: 700;
+	font-weight: 600;
 	font-size: var(--wp--preset--font-size--button);
 	line-height: 1.2;
 	color: var(--wp--preset--color--astara-gray);
@@ -367,7 +367,7 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 	cursor: pointer;
 	font-family: var(--wp--preset--font-family--manrope);
 	font-size: 20px;
-	font-weight: 700;
+	font-weight: 600;
 	color: var(--wp--preset--color--astara-navy);
 	text-align: left;
 }
@@ -398,9 +398,14 @@ a[target="_blank"]:not(.astara-footer__social-icon):not(.astara-news-card):not(:
 	display: none;
 }
 
-/* Eyebrows use the brand orange from Figma. */
+/* Eyebrows use the brand orange from Figma; on the Investment Criteria photo band
+   the eyebrow is white, as in Figma. */
 .astara-eyebrow {
 	color: var(--wp--preset--color--astara-bright-orange);
+}
+
+.astara-criteria .astara-eyebrow {
+	color: var(--wp--preset--color--astara-off-white);
 }
 
 /* Keyboard focus: a clear ring on every interactive element. Navy on light

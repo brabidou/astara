@@ -46,3 +46,9 @@ test( 'unknown URL returns the 404 page', async ( { page } ) => {
 	expect( response.status() ).toBe( 404 );
 	await expect( page.locator( 'h1' ) ).toHaveCount( 1 );
 } );
+
+test( 'the retired Strategy page redirects to the home page How We Work section', async ( { page } ) => {
+	await page.goto( '/strategy/' );
+	await expect( page ).toHaveURL( /\/#how-we-work$/ );
+	await expect( page.locator( '#how-we-work' ) ).toHaveCount( 1 );
+} );

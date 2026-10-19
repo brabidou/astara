@@ -486,7 +486,7 @@ function astara_newsletter_shortcode() {
 			<div class="astara-contact__newsletter-field">
 				<label class="astara-sr-only" for="astara-newsletter-email"><?php esc_html_e( 'Email address', 'astara' ); ?></label>
 				<input type="email" id="astara-newsletter-email" name="email" placeholder="<?php esc_attr_e( 'Enter Email Address', 'astara' ); ?>" required autocomplete="email" />
-				<button type="submit" class="astara-contact__newsletter-submit"><?php esc_html_e( 'Sign up', 'astara' ); ?></button>
+				<button type="submit" class="astara-contact__newsletter-submit"><?php esc_html_e( 'Submit', 'astara' ); ?></button>
 			</div>
 			<div class="astara-hp" aria-hidden="true">
 				<label><?php esc_html_e( 'Leave this field empty', 'astara' ); ?> <input type="text" name="website" tabindex="-1" autocomplete="off" /></label>
