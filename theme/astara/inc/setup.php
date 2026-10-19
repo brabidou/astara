@@ -99,3 +99,42 @@ function astara_redirect_strategy_page() {
 	}
 }
 add_action( 'template_redirect', 'astara_redirect_strategy_page' );
+
+/**
+ * Same-page anchors (e.g. the menu's "Strategy" → /#how-we-work): some browsers jump
+ * to the section before fonts and images have finished loading, and the page then
+ * shifts or snaps back to the top. Once everything has loaded, re-align to the
+ * anchored section, unless the visitor has already scrolled on their own.
+ */
+function astara_anchor_settle_script() {
+	?>
+	<script>
+	( function () {
+		if ( ! location.hash || location.hash.length < 2 ) {
+			return;
+		}
+		var userMoved = false;
+		[ 'wheel', 'touchstart', 'keydown', 'mousedown' ].forEach( function ( type ) {
+			window.addEventListener( type, function () { userMoved = true; }, { once: true, passive: true } );
+		} );
+		function settle() {
+			if ( userMoved ) {
+				return;
+			}
+			var el = document.getElementById( decodeURIComponent( location.hash.slice( 1 ) ) );
+			if ( el && Math.abs( el.getBoundingClientRect().top ) > 2 ) {
+				el.scrollIntoView( { block: 'start' } );
+			}
+		}
+		window.addEventListener( 'load', function () {
+			settle();
+			if ( document.fonts && document.fonts.ready ) {
+				document.fonts.ready.then( settle );
+			}
+			setTimeout( settle, 400 );
+		} );
+	}() );
+	</script>
+	<?php
+}
+add_action( 'wp_footer', 'astara_anchor_settle_script', 99 );
