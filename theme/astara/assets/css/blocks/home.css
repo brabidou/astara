@@ -11,13 +11,21 @@
 
 .astara-hero__title {
 	font-family: var(--wp--preset--font-family--manrope);
-	/* Figma H1 is 90px, but the client asked for everything one step smaller: 72px max */
-	font-size: clamp(40px, 4.4vw, 72px);
+	/* Figma H1: 90px in the 1728px frame = 5.2vw, so the first line spans the
+	   content width like the design. Weight is one step lighter than Figma (200). */
+	font-size: clamp(40px, 5.2vw, 90px);
 	font-weight: 200;
-	line-height: 1.2;
+	line-height: 1.1;
+	letter-spacing: -0.01em;
 	color: var(--wp--preset--color--astara-navy);
-	max-width: 16em; /* breaks after "Partnering to", as in the design */
+	max-width: 16em; /* breaks after "Partnering", as in the design */
 	margin: 0 0 clamp(32px, 3.5vw, 48px);
+}
+
+/* The width cap above would let WordPress's constrained layout centre the title
+   (it sets auto side margins on children); keep it on the left edge. */
+.astara-hero > .astara-hero__title {
+	margin-left: 0 !important;
 }
 
 .astara-hero__row {
