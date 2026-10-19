@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<!-- wp:group {"className":"astara-hero__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group astara-hero__row">
 		<!-- wp:image {"className":"astara-hero__image","sizeSlug":"large"} -->
-		<figure class="wp-block-image size-large astara-hero__image"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/hero-team.jpg' ) ); ?>" alt="Astara team member on site at a manufacturing partner"/></figure>
+		<figure class="wp-block-image size-large astara-hero__image"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/hero-team.jpg' ) ); ?>" width="1200" height="738" alt="Astara team member on site at a manufacturing partner"/></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:group {"className":"astara-hero__copy","layout":{"type":"constrained"}} -->

@@ -114,3 +114,37 @@ function astara_home_hash_links( $block_content ) {
 	return str_replace( 'href="/#', 'href="#', $block_content );
 }
 add_filter( 'render_block_core/navigation-link', 'astara_home_hash_links' );
+
+/**
+ * Image blocks that point at a theme file (the home page photos) have no
+ * attachment ID, so core can't add width/height for them. Add the attributes
+ * from the file itself: without them the browser reserves no space, the page
+ * reflows as each photo arrives, and a #section the browser already jumped to
+ * ends up further down (most visibly on phones and in narrow windows).
+ *
+ * @param string $block_content Rendered block HTML.
+ * @return string
+ */
+function astara_theme_image_dimensions( $block_content ) {
+	$theme_uri = ASTARA_THEME_URI . '/';
+	if ( false === strpos( $block_content, $theme_uri ) ) {
+		return $block_content;
+	}
+
+	$processor = new WP_HTML_Tag_Processor( $block_content );
+	while ( $processor->next_tag( 'img' ) ) {
+		$src = (string) $processor->get_attribute( 'src' );
+		if ( 0 !== strpos( $src, $theme_uri ) || null !== $processor->get_attribute( 'width' ) ) {
+			continue;
+		}
+		$file = ASTARA_THEME_DIR . '/' . substr( strtok( $src, '?' ), strlen( $theme_uri ) );
+		$size = file_exists( $file ) ? wp_getimagesize( $file ) : false;
+		if ( $size ) {
+			$processor->set_attribute( 'width', (string) $size[0] );
+			$processor->set_attribute( 'height', (string) $size[1] );
+		}
+	}
+
+	return $processor->get_updated_html();
+}
+add_filter( 'render_block_core/image', 'astara_theme_image_dimensions' );

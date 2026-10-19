@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<!-- wp:group {"className":"astara-how-we-help__row","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->
 	<div class="wp-block-group astara-how-we-help__row">
 		<!-- wp:image {"className":"astara-how-we-help__image","sizeSlug":"large"} -->
-		<figure class="wp-block-image size-large astara-how-we-help__image"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/how-we-help.jpg' ) ); ?>" alt="Detail of manufactured components at a portfolio company"/></figure>
+		<figure class="wp-block-image size-large astara-how-we-help__image"><img src="<?php echo esc_url( get_theme_file_uri( 'assets/img/home/how-we-help.jpg' ) ); ?>" width="1400" height="933" alt="Detail of manufactured components at a portfolio company"/></figure>
 		<!-- /wp:image -->
 
 		<!-- wp:group {"className":"astara-how-we-help__copy","layout":{"type":"constrained"}} -->
