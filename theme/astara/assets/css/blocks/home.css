@@ -721,3 +721,40 @@
 		padding: clamp(16px, 1.4vw, 24px) clamp(24px, 2.6vw, 44px);
 	}
 }
+
+/* Investment criteria table: a two-row grid. Each item spans both rows through
+   a subgrid, so every value starts on the same line even when a label
+   ("Equity Investment") wraps onto two lines. Values are capped narrow so the
+   two-word ones break the same way Figma does ("Up to / $350M"). */
+@media (min-width: 900px) {
+	.wp-block-group.astara-criteria__table {
+		display: grid;
+		grid-template-columns: repeat(5, minmax(0, 1fr));
+		grid-template-rows: auto auto;
+		row-gap: 0;
+	}
+
+	.wp-block-group.astara-criteria__item {
+		display: grid;
+		grid-row: span 2;
+		grid-template-rows: subgrid;
+		row-gap: 0;
+		padding-inline: clamp(12px, 1.5vw, 26px);
+	}
+
+	.wp-block-group.astara-criteria__item > * {
+		margin-left: 0 !important;
+		margin-right: 0 !important;
+		max-width: none;
+	}
+
+	.astara-criteria__label {
+		align-self: start;
+	}
+
+	.wp-block-group.astara-criteria__item > .astara-criteria__value {
+		align-self: start;
+		justify-self: center;
+		max-width: 5em;
+	}
+}
