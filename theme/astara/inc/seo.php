@@ -115,8 +115,9 @@ add_filter( 'wpseo_opengraph_title', 'astara_seo_home_title' );
  */
 function astara_seo_icons() {
 	return array(
-		array( '32x32', 'favicon-32x32.jpg' ),
-		array( '192x192', 'favicon-192x192.jpg' ),
+		array( '32x32', 'favicon-32x32.png' ),
+		array( '192x192', 'favicon-192x192.png' ),
+		array( '512x512', 'favicon-512x512.png' ),
 	);
 }
 
@@ -132,9 +133,9 @@ function astara_seo_favicon() {
 
 	$base = ASTARA_THEME_URI . '/assets/img/icons/';
 	foreach ( astara_seo_icons() as $icon ) {
-		printf( '<link rel="icon" href="%1$s" sizes="%2$s" type="image/jpeg" />' . "\n", esc_url( $base . $icon[1] ), esc_attr( $icon[0] ) );
+		printf( '<link rel="icon" href="%1$s" sizes="%2$s" type="image/png" />' . "\n", esc_url( $base . $icon[1] ), esc_attr( $icon[0] ) );
 	}
-	printf( '<link rel="apple-touch-icon" href="%s" />' . "\n", esc_url( $base . 'favicon-180x180.jpg' ) );
+	printf( '<link rel="apple-touch-icon" href="%s" />' . "\n", esc_url( $base . 'favicon-180x180.png' ) );
 }
 add_action( 'wp_head', 'astara_seo_favicon', 5 );
 
@@ -174,7 +175,7 @@ function astara_seo_head() {
 					'@id'    => home_url( '/#organization' ),
 					'name'   => get_bloginfo( 'name' ),
 					'url'    => home_url( '/' ),
-					'logo'   => ASTARA_THEME_URI . '/assets/img/icons/favicon-192x192.jpg',
+					'logo'   => ASTARA_THEME_URI . '/assets/img/icons/favicon-512x512.png',
 					'sameAs' => $same_as,
 				),
 				array(
