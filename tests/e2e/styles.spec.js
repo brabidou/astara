@@ -127,7 +127,8 @@ test.describe( 'client round 2', () => {
 		await page.goto( '/' );
 		for ( const [ label, path ] of [ [ 'Contact', '/contact/' ], [ 'Meet our Team', '/team/' ] ] ) {
 			const href = await page.locator( '.wp-block-button__link', { hasText: label } ).first().getAttribute( 'href' );
-			expect( href ).toContain( path );
+			// Trailing slash optional: WordPress redirects /contact to /contact/.
+			expect( href ).toMatch( new RegExp( path.replace( /\/$/, '' ) + '/?$' ) );
 		}
 	} );
 } );
