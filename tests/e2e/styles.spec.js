@@ -89,16 +89,16 @@ test.describe( 'layout', () => {
 } );
 
 test.describe( 'client round 2', () => {
-	test( 'Team photos match the Figma grid at 1728px', async ( { page }, testInfo ) => {
+	test( 'Team photos are one size in every section (Figma ops size, 270x349 at 1728px)', async ( { page }, testInfo ) => {
 		test.skip( testInfo.project.name !== 'desktop', 'desktop only' );
 		await page.setViewportSize( { width: 1728, height: 1000 } );
 		await page.goto( '/team/' );
 		const sizes = await page.evaluate( () => [ ...document.querySelectorAll( '.astara-team-category' ) ].map( ( c ) => {
 			const r = c.querySelector( '.astara-team-card__photo img' ).getBoundingClientRect();
-			return { wide: !! c.querySelector( '.astara-team-grid--wide' ), w: r.width, h: r.height };
+			return { w: r.width, h: r.height };
 		} ) );
 		for ( const s of sizes ) {
-			expect( s.w ).toBeCloseTo( s.wide ? 400 : 270, -1 );
+			expect( s.w ).toBeCloseTo( 270, -1 );
 			expect( s.h ).toBeCloseTo( 349, -1 );
 		}
 		const banner = await page.locator( '.astara-team-hero' ).evaluate( ( el ) => el.getBoundingClientRect().height );

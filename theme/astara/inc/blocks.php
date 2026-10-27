@@ -125,11 +125,10 @@ function astara_render_team_directory() {
 			continue;
 		}
 
-		$grid_class = 'investors' === $category->slug ? 'astara-team-grid--wide' : 'astara-team-grid--narrow';
 		?>
 		<div class="astara-team-category">
 			<h2 class="astara-section-heading astara-team-category__heading"><?php echo esc_html( $category->name ); ?></h2>
-			<div class="astara-team-grid <?php echo esc_attr( $grid_class ); ?>">
+			<div class="astara-team-grid astara-team-grid--narrow">
 				<?php foreach ( $members as $member ) : ?>
 					<?php $modal_id = 'team-modal-' . $member->ID . '-' . wp_unique_id(); ?>
 					<div class="astara-team-member" data-wp-interactive="astara/modal" data-wp-context='{ "isOpen": false }' data-wp-on-window--keydown="actions.closeOnEscape">
