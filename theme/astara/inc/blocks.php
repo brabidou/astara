@@ -143,7 +143,7 @@ function astara_render_team_directory() {
 							<a href="<?php echo esc_url( get_permalink( $member ) ); ?>" class="astara-team-card__toggle" data-wp-on--click="actions.open" aria-haspopup="dialog" aria-label="<?php echo esc_attr( sprintf( /* translators: %s: team member name */ __( 'View bio for %s', 'astara' ), $member->post_title ) ); ?>">+</a>
 						</div>
 
-						<div class="astara-team-modal" data-wp-class--is-open="context.isOpen" data-wp-bind--hidden="!context.isOpen" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr( $modal_id ); ?>">
+						<div class="astara-team-modal" hidden data-wp-class--is-open="context.isOpen" data-wp-bind--hidden="!context.isOpen" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr( $modal_id ); ?>">
 							<div class="astara-team-modal__backdrop" data-wp-on--click="actions.close"></div>
 							<div class="astara-team-modal__panel">
 								<button type="button" class="astara-team-modal__close" data-wp-on--click="actions.close" aria-label="<?php esc_attr_e( 'Close', 'astara' ); ?>">&times;</button>

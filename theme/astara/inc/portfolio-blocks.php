@@ -165,7 +165,7 @@ function astara_render_portfolio_directory() {
 					</a>
 				<?php endif; ?>
 
-				<div class="astara-portfolio-modal" data-wp-class--is-open="context.isOpen" data-wp-bind--hidden="!context.isOpen" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr( $modal_id ); ?>">
+				<div class="astara-portfolio-modal" hidden data-wp-class--is-open="context.isOpen" data-wp-bind--hidden="!context.isOpen" role="dialog" aria-modal="true" aria-labelledby="<?php echo esc_attr( $modal_id ); ?>">
 					<div class="astara-portfolio-modal__backdrop" data-wp-on--click="actions.close"></div>
 					<div class="astara-portfolio-modal__panel">
 						<button type="button" class="astara-portfolio-modal__close" data-wp-on--click="actions.close" aria-label="<?php esc_attr_e( 'Close', 'astara' ); ?>">&times;</button>
