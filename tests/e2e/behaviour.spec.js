@@ -43,9 +43,13 @@ test.describe( 'news archive pagination', () => {
 	} );
 
 	test( 'a direct link to page 2 does not redirect back to page 1', async ( { page } ) => {
+		await page.goto( '/news-archive/' );
+		const older = page.getByRole( 'link', { name: /older/i } );
+		test.skip( ( await older.count() ) === 0, 'fewer than one page of posts right now' );
 		const response = await page.goto( '/news-archive/page/2/' );
 		expect( response.status() ).toBe( 200 );
 		await expect( page ).toHaveURL( /\/news-archive\/page\/2\/?$/ );
+		await expect( page.locator( 'text=No posts found' ) ).toHaveCount( 0 );
 	} );
 } );
 

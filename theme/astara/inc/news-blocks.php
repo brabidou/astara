@@ -224,9 +224,10 @@ function astara_render_news_archive() {
 	// The old names are still read so existing links keep working where WordPress allows it.
 	$year  = absint( isset( $_GET['news_year'] ) ? $_GET['news_year'] : ( isset( $_GET['year'] ) ? $_GET['year'] : 0 ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- read-only filter; absint() sanitizes.
 	$month = absint( isset( $_GET['news_month'] ) ? $_GET['news_month'] : ( isset( $_GET['month'] ) ? $_GET['month'] : 0 ) ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized -- read-only filter; absint() sanitizes.
-	// WordPress 301-redirects ?paged=2 to the pretty /page/2/ URL, where "paged" is no
-	// longer a $_GET param but the "page" query var from the page-pagination rewrite rule.
-	$paged = isset( $_GET['paged'] ) ? absint( $_GET['paged'] ) : max( absint( get_query_var( 'page' ) ), absint( get_query_var( 'paged' ) ), 1 ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- read-only filter, no state change.
+	// WordPress 301-redirects ?paged=2 to the pretty /page/2/ URL, which sets the "page" query
+	// var (the page-pagination rewrite), not "paged" — and under Plain permalinks it's "paged"
+	// instead, which WordPress already fills in from $_GET, so get_query_var() alone covers both.
+	$paged = max( absint( get_query_var( 'page' ) ), absint( get_query_var( 'paged' ) ), 1 );
 
 	$tags = get_terms(
 		array(
@@ -376,8 +377,9 @@ function astara_render_news_archive() {
 						echo wp_kses_post(
 							paginate_links(
 								array(
-									// Pretty /page/%#%/ path directly, since WordPress 301-redirects a ?paged= link here anyway.
-									'base'      => add_query_arg( array_merge( $date_args, $tag_args ), user_trailingslashit( trailingslashit( $archive_url ) . 'page/%#%' ) ),
+									// Canonical WP recipe for paginate_links() outside the main loop: get_pagenum_link()
+									// already respects the permalink structure (pretty vs. plain) and special-cases page 1.
+									'base'      => add_query_arg( array_merge( $date_args, $tag_args ), str_replace( 999999999, '%#%', get_pagenum_link( 999999999 ) ) ),
 									'format'    => '',
 									'current'   => $paged,
 									'total'     => $query->max_num_pages,
