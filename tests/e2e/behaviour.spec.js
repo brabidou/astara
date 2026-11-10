@@ -51,6 +51,18 @@ test.describe( 'news archive pagination', () => {
 		await expect( page ).toHaveURL( /\/news-archive\/page\/2\/?$/ );
 		await expect( page.locator( 'text=No posts found' ) ).toHaveCount( 0 );
 	} );
+
+	test( 'a tag filter survives into the pagination links', async ( { page } ) => {
+		const tagLink = page.locator( '.astara-news-archive__nav--tags .astara-news-archive__nav-link' ).nth( 1 );
+		await page.goto( '/news-archive/' );
+		test.skip( ( await tagLink.count() ) === 0, 'no tags to filter by' );
+		const tagHref = await tagLink.getAttribute( 'href' );
+		await page.goto( tagHref );
+		const older = page.getByRole( 'link', { name: /older/i } );
+		test.skip( ( await older.count() ) === 0, 'that tag has only one page of posts' );
+		const olderHref = await older.first().getAttribute( 'href' );
+		expect( olderHref ).toMatch( /\/page\/2\/\?tag=/ );
+	} );
 } );
 
 test.describe( 'mobile menu', () => {

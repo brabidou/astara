@@ -378,8 +378,11 @@ function astara_render_news_archive() {
 							paginate_links(
 								array(
 									// Canonical WP recipe for paginate_links() outside the main loop: get_pagenum_link()
-									// already respects the permalink structure (pretty vs. plain) and special-cases page 1.
-									'base'      => add_query_arg( array_merge( $date_args, $tag_args ), str_replace( 999999999, '%#%', get_pagenum_link( 999999999 ) ) ),
+									// already respects the permalink structure (pretty vs. plain), and carries over the
+									// current request's own tag/year query args, so they don't need adding again here
+									// (doing so with add_query_arg() also breaks: it treats the literal "%#%" placeholder's
+									// "#" as a URL fragment delimiter and corrupts the query string after it).
+									'base'      => str_replace( 999999999, '%#%', get_pagenum_link( 999999999 ) ),
 									'format'    => '',
 									'current'   => $paged,
 									'total'     => $query->max_num_pages,
