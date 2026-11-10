@@ -376,7 +376,8 @@ function astara_render_news_archive() {
 						echo wp_kses_post(
 							paginate_links(
 								array(
-									'base'      => add_query_arg( 'paged', '%#%', add_query_arg( array_merge( $date_args, $tag_args ), $archive_url ) ),
+									// Pretty /page/%#%/ path directly, since WordPress 301-redirects a ?paged= link here anyway.
+									'base'      => add_query_arg( array_merge( $date_args, $tag_args ), user_trailingslashit( trailingslashit( $archive_url ) . 'page/%#%' ) ),
 									'format'    => '',
 									'current'   => $paged,
 									'total'     => $query->max_num_pages,
