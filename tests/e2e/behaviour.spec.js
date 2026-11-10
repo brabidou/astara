@@ -31,6 +31,24 @@ test.describe( 'team page', () => {
 	} );
 } );
 
+test.describe( 'news archive pagination', () => {
+	test( 'clicking Older loads page 2 with different posts at a /page/2/ URL', async ( { page } ) => {
+		await page.goto( '/news-archive/' );
+		const firstTitle = await page.locator( '.astara-news-card__title' ).first().innerText();
+		const older = page.getByRole( 'link', { name: /older/i } );
+		test.skip( ( await older.count() ) === 0, 'fewer than one page of posts right now' );
+		await older.first().click();
+		await expect( page ).toHaveURL( /\/news-archive\/page\/2\/?(\?.*)?$/ );
+		await expect( page.locator( '.astara-news-card__title' ).first() ).not.toHaveText( firstTitle );
+	} );
+
+	test( 'a direct link to page 2 does not redirect back to page 1', async ( { page } ) => {
+		const response = await page.goto( '/news-archive/page/2/' );
+		expect( response.status() ).toBe( 200 );
+		await expect( page ).toHaveURL( /\/news-archive\/page\/2\/?$/ );
+	} );
+} );
+
 test.describe( 'mobile menu', () => {
 	test.beforeEach( ( { page }, testInfo ) => { // eslint-disable-line no-unused-vars
 		test.skip( testInfo.project.name !== 'mobile', 'mobile only' );
