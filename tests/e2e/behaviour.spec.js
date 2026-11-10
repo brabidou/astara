@@ -29,6 +29,17 @@ test.describe( 'team page', () => {
 		await link.focus();
 		await expect( link ).toBeFocused();
 	} );
+
+	test( 'opening the bio moves focus in; Escape returns it to the trigger', async ( { page }, testInfo ) => {
+		test.skip( testInfo.project.name !== 'desktop', 'popup is desktop only' );
+		await page.goto( '/team/' );
+		const trigger = page.locator( '.astara-team-card__toggle' ).first();
+		await trigger.click();
+		const modal = page.locator( '.astara-team-modal' ).first();
+		await expect( modal.locator( '.astara-team-modal__close' ) ).toBeFocused();
+		await page.keyboard.press( 'Escape' );
+		await expect( trigger ).toBeFocused();
+	} );
 } );
 
 test.describe( 'news archive pagination', () => {
