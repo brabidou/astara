@@ -4,7 +4,7 @@ Everything that has to be checked, changed or finished before the Astara site go
 
 - `- [ ]` open · `- [x]` done (add the date and, if useful, how it was verified)
 - Staging: https://astara.mystagingwebsite.com/ (auto-deploys from `main`)
-- Last updated: 2026-10-19
+- Last updated: 2026-11-10
 
 ---
 
@@ -110,7 +110,8 @@ Staging is hidden from search by Pressable's staging robots.txt (`Disallow: /`).
 - [ ] Mobile menu: consider adding a "Get in Touch" button and contact details to the overlay (currently logo + links only).
 
 - [x] 2026-10-07 — Automated accessibility pass (axe-core, WCAG 2.2 AA) on all pages at 390/768/1440: no violations left except WordPress core's admin bar and skip link (not shown to visitors). Fixed landmarks, colour contrast (darker orange for orange text on light backgrounds; navy text on orange buttons), headings, hidden H1 on pages without one, focus rings.
-- [ ] Manual accessibility pass not yet done: keyboard-only tab order, mobile menu overlay, Team/Portfolio popups (focus trap and Esc to close), site editor, and a screen reader (VoiceOver). 
+- [x] 2026-11-10 — **Team/Portfolio popups: hidden with JS off, and focus trap/Esc/return-focus.** Found by a full-codebase review: the popups had no static `hidden` attribute (only a client-side directive), so with JS off or before hydration they covered the page; and opening one never moved focus in, trapped Tab, or returned focus to the trigger on close, despite `aria-modal="true"`. Fixed in `inc/blocks.php`, `inc/portfolio-blocks.php`, `assets/js/team-modal.js`; verified on staging (SSR HTML now has `hidden`; Tab trap and Escape-returns-focus checked). Covered by `tests/e2e/behaviour.spec.js`.
+- [ ] Manual accessibility pass still open: keyboard-only tab order across the whole site, mobile menu overlay, site editor, and a screen reader (VoiceOver).
 - [x] 2026-10-19 — Favicon replaced with the new brand icon (Besley "A", off-white on navy) in `theme/astara/assets/img/icons/` (32, 180, 192, 512px PNG). A Site Icon set in Settings → General would override it. Still open from this item: set the Site Title/tagline on production, submit the sitemap in Search Console; Google sitelinks can't be forced; Yoast per-page fields override the theme's default descriptions.
 
 - [x] 2026-10-19 — **Client decision: keep the Figma brand orange `#F9703E`.** It is below WCAG AA contrast as a button fill with white text (2.6:1) and as text on the light backgrounds (eyebrows, How We Work numbers, active News Archive filter: 2-2.6:1). The owner recommended an accessible shade; the client declined. The darker `#a8380b` was removed and these elements are excluded from the axe contrast check (`KNOWN_ORANGE_BUTTONS` in `tests/e2e/a11y.spec.js`).
@@ -155,6 +156,31 @@ Use this when you need to change a link, or to verify them all before launch. "A
 | "Back to Team", "Back to Portfolio" links; the News "View More" link | In the theme code (`inc/blocks.php`, `inc/portfolio-blocks.php`, `inc/news-blocks.php`) | Built from the paths `/team/`, `/portfolio/` and `/news-archive/`. **If the slug of the Team, Portfolio or All News page ever changes, these break**, so keep those slugs or update the code. |
 | 404 page buttons (Back to Home, Contact) | In the theme code (`404.php`) | Go to `/` and `/contact/`. |
 | Social links inside a team bio, or any link typed into page text | The page or member's editor | Add links with the block editor's link tool and tick "Open in new tab" for outside sites. |
+
+## 13. Full-codebase review findings (2026-11-10) — not yet fixed
+
+A full-codebase review (not just the recent diff) turned up 6 MEDIUM and 11 LOW findings beyond the two HIGH ones already fixed above. None are blockers, but each should be triaged before launch.
+
+**MEDIUM**
+- [ ] **Newsletter CSV export mangles some emails.** `inc/newsletter.php:162` uses `get_the_title()`, which runs WordPress's title filters (wptexturize etc.), so `o'brien@x.com` exports as `o&#8217;brien@x.com` and `a&b@x.com` as `a&#038;b@x.com` — mail to those addresses then fails. Fix: `get_post_field( 'post_title', $id, 'raw' )`.
+- [ ] **Header/footer nav points at a hard-coded menu post ID** (`"ref":65` in `parts/header.html:9`, `parts/footer.html:9`). On a fresh production DB, or after a seed import where ID 65 is taken, the menu falls back to a page list or disappears. Check/re-point the ref after the production content import (section 8).
+- [ ] **Per-block CSS is gated by page slug instead of `wp_enqueue_block_style()`** (`inc/enqueue.php:67-101`), against CLAUDE.md's own convention. If an editor renames the Team/News/Portfolio/Contact page or moves one of those blocks to another page, it renders unstyled.
+- [ ] **Team directory layout assumes the "Investors" category has the lowest term ID** (`inc/blocks.php:84-104`). A category created before Investors, or Investors deleted and recreated, puts it in the wrong visual band.
+- [ ] **Newsletter signup can get permanently stuck if reCAPTCHA's script is blocked** (ad blocker, consent tool, network) — `assets/js/newsletter.js:48-54`. The form keeps asking for a checkbox that never renders, with no error shown. Add an `onerror` handler on the injected script.
+- [ ] **Newsletter hourly signup cap can be used to lock out real visitors.** `inc/newsletter.php:373,385` resets the hour's expiry on every signup rather than using a fixed window, so without reCAPTCHA keys (honeypot only until they're entered — see section 5) a burst of ~100 bot signups blocks everyone else for an hour (HTTP 429).
+
+**LOW**
+- [ ] News archive: a month-only filter (`?news_month=3`) has no "Clear" link, and month post-counts in the sidebar ignore an active tag filter (`inc/news-blocks.php:256-262,291`).
+- [ ] N+1 queries: team/portfolio/news cards each fetch their own thumbnail and the team directory runs one query per category, instead of priming the cache up front (`inc/blocks.php`, `inc/portfolio-blocks.php`, `inc/news-blocks.php`). Low traffic today; revisit if these pages get slow.
+- [ ] The Interactivity API runtime and both modal/accordion script modules load on every page, not just ones using them (`inc/enqueue.php:143-160`).
+- [ ] The "hidden H1" accessibility check runs before blocks render (priority 5, before `do_blocks` at priority 9), so it can miss an H1 from a dynamic block — could produce two H1s on such a page (`inc/accessibility.php:17-26`).
+- [ ] A one-time content-to-meta migration (`inc/fields.php:100-142`) still runs its version check on every request, and can clear `post_content` even when the already-set meta differs from it. Delete the function once staging and production have both migrated.
+- [ ] JSON-LD output is missing `JSON_HEX_TAG` (`inc/seo.php:190`) — not exploitable today since the inputs are sanitized at save time, but add it for defense in depth.
+- [ ] The theme's Yoast home-title override only checks post meta, so it misses the case where the front page is "latest posts" and Yoast stores the title in its own options instead (`inc/seo.php:74`).
+- [ ] Several places assume WordPress runs at the domain root (`parts/header.html:6`, `parts/footer.html:22`, `inc/setup.php:95-114`, `inc/blocks.php:186`, `inc/portfolio-blocks.php:201`) and one `aria-label` in a template part can't be translated. Fine for the current single-root install; revisit if that ever changes.
+- [ ] If the `[astara_newsletter]` shortcode is ever used twice on one page, both copies share the same element ID and only the first form gets wired up (`inc/newsletter.php:479,487`, `assets/js/newsletter.js:12`).
+- [ ] `404.php` is a deliberate, documented exception to the theme's "no classic PHP templates" rule — not recorded as an accepted exception in CLAUDE.md. Also hard-codes `/contact/`.
+- [ ] Open question, not blocking: `inc/news-links.php:99` lets any Author set a post's "direct link" field, which makes the site's own URL redirect anywhere. Confirm this is the intended role scope.
 
 ## Done
 
