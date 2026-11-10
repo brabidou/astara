@@ -169,3 +169,13 @@ function astara_media_picker_assets( $hook_suffix ) {
 	);
 }
 add_action( 'admin_enqueue_scripts', 'astara_media_picker_assets' );
+
+/**
+ * Give the Title column in admin list tables (Posts, Team Members, Portfolio
+ * Companies, etc.) a sane minimum width, so long titles wrap as words instead
+ * of one letter per line.
+ */
+function astara_admin_list_table_title_width() {
+	echo '<style>.wp-list-table .column-title{width:auto;min-width:30%;}</style>';
+}
+add_action( 'admin_head-edit.php', 'astara_admin_list_table_title_width' );
